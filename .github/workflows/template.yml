@@ -9,6 +9,10 @@ jobs:
  testRunner:
    name: Test all modes 📝
    runs-on: ubuntu-latest
+   strategy:
+      matrix:
+        projectPath:
+          - ./
    steps:
      - name: Checkout code
        uses: actions/checkout@v2
