@@ -9,10 +9,6 @@ jobs:
  testRunner:
    name: Test all modes 📝
    runs-on: ubuntu-latest
-   strategy:
-      matrix:
-        projectPath:
-          - ./
    steps:
      - name: Checkout code
        uses: actions/checkout@v2
@@ -45,7 +41,10 @@ jobs:
      - uses: webbertakken/unity-test-runner@v2
        id: testRunner
        with:
-         testMode: all
+        projectPath: ../../
+        testMode: ${{ matrix.testMode }}
+        checkName: ${{ matrix.testMode }} test results
+        githubToken: ${{ secrets.GITHUB_TOKEN }}
 
      - uses: actions/upload-artifact@v2
        with:
