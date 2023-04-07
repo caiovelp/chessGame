@@ -88,6 +88,7 @@ jobs:
 
      - uses: webbertakken/unity-builder@v2
        with:
+         projectPath: ./chess-game-project
          targetPlatform: WebGL
 
      - uses: actions/upload-artifact@v2
