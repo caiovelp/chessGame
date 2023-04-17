@@ -24,7 +24,7 @@ public class Chessman : MonoBehaviour
         controller = GameObject.FindGameObjectWithTag("GameController");
 
         //Ajusta as posições das peças
-        SetCoodinates();
+        SetCoordinates();
 
         switch (this.name)
         {
@@ -37,19 +37,20 @@ public class Chessman : MonoBehaviour
         }
     }
 
-    public void SetCoodinates() 
+    public void SetCoordinates() 
     {
         float x = xBoard;
         float y = yBoard;
 
         //Provavelmente esses valores deverão ser ajustados
-        x *= 0.66f;
-        y *= 0.66f;
+        x *= 1.15f;
+        y *= 1.15f;
 
-        x -= 2.3f;
-        y -= 2.3f;
+        //Provavelmente esses valores deverão ser ajustados
+        x -= 4f;
+        y -= 3.2f;
 
-        this.transform.position = new Vector3(x, y, -1.0f);
+        this.transform.position = new Vector3(x, y, -1);
     }
 
     public int GetXBoard() 

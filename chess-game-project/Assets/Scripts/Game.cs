@@ -20,7 +20,8 @@ public class Game : MonoBehaviour
         whitePlayer = new GameObject[] 
         {
             //Colocar as outras peças aqui
-            Create("white_queen", 0, 0)
+            Create("white_pawn", 0, 1), Create("white_pawn", 1, 1), Create("white_pawn", 2, 1), Create("white_pawn", 3, 1), Create("white_pawn", 4, 1), Create("white_pawn", 5, 1), Create("white_pawn", 6, 1), Create("white_pawn", 7, 1),
+            Create("white_tower", 0, 0), Create("white_knight", 1, 0), Create("white_bishop", 2, 0), Create("white_queen", 3, 0), Create("white_king", 4, 0), Create("white_bishop", 5, 0), Create("white_knight", 6, 0), Create("white_tower", 7, 0)
         };
 
         //Coloca as peças no tabuleiro
@@ -38,6 +39,11 @@ public class Game : MonoBehaviour
         chessman.SetXBoard(x);
         chessman.SetYBoard(y);
         chessman.Activate();
+        //Isso garante que no início os peões estarão um layer abaixo das outras peças, essas verificações devem ser feitas jogada a jogada.
+        var otherPosition = chessman.transform.position;
+        if (name == "white_pawn") {
+            chessman.transform.position = new Vector3(otherPosition.x, otherPosition.y, 0);
+        }
         return obj;
     }
 
