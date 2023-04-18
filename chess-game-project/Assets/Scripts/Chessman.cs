@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Chessman : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class Chessman : MonoBehaviour
     private string player;
 
     // Peças de xadrez - as pretas vão aqui também
-    public Sprite white_queen, white_king, white_bishop, white_tower, white_knight, white_pawn;
+    public Sprite whiteQueen, whiteKing, whiteBishop, whiteTower, whiteKnight, whitePawn;
 
     public void Activate()
     {
@@ -28,12 +29,12 @@ public class Chessman : MonoBehaviour
 
         switch (this.name)
         {
-            case "white_queen": this.GetComponent<SpriteRenderer>().sprite = white_queen; break;
-            case "white_king": this.GetComponent<SpriteRenderer>().sprite = white_king; break;
-            case "white_bishop": this.GetComponent<SpriteRenderer>().sprite = white_bishop; break;
-            case "white_tower": this.GetComponent<SpriteRenderer>().sprite = white_tower; break;
-            case "white_knight": this.GetComponent<SpriteRenderer>().sprite = white_knight; break;
-            case "white_pawn": this.GetComponent<SpriteRenderer>().sprite = white_pawn; break;
+            case "whiteQueen": this.GetComponent<SpriteRenderer>().sprite = whiteQueen; break;
+            case "whiteKing": this.GetComponent<SpriteRenderer>().sprite = whiteKing; break;
+            case "whiteBishop": this.GetComponent<SpriteRenderer>().sprite = whiteBishop; break;
+            case "whiteTower": this.GetComponent<SpriteRenderer>().sprite = whiteTower; break;
+            case "whiteKnight": this.GetComponent<SpriteRenderer>().sprite = whiteKnight; break;
+            case "whitePawn": this.GetComponent<SpriteRenderer>().sprite = whitePawn; break;
         }
     }
 
