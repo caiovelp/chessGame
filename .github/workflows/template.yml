@@ -133,6 +133,7 @@ jobs:
 
      - uses: webbertakken/unity-builder@v2
        with:
+         projectPath: ./chess-game-project
          targetPlatform: StandaloneWindows64
 
      - uses: actions/upload-artifact@v2
@@ -177,6 +178,7 @@ buildLinux:
 
      - uses: webbertakken/unity-builder@v2
        with:
+         projectPath: ./chess-game-project
          targetPlatform: StandaloneLinux64
 
      - uses: actions/upload-artifact@v2
