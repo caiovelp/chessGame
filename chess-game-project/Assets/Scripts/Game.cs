@@ -20,8 +20,8 @@ public class Game : MonoBehaviour
         whitePlayer = new GameObject[] 
         {
             //Colocar as outras peças aqui
-            Create("white_pawn", 0, 1), Create("white_pawn", 1, 1), Create("white_pawn", 2, 1), Create("white_pawn", 3, 1), Create("white_pawn", 4, 1), Create("white_pawn", 5, 1), Create("white_pawn", 6, 1), Create("white_pawn", 7, 1),
-            Create("white_tower", 0, 0), Create("white_knight", 1, 0), Create("white_bishop", 2, 0), Create("white_queen", 3, 0), Create("white_king", 4, 0), Create("white_bishop", 5, 0), Create("white_knight", 6, 0), Create("white_tower", 7, 0)
+            Create("whitePawn", 0, 1), Create("whitePawn", 1, 1), Create("whitePawn", 2, 1), Create("whitePawn", 3, 1), Create("whitePawn", 4, 1), Create("whitePawn", 5, 1), Create("whitePawn", 6, 1), Create("whitePawn", 7, 1),
+            Create("whiteTower", 0, 0), Create("whiteKnight", 1, 0), Create("whiteBishop", 2, 0), Create("whiteQueen", 3, 0), Create("whiteKing", 4, 0), Create("whiteBishop", 5, 0), Create("whiteKnight", 6, 0), Create("whiteTower", 7, 0)
         };
 
         //Coloca as peças no tabuleiro
@@ -41,7 +41,7 @@ public class Game : MonoBehaviour
         chessman.Activate();
         //Isso garante que no início os peões estarão um layer abaixo das outras peças, essas verificações devem ser feitas jogada a jogada.
         var otherPosition = chessman.transform.position;
-        if (name == "white_pawn") {
+        if (name == "whitePawn") {
             chessman.transform.position = new Vector3(otherPosition.x, otherPosition.y, 0);
         }
         return obj;
