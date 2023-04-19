@@ -40,7 +40,4 @@ Icon?
 ehthumbs.db
 Thumbs.db
 *.log
-chess-game-project/Logs/AssetImportWorker0.log
-chess-game-project/Logs/AssetImportWorker1.log
-chess-game-project/Logs/shadercompiler-AssetImportWorker0.log
-chess-game-project/Logs/shadercompiler-UnityShaderCompiler.exe0.log
+chess-game-project/Logs
