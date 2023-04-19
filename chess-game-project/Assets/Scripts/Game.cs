@@ -53,4 +53,21 @@ public class Game : MonoBehaviour
 
         positions[chessman.GetXBoard(), chessman.GetYBoard()] = obj;
     }
+
+    public void SetPositionEmpty(int x, int y) 
+    {
+        positions[x, y] = null;
+    }
+
+    public GameObject GetPosition(int x, int y)
+    {
+        return positions[x, y];
+    }
+
+    public bool PositionOnBoard(int x, int y) 
+    {
+        //verifica se uma posição está no está no tabuleiro
+        if (x < 0 || y < 0 || x >= positions.GetLength(0) || y >= positions.GetLength(1)) return false;
+        return true;
+    }
 }
