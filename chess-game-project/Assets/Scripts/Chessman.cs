@@ -19,6 +19,7 @@ public class Chessman : MonoBehaviour
 
     // Peças de xadrez - as pretas vão aqui também
     public Sprite whiteQueen, whiteKing, whiteBishop, whiteTower, whiteKnight, whitePawn;
+    public Sprite blackQueen, blackKing, blackBishop, blackTower, blackKnight, blackPawn;
 
     public void Activate()
     {
@@ -35,6 +36,13 @@ public class Chessman : MonoBehaviour
             case "whiteTower": this.GetComponent<SpriteRenderer>().sprite = whiteTower; break;
             case "whiteKnight": this.GetComponent<SpriteRenderer>().sprite = whiteKnight; break;
             case "whitePawn": this.GetComponent<SpriteRenderer>().sprite = whitePawn; player = "white"; break;
+
+            case "blackQueen": this.GetComponent<SpriteRenderer>().sprite = blackQueen; break;
+            case "blackKing": this.GetComponent<SpriteRenderer>().sprite = blackKing; break;
+            case "blackBishop": this.GetComponent<SpriteRenderer>().sprite = blackBishop; break;
+            case "blackTower": this.GetComponent<SpriteRenderer>().sprite = blackTower; break;
+            case "blackKnight": this.GetComponent<SpriteRenderer>().sprite = blackKnight; break;
+            case "blackPawn": this.GetComponent<SpriteRenderer>().sprite = blackPawn; player = "black"; break;
         }
     }
 
@@ -51,7 +59,7 @@ public class Chessman : MonoBehaviour
         x -= 4f;
         y -= 3.4f;
 
-        this.transform.position = new Vector3(x, y, -1);
+        this.transform.position = new Vector3(x, y, -2 + y/100);
     }
 
     public int GetXBoard() 

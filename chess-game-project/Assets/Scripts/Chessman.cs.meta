@@ -3,7 +3,21 @@ guid: 9f07f07393f63174ea7c1ac0240e6f92
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - controller: {instanceID: 0}
+  - movePlate: {instanceID: 0}
+  - whiteQueen: {instanceID: 0}
+  - whiteKing: {instanceID: 0}
+  - whiteBishop: {instanceID: 0}
+  - whiteTower: {instanceID: 0}
+  - whiteKnight: {instanceID: 0}
+  - whitePawn: {instanceID: 0}
+  - blackQueen: {fileID: 21300000, guid: a466ed60dd3bcfa439f9b81a1019a211, type: 3}
+  - blackKing: {fileID: 21300000, guid: 9fc6c94ae8b4d8a44bf2c4b5c787c0b1, type: 3}
+  - blackBishop: {fileID: 21300000, guid: 6917c2c12030e3a45ab447fa85efc927, type: 3}
+  - blackTower: {instanceID: 0}
+  - blackKnight: {instanceID: 0}
+  - blackPawn: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

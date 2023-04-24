@@ -106,6 +106,12 @@ MonoBehaviour:
   whiteTower: {fileID: 21300000, guid: bc8d056b6b8bca6458f34a61f1b0ddb2, type: 3}
   whiteKnight: {fileID: 21300000, guid: 6fa47f81535d3af47a14dfaf206c0ac3, type: 3}
   whitePawn: {fileID: 21300000, guid: f5270244f731dcf48ae2c382d4e0a051, type: 3}
+  blackQueen: {fileID: 21300000, guid: a466ed60dd3bcfa439f9b81a1019a211, type: 3}
+  blackKing: {fileID: 21300000, guid: 9fc6c94ae8b4d8a44bf2c4b5c787c0b1, type: 3}
+  blackBishop: {fileID: 21300000, guid: 6917c2c12030e3a45ab447fa85efc927, type: 3}
+  blackTower: {fileID: 21300000, guid: 817ae6a756e40a24a8894c84068a9932, type: 3}
+  blackKnight: {fileID: 21300000, guid: d748918eac626f3458abaa11b4c90d18, type: 3}
+  blackPawn: {fileID: 21300000, guid: 8545b8e299fa3b246bab2c93fd9cc510, type: 3}
 --- !u!61 &7213403740678534478
 BoxCollider2D:
   m_ObjectHideFlags: 0
