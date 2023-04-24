@@ -49,7 +49,7 @@ public class Chessman : MonoBehaviour
 
         //Provavelmente esses valores deverão ser ajustados
         x -= 4f;
-        y -= 3.2f;
+        y -= 3.4f;
 
         this.transform.position = new Vector3(x, y, -1);
     }
@@ -135,7 +135,7 @@ public class Chessman : MonoBehaviour
 
         //Ajuste do offset em SetCoordinates
         x -= 4f;
-        y -= 3.2f;
+        y -= 3.6f;
 
         //Set actual unity values
         GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
@@ -157,7 +157,7 @@ public class Chessman : MonoBehaviour
 
         //Ajuste do offset em SetCoordinates
         x -= 4f;
-        y -= 3.2f;
+        y -= 3.6f;
 
         //Set actual unity values
         GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);

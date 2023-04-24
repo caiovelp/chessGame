@@ -39,11 +39,7 @@ public class Game : MonoBehaviour
         chessman.SetXBoard(x);
         chessman.SetYBoard(y);
         chessman.Activate();
-        //Isso garante que no início os peões estarão um layer abaixo das outras peças, essas verificações devem ser feitas jogada a jogada.
-        var otherPosition = chessman.transform.position;
-        if (name == "whitePawn") {
-            chessman.transform.position = new Vector3(otherPosition.x, otherPosition.y, 0);
-        }
+
         return obj;
     }
 

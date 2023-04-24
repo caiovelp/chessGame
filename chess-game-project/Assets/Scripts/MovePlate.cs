@@ -38,7 +38,7 @@ public class MovePlate : MonoBehaviour
         controller.GetComponent<Game>().SetPositionEmpty(reference.GetComponent<Chessman>().GetXBoard(), reference.GetComponent<Chessman>().GetYBoard());
 
         reference.GetComponent<Chessman>().SetXBoard(matrixX);
-        reference.GetComponent<Chessman>().SetXBoard(matrixY);
+        reference.GetComponent<Chessman>().SetYBoard(matrixY);
         reference.GetComponent<Chessman>().SetCoordinates();
 
         controller.GetComponent<Game>().SetPosition(reference);
