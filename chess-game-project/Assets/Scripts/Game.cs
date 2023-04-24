@@ -39,11 +39,7 @@ public class Game : MonoBehaviour
         chessman.SetXBoard(x);
         chessman.SetYBoard(y);
         chessman.Activate();
-        //Isso garante que no início os peões estarão um layer abaixo das outras peças, essas verificações devem ser feitas jogada a jogada.
-        var otherPosition = chessman.transform.position;
-        if (name == "whitePawn") {
-            chessman.transform.position = new Vector3(otherPosition.x, otherPosition.y, 0);
-        }
+
         return obj;
     }
 
@@ -52,5 +48,22 @@ public class Game : MonoBehaviour
         Chessman chessman = obj.GetComponent<Chessman>();
 
         positions[chessman.GetXBoard(), chessman.GetYBoard()] = obj;
+    }
+
+    public void SetPositionEmpty(int x, int y) 
+    {
+        positions[x, y] = null;
+    }
+
+    public GameObject GetPosition(int x, int y)
+    {
+        return positions[x, y];
+    }
+
+    public bool PositionOnBoard(int x, int y) 
+    {
+        //verifica se uma posição está no está no tabuleiro
+        if (x < 0 || y < 0 || x >= positions.GetLength(0) || y >= positions.GetLength(1)) return false;
+        return true;
     }
 }
