@@ -106,9 +106,66 @@ public class Chessman : MonoBehaviour
             case "whitePawn":
                 PawnMovePlate(xBoard, yBoard + 1);
                 break;
+            case "blackQueen": 
+                CrossMovePlate();
+                AxisMovePlate();
+                break;
+            case "whiteQueen": 
+                CrossMovePlate();
+                AxisMovePlate();
+                break;
+            case "blackKnight":
+                break;
+            case "whiteKnight":
+                break;
+            case "blackBishop":
+                CrossMovePlate();
+                break;
+            case "whiteBishop":
+                CrossMovePlate();
+                break;
+            case "blackKing": 
+                break;
+            case "whiteKing":
+                break;
+            case "blackTower": 
+                AxisMovePlate();
+                break;
+            case "whiteTower": 
+                AxisMovePlate();
+                break;
         }
     }
 
+    public void CrossMovePlate(){
+        LineMovePlate(1,1);
+        LineMovePlate(1,-1);
+        LineMovePlate(-1,1);
+        LineMovePlate(-1,-1);
+    }
+
+    public void AxisMovePlate(){
+        LineMovePlate(1,0);
+        LineMovePlate(-1,0);
+        LineMovePlate(0,1);
+        LineMovePlate(0,-1);
+    }
+    public void LineMovePlate(int xIncrement, int yIncrement){
+        Game sc = controller.GetComponent<Game>();
+
+        int x = xBoard + xIncrement;
+        int y = yBoard + yIncrement;
+
+        while(sc.PositionOnBoard(x,y) && sc.GetPosition(x,y) == null){
+            MovePlateSpawn(x,y);
+            x += xIncrement;
+            y += yIncrement;
+        }
+
+        if(sc.PositionOnBoard(x,y) && sc.GetPosition(x,y).GetComponent<Chessman>().player != player){
+            MovePlateAttackSpawn(x,y);
+        }
+    }
     public void PawnMovePlate(int x, int y)
     {
         Game sc = controller.GetComponent<Game>();
