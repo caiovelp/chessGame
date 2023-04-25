@@ -17,15 +17,19 @@ public class Chessman : MonoBehaviour
     // Jogador
     private string player;
 
-    // Peças de xadrez - as pretas vão aqui também
+    // Peças de xadrez
     public Sprite whiteQueen, whiteKing, whiteBishop, whiteTower, whiteKnight, whitePawn;
     public Sprite blackQueen, blackKing, blackBishop, blackTower, blackKnight, blackPawn;
 
+    /* 
+        Função responsável por "ativar" as peças, ou seja, ela define as posições das peças,
+        ativa o controlador e define o player que está interagindo com aquela peça.
+    */
     public void Activate()
     {
         controller = GameObject.FindGameObjectWithTag("GameController");
 
-        //Ajusta as posições das peças
+        // Ajusta as posições das peças
         SetCoordinates();
 
         switch (this.name)
@@ -46,22 +50,31 @@ public class Chessman : MonoBehaviour
         }
     }
 
+    // Função responsável por ajustar a posição das peças.
     public void SetCoordinates() 
     {
         float x = xBoard;
         float y = yBoard;
 
-        //Provavelmente esses valores deverão ser ajustados
+        /* 
+            Os valores abaixam fazem um fit da posição das peças de maneira que elas fiquem
+            encaixadas no tabuleiro, ou seja, elas encaixaram em uma matriz 8x8, de maneira
+            que possam ser descritas como pos[i][j], onde i e j são posições da matriz aka
+            tabuleiro de xadrez.
+        */
         x *= 1.15f;
         y *= 1.15f;
 
-        //Provavelmente esses valores deverão ser ajustados
         x -= 4f;
         y -= 3.4f;
 
         this.transform.position = new Vector3(x, y, -2 + y/100);
     }
 
+    /* 
+        Funções GET e SET necessárias para recuperar e alterar valores de x e y, que definem
+        a posição da matriz como matriz[x][y]
+    */
     public int GetXBoard() 
     {
         return xBoard;
@@ -82,13 +95,20 @@ public class Chessman : MonoBehaviour
         yBoard = y;
     }
 
+    /*
+        Função do Unity que é chamada quando o usuário clica e solta o botão do mouse.
+        Nesse caso, essa OnMouseUp é responsável pelo desenho dos moveplates.
+    */
     private void OnMouseUp()
     {
+        // Apaga os moveplates que estão no tabuleiro.
         DestroyMovePlates();
 
+        // Inicia os novos moveplates depedendo da interação.
         InitiateMovePlates();
     }
 
+    // Função responsável por apagar os moveplates que estão desenhadas no tabuleiro
     public void DestroyMovePlates()
     {
         GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
@@ -98,6 +118,7 @@ public class Chessman : MonoBehaviour
         }
     }
 
+    // Função responsável por desenhar os moveplates no tabuleiro de acordo com a peça clicada.
     public void InitiateMovePlates() 
     {
         //Um para cada peça
@@ -132,20 +153,24 @@ public class Chessman : MonoBehaviour
         }
     }
 
-    public void CrossMovePlate(){
+    public void CrossMovePlate()
+    {
         LineMovePlate(1,1);
         LineMovePlate(1,-1);
         LineMovePlate(-1,1);
         LineMovePlate(-1,-1);
     }
 
-    public void AxisMovePlate(){
+    public void AxisMovePlate()
+    {
         LineMovePlate(1,0);
         LineMovePlate(-1,0);
         LineMovePlate(0,1);
         LineMovePlate(0,-1);
     }
-    public void LineMovePlate(int xIncrement, int yIncrement){
+
+    public void LineMovePlate(int xIncrement, int yIncrement)
+    {
         Game sc = controller.GetComponent<Game>();
 
         int x = xBoard + xIncrement;
@@ -161,6 +186,8 @@ public class Chessman : MonoBehaviour
             MovePlateAttackSpawn(x,y);
         }
     }
+
+    // Desenha os moveplate do peão.
     public void PawnMovePlate(int x, int y)
     {
         Game sc = controller.GetComponent<Game>();
@@ -183,7 +210,8 @@ public class Chessman : MonoBehaviour
         }
     }
 
-     public void LMovePlate()
+
+    public void LMovePlate()
     {
         PointMovePlate(xBoard + 1, yBoard + 2);
         PointMovePlate(xBoard - 1, yBoard + 2);
@@ -215,45 +243,47 @@ public class Chessman : MonoBehaviour
         }
     }
 
+    // Desenha os moveplates de acordo com uma matrix 8x8
     public void MovePlateSpawn(int matrixX, int matrixY)
     {
-        //Recupera o valor do tabuleiro para converter em xy coordenadas
+        // Recupera o valor do tabuleiro para converter em xy coordenadas
         float x = matrixX;
         float y = matrixY;
 
-        //Ajuste do offset em SetCoordinates
+        // Ajuste do offset para ficar de acordo com uma matrix 8x8
         x *= 1.15f;
         y *= 1.15f;
 
-        //Ajuste do offset em SetCoordinates
         x -= 4f;
         y -= 3.6f;
 
-        //Set actual unity values
+        // Cria o gameobject do moveplate
         GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
 
+        // Cria uma instância do moveplate e interage com essa instância.
         MovePlate mpScript = mp.GetComponent<MovePlate>();
         mpScript.SetReference(gameObject);
         mpScript.SetCoordinates(matrixX, matrixY);
     }
 
+    // Desenha os moveplates de acordo com uma matrix 8x8 trocando a flag de ataque para true.
     public void MovePlateAttackSpawn(int matrixX, int matrixY)
     {
-        //Recupera o valor do tabuleiro para converter em xy coordenadas
+        // Recupera o valor do tabuleiro para converter em xy coordenadas
         float x = matrixX;
         float y = matrixY;
 
-        //Ajuste do offset em SetCoordinates
+        // Ajuste do offset para ficar de acordo com uma matrix 8x8
         x *= 1.15f;
         y *= 1.15f;
 
-        //Ajuste do offset em SetCoordinates
         x -= 4f;
         y -= 3.6f;
 
-        //Set actual unity values
+        // Cria o gameobject do moveplate
         GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
 
+        // Cria uma instância do moveplate e interage com essa instância, flag attack = true.
         MovePlate mpScript = mp.GetComponent<MovePlate>();
         mpScript.attack = true;
         mpScript.SetReference(gameObject);

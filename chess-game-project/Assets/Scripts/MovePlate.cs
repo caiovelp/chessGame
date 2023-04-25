@@ -15,24 +15,28 @@ public class MovePlate : MonoBehaviour
     // false: movimento, true: ataque
     public bool attack = false;
 
-    //Chamada quando o moveplate é criado
+    // Chamada quando o moveplate é criado
     public void Start()
     {
         if (attack)
         {
-            //A cor do sprite muda para vermelho
+            // A cor do sprite muda para vermelho
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
         }
     }
 
-    //Quando alguém clica no moveplate
+    /*
+        Função do Unity que é chamada quando o usuário clica e solta o botão do mouse.
+        Nesse caso, essa OnMouseUp é responsável pela troca de um moveplate com a peça
+        que está sofrendo a interação do usuário.
+    */
     public void OnMouseUp()
     {
         controller = GameObject.FindGameObjectWithTag("GameController");
 
         if(attack)
         {
-            //Quando uma peça é eliminada, ela vai para o canto esq/dir do tabuleiro.
+            //TODO: Quando uma peça é eliminada, ela vai para o canto esq/dir do tabuleiro.
         }
 
         controller.GetComponent<Game>().SetPositionEmpty(reference.GetComponent<Chessman>().GetXBoard(), reference.GetComponent<Chessman>().GetYBoard());
@@ -46,12 +50,14 @@ public class MovePlate : MonoBehaviour
         reference.GetComponent<Chessman>().DestroyMovePlates();
     }
 
+    //Função para definir as coordenadas de acordo com uma matriz.
     public void SetCoordinates(int x, int y) 
     {
         matrixX = x;
         matrixY = y;
     }
 
+    // Funções de Set e Get para um gameobject.
     public void SetReference(GameObject obj)
     {
         reference = obj;
