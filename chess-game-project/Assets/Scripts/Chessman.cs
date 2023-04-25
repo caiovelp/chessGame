@@ -195,7 +195,8 @@ public class Chessman : MonoBehaviour
         PointMovePlate(xBoard, yBoard - 1);
     }
 
-     public void LMovePlate()
+    // Função resposável por ditar os movimento em "L"
+    public void LMovePlate()
     {
         PointMovePlate(xBoard + 1, yBoard + 2);
         PointMovePlate(xBoard - 1, yBoard + 2);
@@ -207,15 +208,19 @@ public class Chessman : MonoBehaviour
         PointMovePlate(xBoard - 2, yBoard - 1);
     }
 
+    // Função resposável por invocar a MovePlate nas coordenadas informados
     public void PointMovePlate(int x, int y)
     {
         Game gameScript = controller.GetComponent<Game>();
         if (gameScript.PositionOnBoard(x, y))
         {
             GameObject chessPiece = gameScript.GetPosition(x, y);
-            // Verifica se posição da jogada tem uma peça
-            // Se sim, invoca a MovePlate na posição
-            // Caso contrário, se o player da peça é diferente do atual invoca a MovePlate de ataque na posição
+            /*  
+                Verifica se posição da jogada tem uma peça.
+                Se sim, invoca a MovePlate na posição.
+                Caso contrário, se o player da peça é diferente do atual invoca
+                a MovePlate de ataque na posição.
+            */ 
             if (chessPiece == null)
             {
                 MovePlateSpawn(x, y);
