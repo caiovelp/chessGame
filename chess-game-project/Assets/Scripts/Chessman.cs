@@ -103,12 +103,19 @@ public class Chessman : MonoBehaviour
         //Um para cada peça
         switch (this.name)
         {
+            case "blackPawn":
+                PawnMovePlate(xBoard, yBoard - 1);
+                break;
             case "whitePawn":
                 PawnMovePlate(xBoard, yBoard + 1);
                 break;
             case "whiteKnight":
             case "blackKnight":
                 LMovePlate();
+                break;
+            case "blackKing":
+            case "whiteKing":
+                SurroundMovePlate();
                 break;
         }
     }
@@ -133,6 +140,17 @@ public class Chessman : MonoBehaviour
                 MovePlateAttackSpawn(x - 1, y);
             }
         }
+    }
+
+    public void SurroundMovePlate(){
+        PointMovePlate(xBoard + 1, yBoard + 1);
+        PointMovePlate(xBoard + 1, yBoard);
+        PointMovePlate(xBoard + 1, yBoard - 1);
+        PointMovePlate(xBoard - 1, yBoard + 1);
+        PointMovePlate(xBoard - 1, yBoard);
+        PointMovePlate(xBoard - 1, yBoard - 1);
+        PointMovePlate(xBoard, yBoard + 1);
+        PointMovePlate(xBoard, yBoard - 1);
     }
 
      public void LMovePlate()
