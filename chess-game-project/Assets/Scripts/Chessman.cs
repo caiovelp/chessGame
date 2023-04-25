@@ -104,6 +104,8 @@ public class Chessman : MonoBehaviour
         switch (this.name)
         {
             case "blackPawn":
+                PawnMovePlate(xBoard, yBoard - 1);
+                break;
             case "whitePawn":
                 PawnMovePlate(xBoard, yBoard + 1);
                 break;
@@ -122,11 +124,11 @@ public class Chessman : MonoBehaviour
                 break;
             case "blackKing":
             case "whiteKing":
-                SurroundMovePlate();
                 break;
             case "blackTower":
             case "whiteTower": 
                 AxisMovePlate();
+                break;
         }
     }
 
@@ -192,7 +194,7 @@ public class Chessman : MonoBehaviour
         PointMovePlate(xBoard - 2, yBoard + 1);
         PointMovePlate(xBoard - 2, yBoard - 1);
     }
-    
+
     public void PointMovePlate(int x, int y)
     {
         Game gameScript = controller.GetComponent<Game>();
