@@ -121,6 +121,7 @@ public class Chessman : MonoBehaviour
             case "blackKing":
             case "whiteKing":
                 SurroundMovePlate();
+                break;
             case "blackBishop":
             case "whiteBishop":
                 CrossMovePlate();
