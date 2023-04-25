@@ -118,12 +118,13 @@ public class Chessman : MonoBehaviour
             case "blackKnight":
                 LMovePlate();
                 break;
+            case "blackKing":
+            case "whiteKing":
+                SurroundMovePlate();
+                break;
             case "blackBishop":
             case "whiteBishop":
                 CrossMovePlate();
-                break;
-            case "blackKing":
-            case "whiteKing":
                 break;
             case "blackTower":
             case "whiteTower": 
@@ -181,6 +182,17 @@ public class Chessman : MonoBehaviour
                 MovePlateAttackSpawn(x - 1, y);
             }
         }
+    }
+
+    public void SurroundMovePlate(){
+        PointMovePlate(xBoard + 1, yBoard + 1);
+        PointMovePlate(xBoard + 1, yBoard);
+        PointMovePlate(xBoard + 1, yBoard - 1);
+        PointMovePlate(xBoard - 1, yBoard + 1);
+        PointMovePlate(xBoard - 1, yBoard);
+        PointMovePlate(xBoard - 1, yBoard - 1);
+        PointMovePlate(xBoard, yBoard + 1);
+        PointMovePlate(xBoard, yBoard - 1);
     }
 
      public void LMovePlate()
