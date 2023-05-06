@@ -101,11 +101,15 @@ public class Chessman : MonoBehaviour
     */
     private void OnMouseUp()
     {
-        // Apaga os moveplates que estão no tabuleiro.
-        DestroyMovePlates();
+        // Só habilita a jogada se o for a vez do jogador da peça selecionada
+        if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player)
+        {
+            // Apaga os moveplates que estão no tabuleiro.
+            DestroyMovePlates();
 
-        // Inicia os novos moveplates depedendo da interação.
-        InitiateMovePlates();
+            // Inicia os novos moveplates depedendo da interação.
+            InitiateMovePlates();
+        }
     }
 
     // Função responsável por apagar os moveplates que estão desenhadas no tabuleiro
