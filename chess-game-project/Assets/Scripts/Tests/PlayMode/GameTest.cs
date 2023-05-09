@@ -107,8 +107,6 @@ public class GameTests
         Assert.AreEqual("blackBishop", game.GetPosition(5,7).name);
         Assert.AreEqual("blackQueen", game.GetPosition(3,7).name);
         Assert.AreEqual("blackKing", game.GetPosition(4,7).name);
-
-        
     }
 
     [Test]
