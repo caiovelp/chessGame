@@ -15,7 +15,7 @@ public class Game : MonoBehaviour
     private bool gameOver = false;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         whitePlayer = new GameObject[] 
         {
