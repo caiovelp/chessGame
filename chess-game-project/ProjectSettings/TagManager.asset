@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - MovePlate
+  - EndText
+  - WinnerText
   layers:
   - Default
   - TransparentFX
