@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Game : MonoBehaviour
 {
@@ -110,5 +112,23 @@ public class Game : MonoBehaviour
         {
             currentPlayer = "white";
         }
+    }
+
+    public void Update()
+    {
+        if (gameOver == true && Input.GetMouseButtonDown(0))
+        {
+            gameOver = false;
+
+            SceneManager.LoadScene("Game");
+        }
+    }
+
+    public void Winner(string playerWinner)
+    {
+        gameOver = true;
+        
+        GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>().enabled = true;
+        GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>().text = "O " + playerWinner + " venceu! Pressione o mouse para reiniciar";
     }
 }
