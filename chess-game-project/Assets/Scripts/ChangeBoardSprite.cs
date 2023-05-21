@@ -9,10 +9,8 @@ public class ChangeBoardSprite : MonoBehaviour
     [SerializeField] private SpriteRenderer rend;
 
     [SerializeField] private Sprite[] tabuleiros;
-    //[SerializeField] private Sprite[] pecas;
 
     private int tabuleiroID;
-    //private int tabuleiroID;
 
 
     void Awake()

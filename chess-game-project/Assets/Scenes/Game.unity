@@ -422,6 +422,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1206968600}
   - component: {fileID: 1206968599}
+  - component: {fileID: 1206968601}
   m_Layer: 0
   m_Name: Fundo
   m_TagString: Untagged
@@ -496,6 +497,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1206968601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1206968598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d4c39ab4e881504c80eddb7e30b8093, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rendBG: {fileID: 1206968599}
+  fundos:
+  - {fileID: 21300000, guid: c596fc45d360a06429c0da2cdfa301df, type: 3}
+  - {fileID: 21300000, guid: 7843d9df109c9204c8799925f5e113e3, type: 3}
+  - {fileID: 21300000, guid: 4cec0b4e90aea9549ba98195a4c16294, type: 3}
+  - {fileID: 21300000, guid: 3485242eeae4b814f8c1fe702875f9d3, type: 3}
+  - {fileID: 21300000, guid: 19b6ea71496f5f24a81c92bf2f1a22be, type: 3}
+  - {fileID: 21300000, guid: 5d98e86c1432a1c4cb68a855f3e6465f, type: 3}
+  - {fileID: 21300000, guid: 004cf15672a52e34e91ebfe4223816da, type: 3}
+  - {fileID: 21300000, guid: 038b659b3b2d14d4683a136211e95967, type: 3}
+  - {fileID: 21300000, guid: 1296a935698697e4e800b0a2c2670569, type: 3}
+  - {fileID: 21300000, guid: 2e95eda1ff934164db5526ecabd5da7a, type: 3}
+  - {fileID: 21300000, guid: 044d6e38a893bff4c9444b5a4b0db091, type: 3}
+  - {fileID: 21300000, guid: d0024b839053f92459d1bf3a6cbc2422, type: 3}
 --- !u!1 &1261937585
 GameObject:
   m_ObjectHideFlags: 0
