@@ -36,7 +36,10 @@ public class MovePlate : MonoBehaviour
 
         if(attack)
         {
-            //TODO: Quando uma peça é eliminada, ela vai para o canto esq/dir do tabuleiro.
+            GameObject cp = controller.GetComponent<Game>().GetPosition(matrixX,matrixY);
+
+            //TODO move to side
+            Destroy(cp);
         }
 
         controller.GetComponent<Game>().SetPositionEmpty(reference.GetComponent<Chessman>().GetXBoard(), reference.GetComponent<Chessman>().GetYBoard());
@@ -46,6 +49,9 @@ public class MovePlate : MonoBehaviour
         reference.GetComponent<Chessman>().SetCoordinates();
 
         controller.GetComponent<Game>().SetPosition(reference);
+
+        //Alterna o jogador atual
+        controller.GetComponent<Game>().NextTurn();
 
         reference.GetComponent<Chessman>().DestroyMovePlates();
     }

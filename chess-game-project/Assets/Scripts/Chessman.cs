@@ -101,11 +101,15 @@ public class Chessman : MonoBehaviour
     */
     private void OnMouseUp()
     {
-        // Apaga os moveplates que estão no tabuleiro.
-        DestroyMovePlates();
+        // Só habilita a jogada se o for a vez do jogador da peça selecionada
+        if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player)
+        {
+            // Apaga os moveplates que estão no tabuleiro.
+            DestroyMovePlates();
 
-        // Inicia os novos moveplates depedendo da interação.
-        InitiateMovePlates();
+            // Inicia os novos moveplates depedendo da interação.
+            InitiateMovePlates();
+        }
     }
 
     // Função responsável por apagar os moveplates que estão desenhadas no tabuleiro
@@ -154,6 +158,9 @@ public class Chessman : MonoBehaviour
         }
     }
 
+    /*
+        Função que cria as opções em movimentação em X de acordo com o tabuleiro
+    */
     public void CrossMovePlate()
     {
         LineMovePlate(1,1);
@@ -162,6 +169,9 @@ public class Chessman : MonoBehaviour
         LineMovePlate(-1,-1);
     }
 
+    /*
+        Função que cria as opções em movimentação em + de acordo com os eixos do tabuleiro
+    */
     public void AxisMovePlate()
     {
         LineMovePlate(1,0);
@@ -170,6 +180,11 @@ public class Chessman : MonoBehaviour
         LineMovePlate(0,-1);
     }
 
+    /*
+        Função que cria uma linha de movimentação a partir da peça em questão de acordo com um vetor (x,y)
+        @param xIncrement - valor x do vetor
+        @param yIncrement - valor y do vetor
+    */
     public void LineMovePlate(int xIncrement, int yIncrement)
     {
         Game sc = controller.GetComponent<Game>();
@@ -211,6 +226,9 @@ public class Chessman : MonoBehaviour
         }
     }
     
+    /*
+        Função que cria as opções de movimentação somente em volta da peça
+    */
     public void SurroundMovePlate()
     {
         PointMovePlate(xBoard + 1, yBoard + 1);

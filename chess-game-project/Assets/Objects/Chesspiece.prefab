@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8381845327792734849}
   - component: {fileID: 4229366288711443227}
   - component: {fileID: 2097812224390269894}
-  - component: {fileID: 7213403740678534478}
+  - component: {fileID: 9140348104037098822}
   m_Layer: 0
   m_Name: Chesspiece
   m_TagString: Untagged
@@ -112,7 +112,7 @@ MonoBehaviour:
   blackTower: {fileID: 21300000, guid: 817ae6a756e40a24a8894c84068a9932, type: 3}
   blackKnight: {fileID: 21300000, guid: d748918eac626f3458abaa11b4c90d18, type: 3}
   blackPawn: {fileID: 21300000, guid: 8545b8e299fa3b246bab2c93fd9cc510, type: 3}
---- !u!61 &7213403740678534478
+--- !u!61 &9140348104037098822
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

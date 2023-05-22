@@ -15,7 +15,7 @@ public class Game : MonoBehaviour
     private bool gameOver = false;
 
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         whitePlayer = new GameObject[] 
         {
@@ -87,5 +87,28 @@ public class Game : MonoBehaviour
     {
         if (x < 0 || y < 0 || x >= positions.GetLength(0) || y >= positions.GetLength(1)) return false;
         return true;
+    }
+
+     public string GetCurrentPlayer()
+    {
+        return currentPlayer;
+    }
+
+    public bool IsGameOver()
+    {
+        return gameOver;
+    }
+
+    // Função responsavel pela alternância do valor de currentPlayer
+    public void NextTurn()
+    {
+        if (currentPlayer == "white")
+        {
+            currentPlayer = "black";
+        }
+        else
+        {
+            currentPlayer = "white";
+        }
     }
 }
