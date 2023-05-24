@@ -1,5 +1,7 @@
 using UnityEngine;
 using NUnit.Framework;
+using System;
+using System.Collections;
 
 public class ChessmanTests
 {
@@ -11,7 +13,7 @@ public class ChessmanTests
         game = new Game();
     }
 
-    [Test]
+    [Test, Order(1)]
     public void ShouldInitializeMovePlate_WhitePawn()
     {   
         // Arrange
@@ -44,16 +46,18 @@ public class ChessmanTests
         // Assign the move plate prefab to the movePlate variable in the game object
         chessman.movePlate = movePlatePrefab;
 
-        game.SetPosition(piece);
+        gameController.SetPosition(piece);
 
         chessman.InitiateMovePlates();
 
         // Assert
         GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
-        Assert.AreEqual(movePlates.Length, 2);
+
+        // Desconsidera o primeiro movePlate pois não é um dos spawnados, é o básico que é clonado.
+        Assert.AreEqual(movePlates.Length - 1, 2);
     }
 
-    [Test]
+    [Test, Order(2)]
     public void ShouldInitializeMovePlate_BlackPawn()
     {   
         // Arrange
@@ -86,12 +90,857 @@ public class ChessmanTests
         // Assign the move plate prefab to the movePlate variable in the game object
         chessman.movePlate = movePlatePrefab;
 
-        game.SetPosition(piece);
+        gameController.SetPosition(piece);
+
+        gameController.NextTurn();
+
+        GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+
+        var movePlatesBefore = new ArrayList(movePlates).Count;
 
         chessman.InitiateMovePlates();
 
         // Assert
+        movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+        var movePlatesAfter = new ArrayList(movePlates).Count;
+
+        var movePlatesSpawned = movePlatesAfter - movePlatesBefore;
+        Assert.AreEqual(movePlatesSpawned, 2);
+    }
+
+    [Test, Order(3)]
+    public void ShouldInitializeMovePlate_WhiteBishop()
+    {   
+        // Arrange
+        string pieceName = "whiteBishop";
+        int x = 2;
+        int y = 0;
+
+        // Create a chess piece prefab as a placeholder for testing
+        var gameObject = new GameObject();
+        gameObject.AddComponent<Chessman>();
+        gameObject.AddComponent<SpriteRenderer>();
+
+        // Create a move plate prefab
+        var movePlatePrefab = new GameObject();
+        movePlatePrefab.AddComponent<MovePlate>();
+        movePlatePrefab.tag = "MovePlate";
+
+        // Act
+        game.chesspiece = gameObject; // Assign the chess piece prefab to the game object
+        GameObject piece = game.Create(pieceName, x, y);
+        Chessman chessman = piece.GetComponent<Chessman>();
+
+        // Create a new GameController object
+        var controllerObject = new GameObject();
+        var gameController = controllerObject.AddComponent<Game>();
+
+        // Assign the GameController object to the controller variable
+        chessman.controller = gameController.gameObject;
+
+        // Assign the move plate prefab to the movePlate variable in the game object
+        chessman.movePlate = movePlatePrefab;
+
+        gameController.SetPosition(piece);
+
+        gameController.NextTurn();
+
         GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
-        Assert.AreEqual(movePlates.Length, 2);
+
+        var movePlatesBefore = new ArrayList(movePlates).Count;
+
+        chessman.InitiateMovePlates();
+
+        // Assert
+        movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+        var movePlatesAfter = new ArrayList(movePlates).Count;
+
+        var movePlatesSpawned = movePlatesAfter - movePlatesBefore;
+        Assert.AreEqual(movePlatesSpawned, 7);
+    }
+
+    [Test, Order(4)]
+    public void ShouldInitializeMovePlate_WhiteTower()
+    {   
+        // Arrange
+        string pieceName = "whiteTower";
+        int x = 0;
+        int y = 0;
+
+        // Create a chess piece prefab as a placeholder for testing
+        var gameObject = new GameObject();
+        gameObject.AddComponent<Chessman>();
+        gameObject.AddComponent<SpriteRenderer>();
+
+        // Create a move plate prefab
+        var movePlatePrefab = new GameObject();
+        movePlatePrefab.AddComponent<MovePlate>();
+        movePlatePrefab.tag = "MovePlate";
+
+        // Act
+        game.chesspiece = gameObject; // Assign the chess piece prefab to the game object
+        GameObject piece = game.Create(pieceName, x, y);
+        Chessman chessman = piece.GetComponent<Chessman>();
+
+        // Create a new GameController object
+        var controllerObject = new GameObject();
+        var gameController = controllerObject.AddComponent<Game>();
+
+        // Assign the GameController object to the controller variable
+        chessman.controller = gameController.gameObject;
+
+        // Assign the move plate prefab to the movePlate variable in the game object
+        chessman.movePlate = movePlatePrefab;
+
+        gameController.SetPosition(piece);
+
+        GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+
+        var movePlatesBefore = new ArrayList(movePlates).Count;
+
+        chessman.InitiateMovePlates();
+
+        // Assert
+        movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+        var movePlatesAfter = new ArrayList(movePlates).Count;
+
+        var movePlatesSpawned = movePlatesAfter - movePlatesBefore;
+        Assert.AreEqual(movePlatesSpawned, 14);
+    }
+
+    [Test, Order(5)]
+    public void ShouldInitializeMovePlate_WhiteKnight()
+    {   
+        // Arrange
+        string pieceName = "whiteKnight";
+        int x = 1;
+        int y = 0;
+
+        // Create a chess piece prefab as a placeholder for testing
+        var gameObject = new GameObject();
+        gameObject.AddComponent<Chessman>();
+        gameObject.AddComponent<SpriteRenderer>();
+
+        // Create a move plate prefab
+        var movePlatePrefab = new GameObject();
+        movePlatePrefab.AddComponent<MovePlate>();
+        movePlatePrefab.tag = "MovePlate";
+
+        // Act
+        game.chesspiece = gameObject; // Assign the chess piece prefab to the game object
+        GameObject piece = game.Create(pieceName, x, y);
+        Chessman chessman = piece.GetComponent<Chessman>();
+
+        // Create a new GameController object
+        var controllerObject = new GameObject();
+        var gameController = controllerObject.AddComponent<Game>();
+
+        // Assign the GameController object to the controller variable
+        chessman.controller = gameController.gameObject;
+
+        // Assign the move plate prefab to the movePlate variable in the game object
+        chessman.movePlate = movePlatePrefab;
+
+        gameController.SetPosition(piece);
+
+        GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+
+        var movePlatesBefore = new ArrayList(movePlates).Count;
+
+        chessman.InitiateMovePlates();
+
+        // Assert
+        movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+        var movePlatesAfter = new ArrayList(movePlates).Count;
+
+        var movePlatesSpawned = movePlatesAfter - movePlatesBefore;
+        Assert.AreEqual(movePlatesSpawned, 3);
+    }
+
+    [Test, Order(6)]
+    public void ShouldInitializeMovePlate_WhiteQueen()
+    {   
+        // Arrange
+        string pieceName = "whiteQueen";
+        int x = 3;
+        int y = 0;
+
+        // Create a chess piece prefab as a placeholder for testing
+        var gameObject = new GameObject();
+        gameObject.AddComponent<Chessman>();
+        gameObject.AddComponent<SpriteRenderer>();
+
+        // Create a move plate prefab
+        var movePlatePrefab = new GameObject();
+        movePlatePrefab.AddComponent<MovePlate>();
+        movePlatePrefab.tag = "MovePlate";
+
+        // Act
+        game.chesspiece = gameObject; // Assign the chess piece prefab to the game object
+        GameObject piece = game.Create(pieceName, x, y);
+        Chessman chessman = piece.GetComponent<Chessman>();
+
+        // Create a new GameController object
+        var controllerObject = new GameObject();
+        var gameController = controllerObject.AddComponent<Game>();
+
+        // Assign the GameController object to the controller variable
+        chessman.controller = gameController.gameObject;
+
+        // Assign the move plate prefab to the movePlate variable in the game object
+        chessman.movePlate = movePlatePrefab;
+
+        gameController.SetPosition(piece);
+
+        GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+
+        var movePlatesBefore = new ArrayList(movePlates).Count;
+
+        chessman.InitiateMovePlates();
+
+        // Assert
+        movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+        var movePlatesAfter = new ArrayList(movePlates).Count;
+
+        var movePlatesSpawned = movePlatesAfter - movePlatesBefore;
+        Assert.AreEqual(movePlatesSpawned, 21);
+    }
+
+    [Test, Order(7)]
+    public void ShouldInitializeMovePlate_WhiteKing()
+    {   
+        // Arrange
+        string pieceName = "whiteKing";
+        int x = 4;
+        int y = 0;
+
+        // Create a chess piece prefab as a placeholder for testing
+        var gameObject = new GameObject();
+        gameObject.AddComponent<Chessman>();
+        gameObject.AddComponent<SpriteRenderer>();
+
+        // Create a move plate prefab
+        var movePlatePrefab = new GameObject();
+        movePlatePrefab.AddComponent<MovePlate>();
+        movePlatePrefab.tag = "MovePlate";
+
+        // Act
+        game.chesspiece = gameObject; // Assign the chess piece prefab to the game object
+        GameObject piece = game.Create(pieceName, x, y);
+        Chessman chessman = piece.GetComponent<Chessman>();
+
+        // Create a new GameController object
+        var controllerObject = new GameObject();
+        var gameController = controllerObject.AddComponent<Game>();
+
+        // Assign the GameController object to the controller variable
+        chessman.controller = gameController.gameObject;
+
+        // Assign the move plate prefab to the movePlate variable in the game object
+        chessman.movePlate = movePlatePrefab;
+
+        gameController.SetPosition(piece);
+
+        gameController.NextTurn();
+
+        GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+
+        var movePlatesBefore = new ArrayList(movePlates).Count;
+
+        chessman.InitiateMovePlates();
+
+        // Assert
+        movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+        var movePlatesAfter = new ArrayList(movePlates).Count;
+
+        var movePlatesSpawned = movePlatesAfter - movePlatesBefore;
+        Assert.AreEqual(movePlatesSpawned, 5);
+    }
+
+    [Test, Order(8)]
+    public void ShouldInitializeMovePlate_BlackBishop()
+    {   
+        // Arrange
+        string pieceName = "blackBishop";
+        int x = 2;
+        int y = 7;
+
+        // Create a chess piece prefab as a placeholder for testing
+        var gameObject = new GameObject();
+        gameObject.AddComponent<Chessman>();
+        gameObject.AddComponent<SpriteRenderer>();
+
+        // Create a move plate prefab
+        var movePlatePrefab = new GameObject();
+        movePlatePrefab.AddComponent<MovePlate>();
+        movePlatePrefab.tag = "MovePlate";
+
+        // Act
+        game.chesspiece = gameObject; // Assign the chess piece prefab to the game object
+        GameObject piece = game.Create(pieceName, x, y);
+        Chessman chessman = piece.GetComponent<Chessman>();
+
+        // Create a new GameController object
+        var controllerObject = new GameObject();
+        var gameController = controllerObject.AddComponent<Game>();
+
+        // Assign the GameController object to the controller variable
+        chessman.controller = gameController.gameObject;
+
+        // Assign the move plate prefab to the movePlate variable in the game object
+        chessman.movePlate = movePlatePrefab;
+
+        gameController.SetPosition(piece);
+
+        gameController.NextTurn();
+
+        GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+
+        var movePlatesBefore = new ArrayList(movePlates).Count;
+
+        chessman.InitiateMovePlates();
+
+        // Assert
+        movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+        var movePlatesAfter = new ArrayList(movePlates).Count;
+
+        var movePlatesSpawned = movePlatesAfter - movePlatesBefore;
+        Assert.AreEqual(movePlatesSpawned, 7);
+    }
+
+    [Test, Order(9)]
+    public void ShouldInitializeMovePlate_BlackTower()
+    {   
+        // Arrange
+        string pieceName = "blackTower";
+        int x = 0;
+        int y = 7;
+
+        // Create a chess piece prefab as a placeholder for testing
+        var gameObject = new GameObject();
+        gameObject.AddComponent<Chessman>();
+        gameObject.AddComponent<SpriteRenderer>();
+
+        // Create a move plate prefab
+        var movePlatePrefab = new GameObject();
+        movePlatePrefab.AddComponent<MovePlate>();
+        movePlatePrefab.tag = "MovePlate";
+
+        // Act
+        game.chesspiece = gameObject; // Assign the chess piece prefab to the game object
+        GameObject piece = game.Create(pieceName, x, y);
+        Chessman chessman = piece.GetComponent<Chessman>();
+
+        // Create a new GameController object
+        var controllerObject = new GameObject();
+        var gameController = controllerObject.AddComponent<Game>();
+
+        // Assign the GameController object to the controller variable
+        chessman.controller = gameController.gameObject;
+
+        // Assign the move plate prefab to the movePlate variable in the game object
+        chessman.movePlate = movePlatePrefab;
+
+        gameController.SetPosition(piece);
+
+        GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+
+        var movePlatesBefore = new ArrayList(movePlates).Count;
+
+        chessman.InitiateMovePlates();
+
+        // Assert
+        movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+        var movePlatesAfter = new ArrayList(movePlates).Count;
+
+        var movePlatesSpawned = movePlatesAfter - movePlatesBefore;
+        Assert.AreEqual(movePlatesSpawned, 14);
+    }
+
+    [Test, Order(10)]
+    public void ShouldInitializeMovePlate_BlackKnight()
+    {   
+        // Arrange
+        string pieceName = "blackKnight";
+        int x = 1;
+        int y = 7;
+
+        // Create a chess piece prefab as a placeholder for testing
+        var gameObject = new GameObject();
+        gameObject.AddComponent<Chessman>();
+        gameObject.AddComponent<SpriteRenderer>();
+
+        // Create a move plate prefab
+        var movePlatePrefab = new GameObject();
+        movePlatePrefab.AddComponent<MovePlate>();
+        movePlatePrefab.tag = "MovePlate";
+
+        // Act
+        game.chesspiece = gameObject; // Assign the chess piece prefab to the game object
+        GameObject piece = game.Create(pieceName, x, y);
+        Chessman chessman = piece.GetComponent<Chessman>();
+
+        // Create a new GameController object
+        var controllerObject = new GameObject();
+        var gameController = controllerObject.AddComponent<Game>();
+
+        // Assign the GameController object to the controller variable
+        chessman.controller = gameController.gameObject;
+
+        // Assign the move plate prefab to the movePlate variable in the game object
+        chessman.movePlate = movePlatePrefab;
+
+        gameController.SetPosition(piece);
+
+        GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+
+        var movePlatesBefore = new ArrayList(movePlates).Count;
+
+        chessman.InitiateMovePlates();
+
+        // Assert
+        movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+        var movePlatesAfter = new ArrayList(movePlates).Count;
+
+        var movePlatesSpawned = movePlatesAfter - movePlatesBefore;
+        Assert.AreEqual(movePlatesSpawned, 3);
+    }
+
+    [Test, Order(11)]
+    public void ShouldInitializeMovePlate_BlackQueen()
+    {   
+        // Arrange
+        string pieceName = "blackQueen";
+        int x = 3;
+        int y = 7;
+
+        // Create a chess piece prefab as a placeholder for testing
+        var gameObject = new GameObject();
+        gameObject.AddComponent<Chessman>();
+        gameObject.AddComponent<SpriteRenderer>();
+
+        // Create a move plate prefab
+        var movePlatePrefab = new GameObject();
+        movePlatePrefab.AddComponent<MovePlate>();
+        movePlatePrefab.tag = "MovePlate";
+
+        // Act
+        game.chesspiece = gameObject; // Assign the chess piece prefab to the game object
+        GameObject piece = game.Create(pieceName, x, y);
+        Chessman chessman = piece.GetComponent<Chessman>();
+
+        // Create a new GameController object
+        var controllerObject = new GameObject();
+        var gameController = controllerObject.AddComponent<Game>();
+
+        // Assign the GameController object to the controller variable
+        chessman.controller = gameController.gameObject;
+
+        // Assign the move plate prefab to the movePlate variable in the game object
+        chessman.movePlate = movePlatePrefab;
+
+        gameController.SetPosition(piece);
+
+        GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+
+        var movePlatesBefore = new ArrayList(movePlates).Count;
+
+        chessman.InitiateMovePlates();
+
+        // Assert
+        movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+        var movePlatesAfter = new ArrayList(movePlates).Count;
+
+        var movePlatesSpawned = movePlatesAfter - movePlatesBefore;
+        Assert.AreEqual(movePlatesSpawned, 21);
+    }
+
+    [Test, Order(12)]
+    public void ShouldInitializeMovePlate_BlackKing()
+    {   
+        // Arrange
+        string pieceName = "blackKing";
+        int x = 4;
+        int y = 7;
+
+        // Create a chess piece prefab as a placeholder for testing
+        var gameObject = new GameObject();
+        gameObject.AddComponent<Chessman>();
+        gameObject.AddComponent<SpriteRenderer>();
+
+        // Create a move plate prefab
+        var movePlatePrefab = new GameObject();
+        movePlatePrefab.AddComponent<MovePlate>();
+        movePlatePrefab.tag = "MovePlate";
+
+        // Act
+        game.chesspiece = gameObject; // Assign the chess piece prefab to the game object
+        GameObject piece = game.Create(pieceName, x, y);
+        Chessman chessman = piece.GetComponent<Chessman>();
+
+        // Create a new GameController object
+        var controllerObject = new GameObject();
+        var gameController = controllerObject.AddComponent<Game>();
+
+        // Assign the GameController object to the controller variable
+        chessman.controller = gameController.gameObject;
+
+        // Assign the move plate prefab to the movePlate variable in the game object
+        chessman.movePlate = movePlatePrefab;
+
+        gameController.SetPosition(piece);
+
+        GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+
+        var movePlatesBefore = new ArrayList(movePlates).Count;
+
+        chessman.InitiateMovePlates();
+
+        // Assert
+        movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+        var movePlatesAfter = new ArrayList(movePlates).Count;
+
+        var movePlatesSpawned = movePlatesAfter - movePlatesBefore;
+        Assert.AreEqual(movePlatesSpawned, 5);
+
+        // Destroy
+        chessman.DestroyMovePlates();
+    }
+
+    [Test, Order(13)]
+    public void ShouldInitializeAttackMovePlate_Right_Pawn()
+    {   
+        // Arrange Black Pawn
+        string pieceNameBlack = "blackPawn";
+        int xBlack = 1;
+        int yBlack = 2;
+
+        // Arrange White Pawn
+        string pieceNameWhite = "whitePawn";
+        int xWhite = 0;
+        int yWhite = 1;
+
+        // Create a chess piece prefab as a placeholder for testing
+        var gameObject = new GameObject();
+        gameObject.AddComponent<Chessman>();
+        gameObject.AddComponent<SpriteRenderer>();
+
+        // Create a move plate prefab
+        var movePlatePrefab = new GameObject();
+        movePlatePrefab.AddComponent<MovePlate>();
+        movePlatePrefab.tag = "MovePlate";
+
+        // Act
+        game.chesspiece = gameObject; // Assign the chess piece prefab to the game object
+        GameObject pieceBlack = game.Create(pieceNameBlack, xBlack, yBlack);
+        GameObject pieceWhite = game.Create(pieceNameWhite, xWhite, yWhite);
+        Chessman chessman = pieceWhite.GetComponent<Chessman>();
+
+        // Create a new GameController object
+        var controllerObject = new GameObject();
+        var gameController = controllerObject.AddComponent<Game>();
+
+        // Assign the GameController object to the controller variable
+        chessman.controller = gameController.gameObject;
+
+        // Assign the move plate prefab to the movePlate variable in the game object
+        chessman.movePlate = movePlatePrefab;
+
+        gameController.SetPosition(pieceBlack);
+        gameController.SetPosition(pieceWhite);
+
+        GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+
+        var movePlatesBefore = new ArrayList(movePlates).Count;
+
+        chessman.InitiateMovePlates();
+
+        // Assert
+        movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+        var movePlatesAfter = new ArrayList(movePlates).Count;
+
+        var movePlatesSpawned = movePlatesAfter - movePlatesBefore;
+        Assert.AreEqual(movePlatesSpawned, 3);
+
+        // Destroy
+        chessman.DestroyMovePlates();
+    }
+
+    [Test, Order(14)]
+    public void ShouldInitializeOneMovePlate_Pawn()
+    {   
+        // Arrange 
+        string pieceName = "whitePawn";
+        int x = 3;
+        int y = 3;
+
+        // Create a chess piece prefab as a placeholder for testing
+        var gameObject = new GameObject();
+        gameObject.AddComponent<Chessman>();
+        gameObject.AddComponent<SpriteRenderer>();
+
+        // Create a move plate prefab
+        var movePlatePrefab = new GameObject();
+        movePlatePrefab.AddComponent<MovePlate>();
+        movePlatePrefab.tag = "MovePlate";
+
+        // Act
+        game.chesspiece = gameObject; // Assign the chess piece prefab to the game object
+        GameObject piece = game.Create(pieceName, x, y);
+        Chessman chessman = piece.GetComponent<Chessman>();
+
+        // Create a new GameController object
+        var controllerObject = new GameObject();
+        var gameController = controllerObject.AddComponent<Game>();
+
+        // Assign the GameController object to the controller variable
+        chessman.controller = gameController.gameObject;
+
+        // Assign the move plate prefab to the movePlate variable in the game object
+        chessman.movePlate = movePlatePrefab;
+
+        gameController.SetPosition(piece);
+
+        GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+
+        var movePlatesBefore = new ArrayList(movePlates).Count;
+
+        chessman.InitiateMovePlates();
+
+        // Assert
+        movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+        var movePlatesAfter = new ArrayList(movePlates).Count;
+
+        var movePlatesSpawned = movePlatesAfter - movePlatesBefore;
+        Assert.AreEqual(movePlatesSpawned, 1);
+
+        // Destroy
+        chessman.DestroyMovePlates();
+    }
+
+    [Test, Order(15)]
+    public void ShouldCallOnMouseUp()
+    {
+        // Arrange 
+        string pieceName = "whitePawn";
+        int x = 3;
+        int y = 3;
+
+        // Create a chess piece prefab as a placeholder for testing
+        var gameObject = new GameObject();
+        gameObject.AddComponent<Chessman>();
+        gameObject.AddComponent<SpriteRenderer>();
+
+        // Create a move plate prefab
+        var movePlatePrefab = new GameObject();
+        movePlatePrefab.AddComponent<MovePlate>();
+        movePlatePrefab.tag = "MovePlate";
+
+        // Act
+        game.chesspiece = gameObject; // Assign the chess piece prefab to the game object
+        GameObject piece = game.Create(pieceName, x, y);
+        Chessman chessman = piece.GetComponent<Chessman>();
+
+        // Create a new GameController object
+        var controllerObject = new GameObject();
+        var gameController = controllerObject.AddComponent<Game>();
+
+        // Assign the GameController object to the controller variable
+        chessman.controller = gameController.gameObject;
+
+        // Assign the move plate prefab to the movePlate variable in the game object
+        chessman.movePlate = movePlatePrefab;
+
+        gameController.SetPosition(piece);
+
+        GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+
+        var movePlatesBefore = new ArrayList(movePlates).Count;
+
+        chessman.CallOnMouseUp();
+
+        // Assert
+        movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+        var movePlatesAfter = new ArrayList(movePlates).Count;
+
+        var movePlatesSpawned = movePlatesAfter - movePlatesBefore;
+        Assert.AreEqual(movePlatesSpawned, 1);
+    }
+
+    [Test, Order(16)]
+    public void ShouldInitializeAttackMovePlate_Left_Pawn()
+    {   
+        // Arrange Black Pawn
+        string pieceNameBlack = "blackPawn";
+        int xBlack = 0;
+        int yBlack = 2;
+
+        // Arrange White Pawn
+        string pieceNameWhite = "whitePawn";
+        int xWhite = 1;
+        int yWhite = 1;
+
+        // Create a chess piece prefab as a placeholder for testing
+        var gameObject = new GameObject();
+        gameObject.AddComponent<Chessman>();
+        gameObject.AddComponent<SpriteRenderer>();
+
+        // Create a move plate prefab
+        var movePlatePrefab = new GameObject();
+        movePlatePrefab.AddComponent<MovePlate>();
+        movePlatePrefab.tag = "MovePlate";
+
+        // Act
+        game.chesspiece = gameObject; // Assign the chess piece prefab to the game object
+        GameObject pieceBlack = game.Create(pieceNameBlack, xBlack, yBlack);
+        GameObject pieceWhite = game.Create(pieceNameWhite, xWhite, yWhite);
+        Chessman chessman = pieceWhite.GetComponent<Chessman>();
+
+        // Create a new GameController object
+        var controllerObject = new GameObject();
+        var gameController = controllerObject.AddComponent<Game>();
+
+        // Assign the GameController object to the controller variable
+        chessman.controller = gameController.gameObject;
+
+        // Assign the move plate prefab to the movePlate variable in the game object
+        chessman.movePlate = movePlatePrefab;
+
+        gameController.SetPosition(pieceBlack);
+        gameController.SetPosition(pieceWhite);
+
+        GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+
+        var movePlatesBefore = new ArrayList(movePlates).Count;
+
+        chessman.InitiateMovePlates();
+
+        // Assert
+        movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+        var movePlatesAfter = new ArrayList(movePlates).Count;
+
+        var movePlatesSpawned = movePlatesAfter - movePlatesBefore;
+        Assert.AreEqual(movePlatesSpawned, 3);
+
+        // Destroy
+        chessman.DestroyMovePlates();
+    }
+
+    [Test, Order(17)]
+    public void ShouldInitializeAttackMovePlate_Queen_Up()
+    {   
+        // Arrange Black Pawn
+        string pieceNameBlack = "blackPawn";
+        int xBlack = 3;
+        int yBlack = 1;
+
+        // Arrange White Pawn
+        string pieceNameWhite = "whiteQueen";
+        int xWhite = 3;
+        int yWhite = 0;
+
+        // Create a chess piece prefab as a placeholder for testing
+        var gameObject = new GameObject();
+        gameObject.AddComponent<Chessman>();
+        gameObject.AddComponent<SpriteRenderer>();
+
+        // Create a move plate prefab
+        var movePlatePrefab = new GameObject();
+        movePlatePrefab.AddComponent<MovePlate>();
+        movePlatePrefab.tag = "MovePlate";
+
+        // Act
+        game.chesspiece = gameObject; // Assign the chess piece prefab to the game object
+        GameObject pieceBlack = game.Create(pieceNameBlack, xBlack, yBlack);
+        GameObject pieceWhite = game.Create(pieceNameWhite, xWhite, yWhite);
+        Chessman chessman = pieceWhite.GetComponent<Chessman>();
+
+        // Create a new GameController object
+        var controllerObject = new GameObject();
+        var gameController = controllerObject.AddComponent<Game>();
+
+        // Assign the GameController object to the controller variable
+        chessman.controller = gameController.gameObject;
+
+        // Assign the move plate prefab to the movePlate variable in the game object
+        chessman.movePlate = movePlatePrefab;
+
+        gameController.SetPosition(pieceBlack);
+        gameController.SetPosition(pieceWhite);
+
+        GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+
+        var movePlatesBefore = new ArrayList(movePlates).Count;
+
+        chessman.InitiateMovePlates();
+
+        // Assert
+        movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+        var movePlatesAfter = new ArrayList(movePlates).Count;
+
+        var movePlatesSpawned = movePlatesAfter - movePlatesBefore;
+        Assert.AreEqual(movePlatesSpawned, 15);
+
+        // Destroy
+        chessman.DestroyMovePlates();
+    }
+
+    [Test, Order(18)]
+    public void ShouldInitializeAttackMovePlate_King_Side()
+    {   
+        // Arrange Black Pawn
+        string pieceNameBlack = "blackPawn";
+        int xBlack = 5;
+        int yBlack = 0;
+
+        // Arrange White Pawn
+        string pieceNameWhite = "whiteKing";
+        int xWhite = 4;
+        int yWhite = 0;
+
+        // Create a chess piece prefab as a placeholder for testing
+        var gameObject = new GameObject();
+        gameObject.AddComponent<Chessman>();
+        gameObject.AddComponent<SpriteRenderer>();
+
+        // Create a move plate prefab
+        var movePlatePrefab = new GameObject();
+        movePlatePrefab.AddComponent<MovePlate>();
+        movePlatePrefab.tag = "MovePlate";
+
+        // Act
+        game.chesspiece = gameObject; // Assign the chess piece prefab to the game object
+        GameObject pieceBlack = game.Create(pieceNameBlack, xBlack, yBlack);
+        GameObject pieceWhite = game.Create(pieceNameWhite, xWhite, yWhite);
+        Chessman chessman = pieceWhite.GetComponent<Chessman>();
+
+        // Create a new GameController object
+        var controllerObject = new GameObject();
+        var gameController = controllerObject.AddComponent<Game>();
+
+        // Assign the GameController object to the controller variable
+        chessman.controller = gameController.gameObject;
+
+        // Assign the move plate prefab to the movePlate variable in the game object
+        chessman.movePlate = movePlatePrefab;
+
+        gameController.SetPosition(pieceBlack);
+        gameController.SetPosition(pieceWhite);
+
+        GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+
+        var movePlatesBefore = new ArrayList(movePlates).Count;
+
+        chessman.InitiateMovePlates();
+
+        // Assert
+        movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+        var movePlatesAfter = new ArrayList(movePlates).Count;
+
+        var movePlatesSpawned = movePlatesAfter - movePlatesBefore;
+        Assert.AreEqual(movePlatesSpawned, 5);
+
+        // Destroy
+        chessman.DestroyMovePlates();
     }
 }

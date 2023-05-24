@@ -209,9 +209,29 @@ public class Chessman : MonoBehaviour
         Game sc = controller.GetComponent<Game>();
         if (sc.PositionOnBoard(x, y))
         {
-            if (sc.GetPosition(x, y) == null)
+            // Se for a posição inicial do peão, spawnar dois movePlate
+            if (sc.GetCurrentPlayer() == "white" && y == 2)
             {
-                MovePlateSpawn(x, y);
+                if (sc.GetPosition(x, y) == null)
+                {
+                    MovePlateSpawn(x, y);
+                    MovePlateSpawn(x, y + 1);
+                }
+            }
+            else if (sc.GetCurrentPlayer() == "black" && y == 5)
+            {
+                if (sc.GetPosition(x, y) == null)
+                {
+                    MovePlateSpawn(x, y);
+                    MovePlateSpawn(x, y - 1);
+                }
+            }
+            else 
+            {
+                if (sc.GetPosition(x, y) == null)
+                {
+                    MovePlateSpawn(x, y);
+                }
             }
 
             if (sc.PositionOnBoard(x + 1, y) && sc.GetPosition(x + 1, y) != null && sc.GetPosition(x + 1, y).GetComponent<Chessman>().player != player)
@@ -323,5 +343,10 @@ public class Chessman : MonoBehaviour
         mpScript.attack = true;
         mpScript.SetReference(gameObject);
         mpScript.SetCoordinates(matrixX, matrixY);
+    }
+
+    public void CallOnMouseUp()
+    {
+        OnMouseUp();
     }
 }
