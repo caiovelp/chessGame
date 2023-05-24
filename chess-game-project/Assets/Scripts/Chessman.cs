@@ -95,6 +95,15 @@ public class Chessman : MonoBehaviour
         yBoard = y;
     }
 
+    public Sprite GetWhiteQueen()
+    {
+        return whiteQueen;
+    }
+    public Sprite GetBlackQueen()
+    {
+        return blackQueen;
+    }
+
     /*
         Função do Unity que é chamada quando o usuário clica e solta o botão do mouse.
         Nesse caso, essa OnMouseUp é responsável pelo desenho dos moveplates.
@@ -199,7 +208,7 @@ public class Chessman : MonoBehaviour
         }
 
         if(sc.PositionOnBoard(x,y) && sc.GetPosition(x,y).GetComponent<Chessman>().player != player){
-            MovePlateAttackSpawn(x,y);
+            MovePlateSpawn(x,y, attack: true);
         }
     }
 
@@ -207,21 +216,32 @@ public class Chessman : MonoBehaviour
     public void PawnMovePlate(int x, int y)
     {
         Game sc = controller.GetComponent<Game>();
+        bool promote = false;
+        
         if (sc.PositionOnBoard(x, y))
         {
             if (sc.GetPosition(x, y) == null)
             {
-                MovePlateSpawn(x, y);
+                if (y == 7 || y == 0)
+                    promote = true;
+                
+                MovePlateSpawn(x, y, promote: promote);
             }
 
             if (sc.PositionOnBoard(x + 1, y) && sc.GetPosition(x + 1, y) != null && sc.GetPosition(x + 1, y).GetComponent<Chessman>().player != player)
             {
-                MovePlateAttackSpawn(x + 1, y);
+                if (y == 7 || y == 0)
+                    promote = true;
+                
+                MovePlateSpawn(x + 1, y, attack: true, promote: promote);
             }
 
             if (sc.PositionOnBoard(x - 1, y) && sc.GetPosition(x - 1, y) != null && sc.GetPosition(x - 1, y).GetComponent<Chessman>().player != player)
             {
-                MovePlateAttackSpawn(x - 1, y);
+                if (y == 7 || y == 0)
+                    promote = true;
+                
+                MovePlateSpawn(x - 1, y, attack: true, promote: promote);
             }
         }
     }
@@ -273,13 +293,14 @@ public class Chessman : MonoBehaviour
             }
             else if (chessPiece.GetComponent<Chessman>().player != player)
             {
-                MovePlateAttackSpawn(x, y);
+                MovePlateSpawn(x, y, attack: true);
             }
         }
     }
 
-    // Desenha os moveplates de acordo com uma matrix 8x8
-    public void MovePlateSpawn(int matrixX, int matrixY)
+    // Desenha os moveplates de acordo com uma matrix 8x8, caso seja uma ação de ataque xor promoção de peão
+    //                          passe os respectivos atributos como true
+    public void MovePlateSpawn(int matrixX, int matrixY, bool attack = false, bool promote = false)
     {
         // Recupera o valor do tabuleiro para converter em xy coordenadas
         float x = matrixX;
@@ -297,30 +318,9 @@ public class Chessman : MonoBehaviour
 
         // Cria uma instância do moveplate e interage com essa instância.
         MovePlate mpScript = mp.GetComponent<MovePlate>();
-        mpScript.SetReference(gameObject);
-        mpScript.SetCoordinates(matrixX, matrixY);
-    }
-
-    // Desenha os moveplates de acordo com uma matrix 8x8 trocando a flag de ataque para true.
-    public void MovePlateAttackSpawn(int matrixX, int matrixY)
-    {
-        // Recupera o valor do tabuleiro para converter em xy coordenadas
-        float x = matrixX;
-        float y = matrixY;
-
-        // Ajuste do offset para ficar de acordo com uma matrix 8x8
-        x *= 1.15f;
-        y *= 1.15f;
-
-        x -= 4f;
-        y -= 3.6f;
-
-        // Cria o gameobject do moveplate
-        GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
-
-        // Cria uma instância do moveplate e interage com essa instância, flag attack = true.
-        MovePlate mpScript = mp.GetComponent<MovePlate>();
-        mpScript.attack = true;
+        mpScript.promote = promote;
+        mpScript.attack = attack;
+        
         mpScript.SetReference(gameObject);
         mpScript.SetCoordinates(matrixX, matrixY);
     }

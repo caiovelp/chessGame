@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,6 +13,7 @@ public class Game : MonoBehaviour
     private GameObject[,] positions = new GameObject[8,8];
     private GameObject[] whitePlayer = new GameObject[16];
     private GameObject[] blackPlayer = new GameObject[16];
+    private GameObject[] destroyedPieces = new GameObject[32];
 
     private string currentPlayer = "white";
 
@@ -122,6 +125,12 @@ public class Game : MonoBehaviour
 
             SceneManager.LoadScene("Game");
         }
+    }
+
+    public void AppendDestroyedPieces(GameObject cp)
+    {
+        destroyedPieces = destroyedPieces.Append(cp) as GameObject[];
+        Console.WriteLine(destroyedPieces);
     }
 
     public void Winner(string playerWinner)
