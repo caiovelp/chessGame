@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,15 @@ public class MovePlate : MonoBehaviour
 
     GameObject reference = null;
 
+    public Sprite whiteQueen, blackQueen;
+
     //Posições do tabuleiro
     int matrixX;
     int matrixY;
 
     // false: movimento, true: ataque
     public bool attack = false;
+    public bool promote = false;
 
     // Chamada quando o moveplate é criado
     public void Start()
@@ -22,6 +26,17 @@ public class MovePlate : MonoBehaviour
         {
             // A cor do sprite muda para vermelho
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+        
+            if (promote)
+            {
+                // a cor da sprite muda para roxo
+                gameObject.GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.2f, 0.6f, 1.0f);
+            }
+        }
+        else if (promote)
+        {
+            // A cor da sprite muda para azul
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0.0f, 0.0f, 1.0f, 1.0f);
         }
     }
 
@@ -40,7 +55,9 @@ public class MovePlate : MonoBehaviour
 
             if (cp.name == "whiteKing") controller.GetComponent<Game>().Winner("preto");
             if (cp.name == "blackKing") controller.GetComponent<Game>().Winner("branco");
-
+            
+            //controller.GetComponent<Game>().AppendDestroyedPieces(cp);
+            
             //TODO move to side
             Destroy(cp);
         }
@@ -50,9 +67,22 @@ public class MovePlate : MonoBehaviour
         reference.GetComponent<Chessman>().SetXBoard(matrixX);
         reference.GetComponent<Chessman>().SetYBoard(matrixY);
         reference.GetComponent<Chessman>().SetCoordinates();
-
         controller.GetComponent<Game>().SetPosition(reference);
-
+        
+        if (promote)
+        {
+            GameObject cp = controller.GetComponent<Game>().GetPosition(matrixX, matrixY);
+            if (matrixY == 7)
+            {
+                cp.name = "whiteQueen";
+                cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetWhiteQueen();   
+            }
+            else
+            {
+                cp.name = "blackQueen";
+                cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetBlackQueen();
+            }
+        }
         //Alterna o jogador atual
         controller.GetComponent<Game>().NextTurn();
 
