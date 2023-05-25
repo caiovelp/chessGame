@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System;
 using System.Linq;
 
-// using Codice.Client.BaseCommands;
+using Codice.Client.BaseCommands;
 
 class Program{
   public static void Main(String[] argv){
@@ -261,7 +261,7 @@ public class Piece {
         for(int i = x + 1; i < 8; i++){
             if (!board.VerifyInsideBoard(i, y)) continue;
             if(board.GetPiece(i, y) == null){
-                moves.Add(new Move(x,y, i,y, 0));
+                moves.Add(new Move(x,y, i,y));
             }else{
                 if(board.GetPiece(i, y).team != piece.team){
                     moves.Add(new Move(x,y, i,y, (board.GetPiece(i, y)).TypeToScore()));
@@ -273,7 +273,7 @@ public class Piece {
         for(int i = x - 1; i >= 0; i--){
             if (!board.VerifyInsideBoard(i, y)) continue;
             if(board.GetPiece(i, y) == null){
-                moves.Add(new Move(x,y, i,y, 0));
+                moves.Add(new Move(x,y, i,y));
             }else{
                 if(board.GetPiece(i, y).team != piece.team){
                     moves.Add(new Move(x,y, i,y, (board.GetPiece(i, y)).TypeToScore()));
@@ -285,7 +285,7 @@ public class Piece {
         for(int i = y + 1; i < 8; i++){
             if (!board.VerifyInsideBoard(x, i)) continue;
             if(board.GetPiece(x, i) == null){
-                moves.Add(new Move(x,y, x,i, 0));
+                moves.Add(new Move(x,y, x,i));
             }else{
                 if(board.GetPiece(x, i).team != piece.team){
                     moves.Add(new Move(x,y, x,i, (board.GetPiece(x, i)).TypeToScore()));
@@ -297,7 +297,7 @@ public class Piece {
         for(int i = y - 1; i >= 0; i--){
             if (!board.VerifyInsideBoard(x, i)) continue;
             if(board.GetPiece(x, i) == null){
-                moves.Add(new Move(x,y, x,i, 0));
+                moves.Add(new Move(x,y, x,i));
             }else{
                 if(board.GetPiece(x, i).team != piece.team){
                     moves.Add(new Move(x,y, x,i, (board.GetPiece(x, i)).TypeToScore()));
@@ -317,7 +317,7 @@ public class Piece {
         for(int i = 1; (i+x < 8) && (i+y < 8); i++){
             if (!board.VerifyInsideBoard(x + i, y + i)) continue;
             if(board.GetPiece(x+i, y+i) == null){
-                moves.Add(new Move(x,y, x+i, y+i, 0));
+                moves.Add(new Move(x,y, x+i, y+i));
             }else{
                 if(board.GetPiece(x+i, y+i).team != piece.team){
                     moves.Add(new Move(x,y, x+i,y+i, (board.GetPiece(x+i,y+i)).TypeToScore()));
@@ -329,7 +329,7 @@ public class Piece {
         for(int i = -1; (i+x >= 0) && (i+y >= 0); i--){
             if (!board.VerifyInsideBoard(x + i, y + i)) continue;
             if(board.GetPiece(x+i, y+i) == null){
-                moves.Add(new Move(x,y, x+i, y+i, 0));
+                moves.Add(new Move(x,y, x+i, y+i));
             }else{
                 if(board.GetPiece(x+i, y+i).team != piece.team){
                     moves.Add(new Move(x,y, x+i,y+i, (board.GetPiece(x+i,y+i)).TypeToScore()));
@@ -341,7 +341,7 @@ public class Piece {
         for(int i = 1; (i+x < 8) && (i-y >= 0); i++){
             if (!board.VerifyInsideBoard(x + i, i - y)) continue;
             if(board.GetPiece(x+i, i-y) == null){
-                moves.Add(new Move(x,y, x+i, i-y, 0));
+                moves.Add(new Move(x,y, x+i, i-y));
             }else{
                 if(board.GetPiece(x+i, i-y).team != piece.team){
                     moves.Add(new Move(x,y, x+i,i-y, (board.GetPiece(x+i,i-y)).TypeToScore()));
@@ -353,7 +353,7 @@ public class Piece {
         for(int i = 1; (i-x >= 0) && (i+y < 8); i++){
             if (!board.VerifyInsideBoard(i - x, y + 1)) continue;
             if(board.GetPiece(i-x, y+i) == null){
-                moves.Add(new Move(x,y, i-x, y+i, 0));
+                moves.Add(new Move(x,y, i-x, y+i));
             }else{
                 if(board.GetPiece(i-x, y+i).team != piece.team){
                     moves.Add(new Move(x,y, i-x,y+i, (board.GetPiece(i-x,y+i)).TypeToScore()));
