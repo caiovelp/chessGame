@@ -103,7 +103,7 @@ public class Chessman : MonoBehaviour
         y *= 0.95f;
 
         x -= 3.32f;
-        y -= 2.82f;
+        y -= 2.72f;
 
         this.transform.position = new Vector3(x, y, -2 + y/100);
     }
