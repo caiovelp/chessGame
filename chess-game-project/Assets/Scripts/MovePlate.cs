@@ -9,7 +9,6 @@ public class MovePlate : MonoBehaviour
 
     GameObject reference = null;
 
-    public Sprite whiteQueen, blackQueen;
 
     //Posições do tabuleiro
     int matrixX;
@@ -33,11 +32,6 @@ public class MovePlate : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.2f, 0.6f, 1.0f);
             }
         }
-        else if (promote)
-        {
-            // A cor da sprite muda para azul
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(0.0f, 0.0f, 1.0f, 1.0f);
-        }
     }
 
     /*
@@ -51,17 +45,23 @@ public class MovePlate : MonoBehaviour
 
         if(attack)
         {
+            int i, j;
             GameObject cp = controller.GetComponent<Game>().GetPosition(matrixX,matrixY);
 
             if (cp.name == "whiteKing") controller.GetComponent<Game>().Winner("preto");
             if (cp.name == "blackKing") controller.GetComponent<Game>().Winner("branco");
             
-            //controller.GetComponent<Game>().AppendDestroyedPieces(cp);
+            controller.GetComponent<Game>().AppendDestroyedPieces(cp);
+            (i,j) = controller.GetComponent<Game>().SearchDestroyedPieces(cp);
+            if (cp.GetComponent<Chessman>().GetPlayer() == "black")
+                controller.GetComponent<Game>().Create(cp.name, i + 6, j);
+            else
+                controller.GetComponent<Game>().Create(cp.name, i - 3, j);
             
+            controller.GetComponent<Game>().SerPositionSpriteEmpty(matrixX, matrixY);
+            controller.GetComponent<Game>().SetPositionEmpty(matrixX, matrixY);   
             //TODO move to side
-            Destroy(cp);
         }
-
         controller.GetComponent<Game>().SetPositionEmpty(reference.GetComponent<Chessman>().GetXBoard(), reference.GetComponent<Chessman>().GetYBoard());
 
         reference.GetComponent<Chessman>().SetXBoard(matrixX);

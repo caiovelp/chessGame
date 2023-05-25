@@ -13,7 +13,7 @@ public class Game : MonoBehaviour
     private GameObject[,] positions = new GameObject[8,8];
     private GameObject[] whitePlayer = new GameObject[16];
     private GameObject[] blackPlayer = new GameObject[16];
-    private GameObject[] destroyedPieces = new GameObject[32];
+    private GameObject[,] destroyedPieces;
 
     private string currentPlayer = "white";
 
@@ -41,6 +41,8 @@ public class Game : MonoBehaviour
             Create("blackQueen", 3, 7), Create("blackKing", 4, 7),
             Create("blackBishop", 5, 7), Create("blackKnight", 6, 7), Create("blackTower", 7, 7)
         };
+
+        this.destroyedPieces = new GameObject[4,8];
 
         // Coloca as peças no tabuleiro
         for (int i = 0; i < whitePlayer.Length; i++) 
@@ -74,16 +76,21 @@ public class Game : MonoBehaviour
 
         positions[chessman.GetXBoard(), chessman.GetYBoard()] = obj;
     }
-
+    
     public GameObject GetPosition(int x, int y)
     {
         return positions[x, y];
     }
 
     // Função de define que uma posição (x, y) fique vazia.
-    public void SetPositionEmpty(int x, int y) 
+    public void SetPositionEmpty(int x, int y)
     {
         positions[x, y] = null;
+    }
+
+    public void SerPositionSpriteEmpty(int x, int y)
+    {
+        positions[x, y].GetComponent<SpriteRenderer>().sprite = null;   
     }
 
 
@@ -129,8 +136,48 @@ public class Game : MonoBehaviour
 
     public void AppendDestroyedPieces(GameObject cp)
     {
-        destroyedPieces = destroyedPieces.Append(cp) as GameObject[];
-        Console.WriteLine(destroyedPieces);
+        if (cp.GetComponent<Chessman>().GetPlayer() == "white")
+        {
+            for (int i = 1; i >= 0 ; i--)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (destroyedPieces[i, j] == null)
+                    {
+                        destroyedPieces[i, j] = cp;
+                        return;
+                    }
+                }
+            }
+        }
+        else
+        {
+            for (int i = 2; i < 4; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (destroyedPieces[i, j] == null)
+                    {
+                        destroyedPieces[i, j] = cp;
+                        return;
+                    }
+                }
+            }    
+        }
+    }
+
+    public (int i, int j) SearchDestroyedPieces(GameObject cp)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                if (destroyedPieces[i, j] == cp)
+                    return (i, j);
+            }
+        }
+
+        return (-1, -1);
     }
 
     public void Winner(string playerWinner)
