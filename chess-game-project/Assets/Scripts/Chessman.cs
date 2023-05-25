@@ -62,11 +62,11 @@ public class Chessman : MonoBehaviour
             que possam ser descritas como pos[i][j], onde i e j são posições da matriz aka
             tabuleiro de xadrez.
         */
-        x *= 1.15f;
-        y *= 1.15f;
+        x *= 0.95f;
+        y *= 0.95f;
 
-        x -= 4f;
-        y -= 3.4f;
+        x -= 3.32f;
+        y -= 2.82f;
 
         this.transform.position = new Vector3(x, y, -2 + y/100);
     }
@@ -225,12 +225,39 @@ public class Chessman : MonoBehaviour
         
         if (sc.PositionOnBoard(x, y))
         {
-            if (sc.GetPosition(x, y) == null)
+            if (y == 7 || y == 0)
+                promote = true;
+                
+                MovePlateSpawn(x, y, promote: promote);
+            // Se for a posição inicial do peão, spawnar dois movePlate
+            if (sc.GetCurrentPlayer() == "white" && y == 2)
             {
+
                 if (y == 7 || y == 0)
                     promote = true;
                 
                 MovePlateSpawn(x, y, promote: promote);
+
+                if (sc.GetPosition(x, y) == null)
+                {
+                    MovePlateSpawn(x, y);
+                    MovePlateSpawn(x, y + 1);
+                }
+            }
+            else if (sc.GetCurrentPlayer() == "black" && y == 5)
+            {
+                if (sc.GetPosition(x, y) == null)
+                {
+                    MovePlateSpawn(x, y);
+                    MovePlateSpawn(x, y - 1);
+                }
+            }
+            else 
+            {
+                if (sc.GetPosition(x, y) == null)
+                {
+                    MovePlateSpawn(x, y);
+                }
             }
 
             if (sc.PositionOnBoard(x + 1, y) && sc.GetPosition(x + 1, y) != null && sc.GetPosition(x + 1, y).GetComponent<Chessman>().player != player)
@@ -312,11 +339,11 @@ public class Chessman : MonoBehaviour
         float y = matrixY;
 
         // Ajuste do offset para ficar de acordo com uma matrix 8x8
-        x *= 1.15f;
-        y *= 1.15f;
+        x *= 0.95f;
+        y *= 0.95f;
 
-        x -= 4f;
-        y -= 3.6f;
+        x -= 3.32f;
+        y -= 2.99f;
 
         // Cria o gameobject do moveplate
         GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
@@ -328,5 +355,10 @@ public class Chessman : MonoBehaviour
         
         mpScript.SetReference(gameObject);
         mpScript.SetCoordinates(matrixX, matrixY);
+    }
+
+    public void CallOnMouseUp()
+    {
+        OnMouseUp();
     }
 }
