@@ -62,11 +62,11 @@ public class Chessman : MonoBehaviour
             que possam ser descritas como pos[i][j], onde i e j são posições da matriz aka
             tabuleiro de xadrez.
         */
-        x *= 1.15f;
-        y *= 1.15f;
+        x *= 0.95f;
+        y *= 0.95f;
 
-        x -= 4f;
-        y -= 3.4f;
+        x -= 3.32f;
+        y -= 2.82f;
 
         this.transform.position = new Vector3(x, y, -2 + y/100);
     }
@@ -286,11 +286,11 @@ public class Chessman : MonoBehaviour
         float y = matrixY;
 
         // Ajuste do offset para ficar de acordo com uma matrix 8x8
-        x *= 1.15f;
-        y *= 1.15f;
+        x *= 0.95f;
+        y *= 0.95f;
 
-        x -= 4f;
-        y -= 3.6f;
+        x -= 3.32f;
+        y -= 2.99f;
 
         // Cria o gameobject do moveplate
         GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
