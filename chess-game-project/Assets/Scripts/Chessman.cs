@@ -18,8 +18,44 @@ public class Chessman : MonoBehaviour
     private string player;
 
     // Peças de xadrez
-    public Sprite whiteQueen, whiteKing, whiteBishop, whiteTower, whiteKnight, whitePawn;
-    public Sprite blackQueen, blackKing, blackBishop, blackTower, blackKnight, blackPawn;
+    public Sprite[] whiteQueen, whiteKing, whiteBishop, whiteTower, whiteKnight, whitePawn;
+    public Sprite[] blackQueen, blackKing, blackBishop, blackTower, blackKnight, blackPawn;
+    private int setID;
+
+
+    //Função que seleciona a skin das peças.
+    public void SelectPeca(bool isForward)
+    {
+        if (isForward)
+        {
+            if (setID == whitePawn.Length - 1)
+            {
+                setID = 0;
+            }
+            else
+            {
+                setID++;
+            }
+        }
+        else
+        {
+            if (setID == 0)
+            {
+                setID = whitePawn.Length - 1;
+            }
+            else
+            {
+                setID--;
+            }
+        }
+        PlayerPrefs.SetInt("set", setID);
+
+        switch (this.name)
+        {
+            case "SptPecaBranca": this.GetComponent<SpriteRenderer>().sprite = whiteKing[setID]; Debug.Log(this.name); break;
+            case "SptPecaPreta": this.GetComponent<SpriteRenderer>().sprite = blackKing[setID]; Debug.Log(this.name); break;
+        }
+    }
 
     /* 
         Função responsável por "ativar" as peças, ou seja, ela define as posições das peças,
@@ -28,25 +64,26 @@ public class Chessman : MonoBehaviour
     public void Activate()
     {
         controller = GameObject.FindGameObjectWithTag("GameController");
+        setID = PlayerPrefs.GetInt("set", 0);
 
         // Ajusta as posições das peças
         SetCoordinates();
 
         switch (this.name)
         {
-            case "whiteQueen": this.GetComponent<SpriteRenderer>().sprite = whiteQueen; player = "white"; break;
-            case "whiteKing": this.GetComponent<SpriteRenderer>().sprite = whiteKing; player = "white"; break;
-            case "whiteBishop": this.GetComponent<SpriteRenderer>().sprite = whiteBishop; player = "white"; break;
-            case "whiteTower": this.GetComponent<SpriteRenderer>().sprite = whiteTower; player = "white"; break;
-            case "whiteKnight": this.GetComponent<SpriteRenderer>().sprite = whiteKnight; player = "white"; break;
-            case "whitePawn": this.GetComponent<SpriteRenderer>().sprite = whitePawn; player = "white"; break;
+            case "whiteQueen": this.GetComponent<SpriteRenderer>().sprite = whiteQueen[setID]; player = "white"; break;
+            case "whiteKing": this.GetComponent<SpriteRenderer>().sprite = whiteKing[setID]; player = "white"; break;
+            case "whiteBishop": this.GetComponent<SpriteRenderer>().sprite = whiteBishop[setID]; player = "white"; break;
+            case "whiteTower": this.GetComponent<SpriteRenderer>().sprite = whiteTower[setID]; player = "white"; break;
+            case "whiteKnight": this.GetComponent<SpriteRenderer>().sprite = whiteKnight[setID]; player = "white"; break;
+            case "whitePawn": this.GetComponent<SpriteRenderer>().sprite = whitePawn[setID]; player = "white"; break;
 
-            case "blackQueen": this.GetComponent<SpriteRenderer>().sprite = blackQueen; player = "black"; break;
-            case "blackKing": this.GetComponent<SpriteRenderer>().sprite = blackKing; player = "black"; break;
-            case "blackBishop": this.GetComponent<SpriteRenderer>().sprite = blackBishop; player = "black"; break;
-            case "blackTower": this.GetComponent<SpriteRenderer>().sprite = blackTower; player = "black"; break;
-            case "blackKnight": this.GetComponent<SpriteRenderer>().sprite = blackKnight; player = "black"; break;
-            case "blackPawn": this.GetComponent<SpriteRenderer>().sprite = blackPawn; player = "black"; break;
+            case "blackQueen": this.GetComponent<SpriteRenderer>().sprite = blackQueen[setID]; player = "black"; break;
+            case "blackKing": this.GetComponent<SpriteRenderer>().sprite = blackKing[setID]; player = "black"; break;
+            case "blackBishop": this.GetComponent<SpriteRenderer>().sprite = blackBishop[setID]; player = "black"; break;
+            case "blackTower": this.GetComponent<SpriteRenderer>().sprite = blackTower[setID]; player = "black"; break;
+            case "blackKnight": this.GetComponent<SpriteRenderer>().sprite = blackKnight[setID]; player = "black"; break;
+            case "blackPawn": this.GetComponent<SpriteRenderer>().sprite = blackPawn[setID]; player = "black"; break;
         }
     }
 
@@ -62,11 +99,11 @@ public class Chessman : MonoBehaviour
             que possam ser descritas como pos[i][j], onde i e j são posições da matriz aka
             tabuleiro de xadrez.
         */
-        x *= 1.15f;
-        y *= 1.15f;
+        x *= 0.95f;
+        y *= 0.95f;
 
-        x -= 4f;
-        y -= 3.4f;
+        x -= 3.32f;
+        y -= 2.72f;
 
         this.transform.position = new Vector3(x, y, -2 + y/100);
     }
@@ -209,9 +246,29 @@ public class Chessman : MonoBehaviour
         Game sc = controller.GetComponent<Game>();
         if (sc.PositionOnBoard(x, y))
         {
-            if (sc.GetPosition(x, y) == null)
+            // Se for a posição inicial do peão, spawnar dois movePlate
+            if (sc.GetCurrentPlayer() == "white" && y == 2)
             {
-                MovePlateSpawn(x, y);
+                if (sc.GetPosition(x, y) == null)
+                {
+                    MovePlateSpawn(x, y);
+                    MovePlateSpawn(x, y + 1);
+                }
+            }
+            else if (sc.GetCurrentPlayer() == "black" && y == 5)
+            {
+                if (sc.GetPosition(x, y) == null)
+                {
+                    MovePlateSpawn(x, y);
+                    MovePlateSpawn(x, y - 1);
+                }
+            }
+            else 
+            {
+                if (sc.GetPosition(x, y) == null)
+                {
+                    MovePlateSpawn(x, y);
+                }
             }
 
             if (sc.PositionOnBoard(x + 1, y) && sc.GetPosition(x + 1, y) != null && sc.GetPosition(x + 1, y).GetComponent<Chessman>().player != player)
@@ -286,11 +343,11 @@ public class Chessman : MonoBehaviour
         float y = matrixY;
 
         // Ajuste do offset para ficar de acordo com uma matrix 8x8
-        x *= 1.15f;
-        y *= 1.15f;
+        x *= 0.95f;
+        y *= 0.95f;
 
-        x -= 4f;
-        y -= 3.6f;
+        x -= 3.32f;
+        y -= 2.99f;
 
         // Cria o gameobject do moveplate
         GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
@@ -309,11 +366,11 @@ public class Chessman : MonoBehaviour
         float y = matrixY;
 
         // Ajuste do offset para ficar de acordo com uma matrix 8x8
-        x *= 1.15f;
-        y *= 1.15f;
+        x *= 0.95f;
+        y *= 0.95f;
 
-        x -= 4f;
-        y -= 3.6f;
+        x -= 3.32f;
+        y -= 2.99f;
 
         // Cria o gameobject do moveplate
         GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
@@ -323,5 +380,10 @@ public class Chessman : MonoBehaviour
         mpScript.attack = true;
         mpScript.SetReference(gameObject);
         mpScript.SetCoordinates(matrixX, matrixY);
+    }
+
+    public void CallOnMouseUp()
+    {
+        OnMouseUp();
     }
 }
