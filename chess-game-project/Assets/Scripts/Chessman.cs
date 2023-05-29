@@ -252,7 +252,9 @@ public class Chessman : MonoBehaviour
                 if (sc.GetPosition(x, y) == null)
                 {
                     MovePlateSpawn(x, y);
-                    MovePlateSpawn(x, y + 1);
+                    if ((sc.GetPosition(x, y + 1) == null)){
+                        MovePlateSpawn(x, y + 1);
+                    }
                 }
             }
             else if (sc.GetCurrentPlayer() == "black" && y == 5)
@@ -260,7 +262,9 @@ public class Chessman : MonoBehaviour
                 if (sc.GetPosition(x, y) == null)
                 {
                     MovePlateSpawn(x, y);
-                    MovePlateSpawn(x, y - 1);
+                    if ((sc.GetPosition(x, y - 1) == null)){
+                        MovePlateSpawn(x, y - 1);
+                    }
                 }
             }
             else 
