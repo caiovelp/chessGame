@@ -292,7 +292,7 @@ public class Chessman : MonoBehaviour
             {
                 if (sc.GetPosition(x, y) == null)
                 {
-                    if (y == 7)
+                    if (y == 0)
                         promote = true;
                     MovePlateSpawn(x, y, promote: promote);
                 }
