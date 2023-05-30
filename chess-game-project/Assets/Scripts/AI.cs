@@ -1,8 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
-// using UnityEngine;
+using UnityEngine;
 using System;
 
+// class Program{
+//   public static void Main(String[] argv){
+//     Board b = new Board();
+//     b.addPiece(3, 0, 0, 0);
+//     b.addPiece(0, 1, 0, 7);
+//     b.addPiece(3, 1, 1, 7);
+
+//     Move bestMove = AI.bestChoice(b, 0, 1);
+//     for(int i=7; i >= 0;i--){
+//       for(int t=0; t<8;t++){
+//         Piece a = b.getPiece(t,i);
+//         if(a == null){
+//           Console.Write(' ');
+//         }else{
+//           Console.Write(a.type);
+//         }
+//         Console.Write("|");
+//       }
+//       Console.Write("\n");
+//     }
+    
+//     Console.WriteLine("Resp: "+ bestMove.x +" "+ bestMove.y + " -> " + bestMove.destX +" "+ bestMove.destY +" $"+ bestMove.score);
+//   }
+// }
 
 public class Move {
     public int x;
@@ -40,7 +64,7 @@ public class Piece {
         y = _y;
     }
 	public int typeToScore(){
-    	return this.type;
+    	return this.type+1;
 	}
     public Move[] movement(Board board){
         switch(this.type){
@@ -203,6 +227,7 @@ public class Piece {
     // Adjacent squares
     public Move[] pawn(Board board){
 		Piece piece = this;
+        Piece target;
 		List<Move> moves = new List<Move>();
 
 		int firstMove = 0;
@@ -219,6 +244,12 @@ public class Piece {
 				}
 			}
 		}
+        for(int ii = -1; ii <= 1; ii+=2){
+            target = board.getPiece(piece.x + ii, piece.y + delta);
+            if(target != null && target.team != this.team){
+                moves.Add(new Move(piece.x, piece.y, piece.x + ii, piece.y + delta, target.typeToScore()));
+            }
+        }
         return moves.ToArray();
 	}
     public Move[] L(Board board){
@@ -246,10 +277,20 @@ public class Piece {
 }
 public class Board {
     public Piece[] positions = new Piece[64];
+    private int w = 0;
     public Piece[] w_pieces = new Piece[16];
+    private int b = 0;
     public Piece[] b_pieces = new Piece[16];
     public void addPiece(int type, int team, int x, int y){
-        positions[y*8 + x] = new Piece(type, team, x, y);
+        Piece p = new Piece(type, team, x, y);
+        positions[y*8 + x] = p;
+        if(team == 0){
+          w_pieces[w] = p;
+          w+=1;
+        }else{
+          b_pieces[b] = p;
+          b+=1;
+        }
     }
 
     public Piece[] getPieces(int turn) {
@@ -269,10 +310,10 @@ public class Board {
         }
     }
     public Piece getPiece(int x, int y){
-        return positions[y*8 + x];
+        return this.positions[y*8 + x];
     }
     public void setPiece(int x, int y, Piece p){
-        positions[y*8 + x] = p;
+        this.positions[y*8 + x] = p;
     }
     public void _move(Move _move){
         move(_move.x, _move.y, _move.destX, _move.destY);
@@ -289,19 +330,20 @@ public class Board {
 }
 
 public class AI{
-    public Move bestChoice(Board board, int turn, int depth){
-        return _bestChoice(board, turn, depth*2, turn, -1, 9999);
+    static public Move bestChoice(Board board, int turn, int depth){
+        return _bestChoice(board, turn, depth, turn, -1, 9999);
     }
-    public Move _bestChoice(Board board, int turn, int depth, int maxmizeTurn, int alpha, int beta){        
+    static public Move _bestChoice(Board board, int turn, int depth, int maxmizeTurn, int alpha, int beta){        
         Piece _p;
         Move bestMove = Move.fake();
         foreach(var p in board.getPieces(turn)){
             foreach(var m in p.movement(board)){
-                if(depth != 0){
+                // Console.WriteLine("T"+turn +" - "+ m.x +" "+ m.y + " -> " + m.destX +" "+ m.destY +" $"+ m.score);
+                if(depth > 0){
                     _p = board.getPiece(m.destX, m.destY);
-                    board._move(m);
+                    board._move(m); // Possivelmente parte de um bug (1)
                     m.score -= _bestChoice(board, (turn+1)%2, depth-1, maxmizeTurn, alpha, beta).score; // Recursive Score
-                    board._rMove(m);
+                    board._rMove(m); // Possivelmente parte de um bug (2)
                     board.setPiece(m.destX, m.destY, _p);
                 }
                 if(m.score > bestMove.score){ // Max(this, last)
