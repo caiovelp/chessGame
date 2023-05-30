@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+// using UnityEngine;
+using System;
 
 
 public class Move {
@@ -23,6 +24,9 @@ public class Move {
         destY = _destY;
         score = _score;
     }
+    static public Move fake(){
+        return new Move(-1,-1,-1,-1,-1);
+    }
 }
 public class Piece {
     public int type;
@@ -38,6 +42,24 @@ public class Piece {
 	public int typeToScore(){
     	return this.type;
 	}
+    public Move[] movement(Board board){
+        switch(this.type){
+            case 0: return this.pawn(board); // Peao
+            case 1: return this.L(board); // Cavalo
+            case 2: return this.cross(board); // Bispo
+            case 3: return this.plus(board); // Castelo   
+            case 4: return this.queen(board); // Rainha    
+        }
+        return this.adj(board); // Rei
+    }
+    public Move[] queen(Board board){
+        Move[] x = this.cross(board);
+        Move[] y = this.plus(board);
+        Move[] z = new Move[x.Length + y.Length];
+        x.CopyTo(z, 0);
+        y.CopyTo(z, x.Length);
+        return z;
+    }
     // 4 straight lines
     public Move[] plus(Board board){
 		Piece piece = this;
@@ -145,18 +167,21 @@ public class Piece {
     // Adjacent squares
     public Move[] adj(Board board){
 		Piece piece = this;
+        Piece target;
 		List<Move> moves = new List<Move>();
-		int x;
-		int y;
+		int x = piece.x;
+        int y = piece.y;
 		for(int i = -1; i <= 1; i+=2){
-			if(board.getPiece(x+i, y) == null){
+            target = board.getPiece(x+i, y);
+			if(target == null){
 				moves.Add(new Move(x,y, x+i, y));
 			}else if(target.team != piece.team){
 				moves.Add(new Move(x,y, x+i,y, target.typeToScore()));
 			}
 		}
-		for(int y = -1; y <= 1; y+=2){
-			if(board.getPiece(x, y+i) == null){
+		for(int i = -1; i <= 1; i+=2){
+            target = board.getPiece(x, y+i);
+			if(target == null){
 				moves.Add(new Move(x,y, x,y+i));
 			}else if(target.team != piece.team){
 				moves.Add(new Move(x,y, x,y+i, target.typeToScore()));
@@ -165,13 +190,15 @@ public class Piece {
 		
 		for(int i = -1; i <= 1; i+=2){
 			for(int z = -1; z <= 1; z+=2){
-				if(board.getPiece(x+i, y+z) == null){
+                target = board.getPiece(x, y+i);
+				if(target == null){
 					moves.Add(new Move(x,y, x+i, y+z));
 				}else if(target.team != piece.team){
 					moves.Add(new Move(x,y, x+i, y+z, target.typeToScore()));
 				}
 			}
 		}
+        return moves.ToArray();
 	}
     // Adjacent squares
     public Move[] pawn(Board board){
@@ -180,25 +207,26 @@ public class Piece {
 
 		int firstMove = 0;
 		int delta = 0;
-		if(piece.team = 0){delta = 1;if(piece.y == 1){firstMove = 1;}}
-		if(piece.team = 1){delta = -1;if(piece.y == 6){firstMove = 1;}}
+		if(piece.team == 0){delta = 1;if(piece.y == 1){firstMove = 1;}}
+		if(piece.team == 1){delta = -1;if(piece.y == 6){firstMove = 1;}}
 
 
 		if(board.getPiece(piece.x, piece.y + delta) == null){ // Na teoria, o peão nunca estaria no topo
-			moves.Add(new Move(piece.x, piece.y + delta));
-			if(firstMove){
+			moves.Add(new Move(piece.x, piece.y, piece.x, piece.y + delta));
+			if(firstMove == 1){
 				if(board.getPiece(piece.x, piece.y + delta*2) == null){ // Só vale pra casa inicial
-					moves.Add(new Move(piece.x, piece.y + delta));
+					moves.Add(new Move(piece.x, piece.y, piece.x, piece.y + delta));
 				}
 			}
 		}
+        return moves.ToArray();
 	}
     public Move[] L(Board board){
 		Piece piece = this;
         List<Move> moves = new List<Move>();
         Piece target;
-        int x;
-        int y;
+        int x = piece.x;
+        int y = piece.y;
         for(int i = -1; i <= 0; i++){ // Invert Y
             for(int z = 0; z <= 1; z++){ // Change x and y sizes
                 for(int w = -1; w <= 0; w++){ // Invert x
@@ -217,21 +245,34 @@ public class Piece {
     }
 }
 public class Board {
-    public Piece[] pieces = new Piece[8*8];
+    public Piece[] positions = new Piece[64];
+    public Piece[] w_pieces = new Piece[16];
+    public Piece[] b_pieces = new Piece[16];
     public void addPiece(int type, int team, int x, int y){
-        pieces[y*8 + x] = new Piece(type, team, x, y);
+        positions[y*8 + x] = new Piece(type, team, x, y);
     }
 
-    public Piece[] getPieces() {
+    public Piece[] getPieces(int turn) {
         List<Piece> resp = new List<Piece>();
-        foreach (var p in pieces)
-        {
-            if(p != null){resp.Add(p);}
+        if(turn == 0){
+            foreach (var p in w_pieces)
+            {
+                if(p != null){resp.Add(p);}
+            }
+            return resp.ToArray();
+        }else{
+            foreach (var p in b_pieces)
+            {
+                if(p != null){resp.Add(p);}
+            }
+            return resp.ToArray();
         }
-        return resp.ToArray();
     }
     public Piece getPiece(int x, int y){
-        return pieces[y*8 + x];
+        return positions[y*8 + x];
+    }
+    public void setPiece(int x, int y, Piece p){
+        positions[y*8 + x] = p;
     }
     public void _move(Move _move){
         move(_move.x, _move.y, _move.destX, _move.destY);
@@ -240,45 +281,49 @@ public class Board {
         move(_move.destX, _move.destY, _move.x, _move.y);
     }
     public void move(int x, int y, int xd, int yd){
-        pieces[y*8 + x].x = xd;
-        pieces[y*8 + x].y = yd;
-        pieces[yd*8 + xd] = this.pieces[y*8 + x];
-        pieces[y*8 + x] = null;
+        positions[y*8 + x].x = xd;
+        positions[y*8 + x].y = yd;
+        positions[yd*8 + xd] = this.positions[y*8 + x];
+        positions[y*8 + x] = null;
     }
 }
 
 public class AI{
-    // public Board simplify(){
-    //     // Recebe o estado atual do jogo e transforma na classe Board
-
-    //     // Board board = new Board();
-    //     // return board;
-    //     return new Board();
-    // }
-
-    // public Move bestChoice(Board board, Move[] pastMoves, int turn){
-    //     // Recebe um Board simplificado para decidir qual o melhor movimento. Retorna a posição da peça, seguida de seu destino
-
-    //     Move[] best_moves = new Move[];
-    //     // Pra cada peça
-    //     // - Pegar todas as opções de movimento, e dar uma pontuação pra cada.
-    //     foreach (var p in board.getPieces()){
-    //         possibleMoves(p, board);
-    //     }
-
-    //     // Retorna a movimentação de melhor pontuação
-    // }
-
-    // public Move[] possibleMoves(Piece piece, Board board){
-    //     int t = piece.type;
-    //     switch (t){
-    //         case 0: break; // Peao
-    //         case 1: break; // Cavalo
-    //         case 2: break; // Bispo
-    //         case 3: break; // Castelo
-    //         case 4: break; // Rainha
-    //         case 5: break; // Rei
-    //     }
-    // }
-
+    public Move bestChoice(Board board, int turn, int depth){
+        return _bestChoice(board, turn, depth*2, turn, -1, 9999);
+    }
+    public Move _bestChoice(Board board, int turn, int depth, int maxmizeTurn, int alpha, int beta){        
+        Piece _p;
+        Move bestMove = Move.fake();
+        foreach(var p in board.getPieces(turn)){
+            foreach(var m in p.movement(board)){
+                if(depth != 0){
+                    _p = board.getPiece(m.destX, m.destY);
+                    board._move(m);
+                    m.score -= _bestChoice(board, (turn+1)%2, depth-1, maxmizeTurn, alpha, beta).score; // Recursive Score
+                    board._rMove(m);
+                    board.setPiece(m.destX, m.destY, _p);
+                }
+                if(m.score > bestMove.score){ // Max(this, last)
+                    bestMove = m;
+                    if(turn == maxmizeTurn){
+                        if(m.score > alpha){
+                            alpha = m.score;
+                            if(beta <= alpha){
+                                return Move.fake(); // Return doesn't matter here
+                            }
+                        }
+                    }else{
+                        if(m.score > beta){
+                            beta = m.score;
+                            if(beta <= alpha){
+                                return Move.fake(); // Return doesn't matter here
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return bestMove;
+    }
 }
