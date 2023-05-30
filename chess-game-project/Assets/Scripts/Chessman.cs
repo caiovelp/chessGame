@@ -138,15 +138,30 @@ public class Chessman : MonoBehaviour
     */
     private void OnMouseUp()
     {
-        // Só habilita a jogada se o for a vez do jogador da peça selecionada
-        if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player)
+        // Só habilita a jogada se o for a vez do jogador da peça selecionada e se o player não for IA
+        if (player == "black")
         {
-            // Apaga os moveplates que estão no tabuleiro.
-            DestroyMovePlates();
+            if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player && !controller.GetComponent<Game>().IsBlackIa())
+            {
+                // Apaga os moveplates que estão no tabuleiro.
+                DestroyMovePlates();
 
-            // Inicia os novos moveplates depedendo da interação.
-            InitiateMovePlates();
+                // Inicia os novos moveplates depedendo da interação.
+                InitiateMovePlates();
+            }    
         }
+        else
+        {
+            if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player && !controller.GetComponent<Game>().IsWhiteIa())
+            {
+                // Apaga os moveplates que estão no tabuleiro.
+                DestroyMovePlates();
+
+                // Inicia os novos moveplates depedendo da interação.
+                InitiateMovePlates();
+            }
+        }
+        
     }
 
     // Função responsável por apagar os moveplates que estão desenhadas no tabuleiro

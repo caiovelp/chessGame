@@ -15,6 +15,8 @@ public class Game : MonoBehaviour
     private string currentPlayer = "white";
 
     private bool gameOver = false;
+    private bool blackIa = true;
+    private bool whiteIa = false;
 
     // Start is called before the first frame update
     public void Start()
@@ -83,7 +85,6 @@ public class Game : MonoBehaviour
         positions[x, y] = null;
     }
 
-
     // Função verifica se dado um valor (x, y), esse par está dentro do tabuleiro 8x8.
     public bool PositionOnBoard(int x, int y) 
     {
@@ -95,6 +96,16 @@ public class Game : MonoBehaviour
     {
         return currentPlayer;
     }
+     
+     public bool IsBlackIa()
+     {
+         return blackIa;
+     }
+     
+     public bool IsWhiteIa()
+     {
+         return whiteIa;
+     }
 
     public bool IsGameOver()
     {
