@@ -138,6 +138,11 @@ public class Chessman : MonoBehaviour
     {
         return this.name;
     }
+
+    public string GetPlayer()
+    {
+        return this.player;
+    }
     /*
         Função do Unity que é chamada quando o usuário clica e solta o botão do mouse.
         Nesse caso, essa OnMouseUp é responsável pelo desenho dos moveplates.
@@ -437,7 +442,7 @@ public class Chessman : MonoBehaviour
         int i = 0;
         foreach (var whitePiece in whitePieces)
         {
-            if (controller.GetComponent<Game>().GetPosition(whitePiece.GetComponent<Chessman>().GetXBoard(), whitePiece.GetComponent<Chessman>().GetYBoard()) == null) continue;
+            if (whitePiece == null) continue;
             
             Chessman gc = whitePiece.GetComponent<Chessman>();
             int pieceTeam = 0;
@@ -478,6 +483,7 @@ public class Chessman : MonoBehaviour
         int i = 0;
         foreach (var blackPiece in blackPieces)
         {
+            if (blackPiece == null) continue;
             Chessman gc = blackPiece.GetComponent<Chessman>();
             int pieceTeam = 1;
             int pieceType = 0;
@@ -516,6 +522,7 @@ public class Chessman : MonoBehaviour
         Piece[,] pieces = new Piece[8,8];
         foreach (var whitePiece in whitePieces)
         {
+            if (whitePiece == null) continue;
             Chessman gc = whitePiece.GetComponent<Chessman>();
             int pieceTeam = 0;
             int pieceType = 0;
@@ -545,6 +552,7 @@ public class Chessman : MonoBehaviour
         }
         foreach (var blackPiece in blackPieces)
         {
+            if (blackPiece == null) continue;
             Chessman gc = blackPiece.GetComponent<Chessman>();
             int pieceTeam = 1;
             int pieceType = 0;

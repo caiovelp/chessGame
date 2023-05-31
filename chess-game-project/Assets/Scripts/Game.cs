@@ -74,6 +74,32 @@ public class Game : MonoBehaviour
         positions[chessman.GetXBoard(), chessman.GetYBoard()] = obj;
     }
 
+    public void SearchAndDestroy(GameObject cp)
+    {
+        if (cp.GetComponent<Chessman>().GetPlayer() == "white")
+        {
+            for (var i = 0; i < whitePlayer.Length; i++)
+            {
+                if (whitePlayer[i] == null || whitePlayer[i].Equals(cp))
+                {
+                    whitePlayer[i] = null;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            for (var i = 0; i < blackPlayer.Length; i++)
+            {
+                if (blackPlayer[i] == cp)
+                {
+                    blackPlayer[i] = null;
+                    break;
+                }
+            }
+        }
+    }
+
     public GameObject[,] GetPositions()
     {
         return positions;
@@ -99,6 +125,12 @@ public class Game : MonoBehaviour
     {
         positions[x, y] = null;
     }
+    
+    public void SerPositionSpriteEmpty(int x, int y)
+    {
+        positions[x, y].GetComponent<SpriteRenderer>().sprite = null;   
+    }
+
 
     // Função verifica se dado um valor (x, y), esse par está dentro do tabuleiro 8x8.
     public bool PositionOnBoard(int x, int y) 
