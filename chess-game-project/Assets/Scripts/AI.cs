@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 // using UnityEngine;
 using System;
+using System.Linq;
+
 // using Codice.Client.BaseCommands;
 
 class Program{
@@ -561,5 +563,21 @@ public class AI{
             }
         }
         return bestMove;
+    }
+
+    public static Move RandomChoice(Board board, int turn)
+    {
+        List<Piece> pieces = new List<Piece>();
+        foreach (var piece in board.GetPieces(turn))
+        {
+            if(piece.Movement(board).Length > 0)
+                pieces.Add(piece);
+        }
+        Random r = new Random();
+        int index = r.Next(pieces.Count);
+        Move[] movePiece = pieces[index].Movement(board);
+        index = r.Next(movePiece.Length);
+
+        return movePiece[index];
     }
 }
