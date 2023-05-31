@@ -36,13 +36,19 @@ public class MovePlate : MonoBehaviour
 
         if(attack)
         {
+            int i = 0;
+            int j = 0;
             GameObject cp = controller.GetComponent<Game>().GetPosition(matrixX,matrixY);
 
             if (cp.name == "whiteKing") controller.GetComponent<Game>().Winner("preto");
             if (cp.name == "blackKing") controller.GetComponent<Game>().Winner("branco");
 
             //TODO move to side
-            Destroy(cp);
+            controller.GetComponent<Game>().SearchAndDestroy(cp);
+            
+            controller.GetComponent<Game>().SerPositionSpriteEmpty(matrixX, matrixY);
+            controller.GetComponent<Game>().SetPositionEmpty(matrixX, matrixY);
+            
         }
 
         controller.GetComponent<Game>().SetPositionEmpty(reference.GetComponent<Chessman>().GetXBoard(), reference.GetComponent<Chessman>().GetYBoard());
