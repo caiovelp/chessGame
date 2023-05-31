@@ -165,18 +165,10 @@ public class Game : MonoBehaviour
         if (currentPlayer == "white")
         {
             currentPlayer = "black";
-            if (IsBlackIa())
-            {
-                
-            }
         }
         else
         {
             currentPlayer = "white";
-            if (IsWhiteIa())
-            {
-                
-            }
         }
     }
 
