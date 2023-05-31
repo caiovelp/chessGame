@@ -1,32 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+// using UnityEngine;
 using System;
 
-// class Program{
-//   public static void Main(String[] argv){
-//     Board b = new Board();
-//     b.addPiece(3, 0, 0, 0);
-//     b.addPiece(0, 1, 0, 7);
-//     b.addPiece(3, 1, 1, 7);
+class Program{
+  public static void Main(String[] argv){
+    Board b = new Board();
+    b.AddPiece(3, 0, 0, 0);
+    b.AddPiece(4, 1, 0, 7);
+    b.AddPiece(3, 1, 1, 7);
 
-//     Move bestMove = AI.bestChoice(b, 0, 1);
-//     for(int i=7; i >= 0;i--){
-//       for(int t=0; t<8;t++){
-//         Piece a = b.getPiece(t,i);
-//         if(a == null){
-//           Console.Write(' ');
-//         }else{
-//           Console.Write(a.type);
-//         }
-//         Console.Write("|");
-//       }
-//       Console.Write("\n");
-//     }
+    Move bestMove = AI.BestChoice(b, 0, 3);
+    for(int i=7; i >= 0;i--){
+      for(int t=0; t<8;t++){
+        Piece a = b.GetPiece(t,i);
+        if(a == null){
+          Console.Write(' ');
+        }else{
+          Console.Write(a.type);
+        }
+        Console.Write("|");
+      }
+      Console.Write("\n");
+    }
     
-//     Console.WriteLine("Resp: "+ bestMove.x +" "+ bestMove.y + " -> " + bestMove.destX +" "+ bestMove.destY +" $"+ bestMove.score);
-//   }
-// }
+    Console.WriteLine("Resp: "+ bestMove.x +" "+ bestMove.y + " -> " + bestMove.destX +" "+ bestMove.destY +" $"+ bestMove.score);
+  }
+}
 
 public class Move {
     public int x;
@@ -34,12 +34,14 @@ public class Move {
     public int destX;
     public int destY;
     public int score;
+    public bool attack;
     public Move(int _x, int _y, int _destX, int _destY){
         x = _x;
         y = _y;
         destX = _destX;
         destY = _destY;
         score = 0;
+        attack = false;
     }
     public Move(int _x, int _y, int _destX, int _destY, int _score){
         x = _x;
@@ -47,6 +49,7 @@ public class Move {
         destX = _destX;
         destY = _destY;
         score = _score;
+        attack = true;
     }
     static public Move fake(){
         return new Move(-1,-1,-1,-1,-1);
@@ -91,44 +94,45 @@ public class Piece {
         int x = piece.x;
         int y = piece.y;
         for(int i = x + 1; i < 8; i++){
-            if(board.getPiece(i, y) == null){
+            if(board.GetPiece(i, y) == null){
                 moves.Add(new Move(x,y, i,y, 0));
             }else{
-                if(board.getPiece(i, y).team != piece.team){
-                    moves.Add(new Move(x,y, i,y, (board.getPiece(i, y)).typeToScore()));
+                if(board.GetPiece(i, y).team != piece.team){
+                    moves.Add(new Move(x,y, i,y, (board.GetPiece(i, y)).typeToScore()));
                 }
                 break;
             }
         }
 
         for(int i = x - 1; i >= 0; i--){
-            if(board.getPiece(i, y) == null){
+            if (!board.VerifyInsideBoard(i, y)) continue;
+            if(board.GetPiece(i, y) == null){
                 moves.Add(new Move(x,y, i,y, 0));
             }else{
-                if(board.getPiece(i, y).team != piece.team){
-                    moves.Add(new Move(x,y, i,y, (board.getPiece(i, y)).typeToScore()));
+                if(board.GetPiece(i, y).team != piece.team){
+                    moves.Add(new Move(x,y, i,y, (board.GetPiece(i, y)).typeToScore()));
                 }
                 break;
             }
         }
 
         for(int i = y + 1; i < 8; i++){
-            if(board.getPiece(x, i) == null){
+            if(board.GetPiece(x, i) == null){
                 moves.Add(new Move(x,y, x,i, 0));
             }else{
-                if(board.getPiece(x, i).team != piece.team){
-                    moves.Add(new Move(x,y, x,i, (board.getPiece(x, i)).typeToScore()));
+                if(board.GetPiece(x, i).team != piece.team){
+                    moves.Add(new Move(x,y, x,i, (board.GetPiece(x, i)).typeToScore()));
                 }
                 break;
             }
         }
 
         for(int i = y - 1; i >= 0; i--){
-            if(board.getPiece(x, i) == null){
+            if(board.GetPiece(x, i) == null){
                 moves.Add(new Move(x,y, x,i, 0));
             }else{
-                if(board.getPiece(x, i).team != piece.team){
-                    moves.Add(new Move(x,y, x,i, (board.getPiece(x, i)).typeToScore()));
+                if(board.GetPiece(x, i).team != piece.team){
+                    moves.Add(new Move(x,y, x,i, (board.GetPiece(x, i)).typeToScore()));
                 }
                 break;
             }
@@ -143,44 +147,46 @@ public class Piece {
         int x = piece.x;
         int y = piece.y;
         for(int i = 1; (i+x < 8) && (i+y < 8); i++){
-            if(board.getPiece(x+i, y+i) == null){
+            if (!board.VerifyInsideBoard(piece.x + i, piece.y + i)) continue;
+            if(board.GetPiece(x+i, y+i) == null){
                 moves.Add(new Move(x,y, x+i, y+i, 0));
             }else{
-                if(board.getPiece(x+i, y+i).team != piece.team){
-                    moves.Add(new Move(x,y, x+i,y+i, (board.getPiece(x+i,y+i)).typeToScore()));
+                if(board.GetPiece(x+i, y+i).team != piece.team){
+                    moves.Add(new Move(x,y, x+i,y+i, (board.GetPiece(x+i,y+i)).typeToScore()));
                 }
                 break;
             }
         }
 
         for(int i = -1; (i+x >= 0) && (i+y >= 0); i--){
-            if(board.getPiece(x+i, y+i) == null){
+            if (!board.VerifyInsideBoard(piece.x + i, piece.y + i)) continue;
+            if(board.GetPiece(x+i, y+i) == null){
                 moves.Add(new Move(x,y, x+i, y+i, 0));
             }else{
-                if(board.getPiece(x+i, y+i).team != piece.team){
-                    moves.Add(new Move(x,y, x+i,y+i, (board.getPiece(x+i,y+i)).typeToScore()));
+                if(board.GetPiece(x+i, y+i).team != piece.team){
+                    moves.Add(new Move(x,y, x+i,y+i, (board.GetPiece(x+i,y+i)).typeToScore()));
                 }
                 break;
             }
         }
 
         for(int i = 1; (i+x < 8) && (i-y >= 0); i++){
-            if(board.getPiece(x+i, i-y) == null){
+            if(board.GetPiece(x+i, i-y) == null){
                 moves.Add(new Move(x,y, x+i, i-y, 0));
             }else{
-                if(board.getPiece(x+i, i-y).team != piece.team){
-                    moves.Add(new Move(x,y, x+i,i-y, (board.getPiece(x+i,i-y)).typeToScore()));
+                if(board.GetPiece(x+i, i-y).team != piece.team){
+                    moves.Add(new Move(x,y, x+i,i-y, (board.GetPiece(x+i,i-y)).typeToScore()));
                 }
                 break;
             }
         }
 
         for(int i = 1; (i-x >= 0) && (i+y < 8); i++){
-            if(board.getPiece(i-x, y+i) == null){
+            if(board.GetPiece(i-x, y+i) == null){
                 moves.Add(new Move(x,y, i-x, y+i, 0));
             }else{
-                if(board.getPiece(i-x, y+i).team != piece.team){
-                    moves.Add(new Move(x,y, i-x,y+i, (board.getPiece(i-x,y+i)).typeToScore()));
+                if(board.GetPiece(i-x, y+i).team != piece.team){
+                    moves.Add(new Move(x,y, i-x,y+i, (board.GetPiece(i-x,y+i)).typeToScore()));
                 }
                 break;
             }
@@ -196,7 +202,8 @@ public class Piece {
 		int x = piece.x;
         int y = piece.y;
 		for(int i = -1; i <= 1; i+=2){
-            target = board.getPiece(x+i, y);
+            if (!board.VerifyInsideBoard(piece.x + i, piece.y)) continue;
+            target = board.GetPiece(x+i, y);
 			if(target == null){
 				moves.Add(new Move(x,y, x+i, y));
 			}else if(target.team != piece.team){
@@ -204,7 +211,8 @@ public class Piece {
 			}
 		}
 		for(int i = -1; i <= 1; i+=2){
-            target = board.getPiece(x, y+i);
+            if (!board.VerifyInsideBoard(piece.x, piece.y + i)) continue;
+            target = board.GetPiece(x, y+i);
 			if(target == null){
 				moves.Add(new Move(x,y, x,y+i));
 			}else if(target.team != piece.team){
@@ -214,7 +222,8 @@ public class Piece {
 		
 		for(int i = -1; i <= 1; i+=2){
 			for(int z = -1; z <= 1; z+=2){
-                target = board.getPiece(x, y+i);
+                if (!board.VerifyInsideBoard(piece.x, piece.y + i)) continue;
+                target = board.GetPiece(x, y+i);
 				if(target == null){
 					moves.Add(new Move(x,y, x+i, y+z));
 				}else if(target.team != piece.team){
@@ -234,18 +243,26 @@ public class Piece {
 		int delta = 0;
 		if(piece.team == 0){delta = 1;if(piece.y == 1){firstMove = 1;}}
 		if(piece.team == 1){delta = -1;if(piece.y == 6){firstMove = 1;}}
-
-
-		if(board.getPiece(piece.x, piece.y + delta) == null){ // Na teoria, o peão nunca estaria no topo
-			moves.Add(new Move(piece.x, piece.y, piece.x, piece.y + delta));
-			if(firstMove == 1){
-				if(board.getPiece(piece.x, piece.y + delta*2) == null){ // Só vale pra casa inicial
-					moves.Add(new Move(piece.x, piece.y, piece.x, piece.y + delta));
-				}
-			}
-		}
-        for(int ii = -1; ii <= 1; ii+=2){
-            target = board.getPiece(piece.x + ii, piece.y + delta);
+        if(board.VerifyInsideBoard(piece.x, piece.y + delta))
+        {
+            if (board.GetPiece(piece.x, piece.y + delta) == null)
+            {
+                // Na teoria, o peão nunca estaria no topo
+                moves.Add(new Move(piece.x, piece.y, piece.x, piece.y + delta));
+                if (firstMove == 1)
+                {
+                    if (board.GetPiece(piece.x, piece.y + delta * 2) == null)
+                    {
+                        // Só vale pra casa inicial
+                        moves.Add(new Move(piece.x, piece.y, piece.x, piece.y + delta*2));
+                    }
+                }
+            }
+        }
+        for(int ii = -1; ii <= 1; ii+=2)
+        {
+            if (!board.VerifyInsideBoard(piece.x + ii, piece.y + delta)) continue;
+                target = board.GetPiece(piece.x + ii, piece.y + delta);
             if(target != null && target.team != this.team){
                 moves.Add(new Move(piece.x, piece.y, piece.x + ii, piece.y + delta, target.typeToScore()));
             }
@@ -258,16 +275,17 @@ public class Piece {
         Piece target;
         int x = piece.x;
         int y = piece.y;
-        for(int i = -1; i <= 0; i++){ // Invert Y
+        for(int i = -1; i <= 1; i+=2){ // Invert Y
             for(int z = 0; z <= 1; z++){ // Change x and y sizes
-                for(int w = -1; w <= 0; w++){ // Invert x
+                for(int w = -1; w <= 1; w+=2){ // Invert x
                     x = (1+z)*w;
                     y = (2-z)*i;
-                    target = board.getPiece(piece.x + x,piece.y + y);
+                    if (!board.VerifyInsideBoard(piece.x + x, piece.y + y)) continue;
+                    target = board.GetPiece(piece.x + x,piece.y + y);
                     if(target == null){
-                        moves.Add(new Move(x,y, x+i, y+i));
+                        moves.Add(new Move(piece.x,piece.y, piece.x+x, piece.y+y));
                     }else if(target.team != piece.team){
-                        moves.Add(new Move(x,y, x+i,y+i, target.typeToScore()));
+                        moves.Add(new Move(piece.x,piece.y, piece.x+x, piece.y+y, target.typeToScore()));
                     }
                 }
             }
@@ -276,93 +294,101 @@ public class Piece {
     }
 }
 public class Board {
-    public Piece[] positions = new Piece[64];
+    public Piece[,] positions = new Piece[8,8];
     private int w = 0;
-    public Piece[] w_pieces = new Piece[16];
+    public Piece[] wPieces = new Piece[16];
     private int b = 0;
-    public Piece[] b_pieces = new Piece[16];
-    public void addPiece(int type, int team, int x, int y){
+    public Piece[] bPieces = new Piece[16];
+    public void AddPiece(int type, int team, int x, int y){
         Piece p = new Piece(type, team, x, y);
-        positions[y*8 + x] = p;
+        positions[x, y]  = p;
         if(team == 0){
-          w_pieces[w] = p;
+          wPieces[w] = p;
           w+=1;
         }else{
-          b_pieces[b] = p;
+          bPieces[b] = p;
           b+=1;
         }
     }
 
-    public Piece[] getPieces(int turn) {
+    public Piece[] GetPieces(int turn) {
         List<Piece> resp = new List<Piece>();
         if(turn == 0){
-            foreach (var p in w_pieces)
+            foreach (var p in wPieces)
             {
                 if(p != null){resp.Add(p);}
             }
             return resp.ToArray();
         }else{
-            foreach (var p in b_pieces)
+            foreach (var p in bPieces)
             {
                 if(p != null){resp.Add(p);}
             }
             return resp.ToArray();
         }
     }
-    public Piece getPiece(int x, int y){
-        return this.positions[y*8 + x];
+    public Piece GetPiece(int x, int y){
+        return this.positions[x,y];
     }
-    public void setPiece(int x, int y, Piece p){
-        this.positions[y*8 + x] = p;
+    public void SetPiece(int x, int y, Piece p){
+        this.positions[x,y] = p;
+    }
+
+    public bool VerifyInsideBoard(int x, int y)
+    {
+        if ((x < 0 || x > 7) || (y < 0 || y > 7))
+            return false;
+        return true;
     }
     public void _move(Move _move){
-        move(_move.x, _move.y, _move.destX, _move.destY);
+        Move(_move.x, _move.y, _move.destX, _move.destY);
     }
     public void _rMove(Move _move){
-        move(_move.destX, _move.destY, _move.x, _move.y);
+        Move(_move.destX, _move.destY, _move.x, _move.y);
     }
-    public void move(int x, int y, int xd, int yd){
-        positions[y*8 + x].x = xd;
-        positions[y*8 + x].y = yd;
-        positions[yd*8 + xd] = this.positions[y*8 + x];
-        positions[y*8 + x] = null;
+    public void Move(int x, int y, int xd, int yd){
+        positions[x,y].x = xd;
+        positions[x,y].y = yd;
+        positions[xd,yd] = this.positions[x,y];
+        positions[x,y] = null;
     }
 }
 
 public class AI{
-    static public Move bestChoice(Board board, int turn, int depth){
+    public static Move BestChoice(Board board, int turn, int depth){
         return _bestChoice(board, turn, depth, turn, -1, 9999);
     }
-    static public Move _bestChoice(Board board, int turn, int depth, int maxmizeTurn, int alpha, int beta){        
+
+    private static Move _bestChoice(Board board, int turn, int depth, int maxmizeTurn, int alpha, int beta){        
         Piece _p;
         Move bestMove = Move.fake();
-        foreach(var p in board.getPieces(turn)){
+        foreach(var p in board.GetPieces(turn)){
             foreach(var m in p.movement(board)){
                 // Console.WriteLine("T"+turn +" - "+ m.x +" "+ m.y + " -> " + m.destX +" "+ m.destY +" $"+ m.score);
                 if(depth > 0){
-                    _p = board.getPiece(m.destX, m.destY);
+                    _p = board.GetPiece(m.destX, m.destY);
                     board._move(m); // Possivelmente parte de um bug (1)
                     m.score -= _bestChoice(board, (turn+1)%2, depth-1, maxmizeTurn, alpha, beta).score; // Recursive Score
                     board._rMove(m); // Possivelmente parte de um bug (2)
-                    board.setPiece(m.destX, m.destY, _p);
+                    board.SetPiece(m.destX, m.destY, _p);
                 }
                 if(m.score > bestMove.score){ // Max(this, last)
                     bestMove = m;
-                    if(turn == maxmizeTurn){
-                        if(m.score > alpha){
-                            alpha = m.score;
-                            if(beta <= alpha){
-                                return Move.fake(); // Return doesn't matter here
-                            }
-                        }
-                    }else{
-                        if(m.score > beta){
-                            beta = m.score;
-                            if(beta <= alpha){
-                                return Move.fake(); // Return doesn't matter here
-                            }
-                        }
-                    }
+                    // if(turn == maxmizeTurn){
+                    //     if(m.score > alpha){
+                    //         alpha = m.score;
+                    //         if(beta <= alpha){
+                    //             return Move.fake(); // Return doesn't matter here
+                    //         }
+                    //     }
+                    // }else{
+                    //     if(m.score > beta){
+                    //         beta = -m.score;
+                    //         if(beta <= alpha){
+                    //             return Move.fake(); // Return doesn't matter here
+                    //         }
+                    //     }
+                    // }
                 }
             }
         }

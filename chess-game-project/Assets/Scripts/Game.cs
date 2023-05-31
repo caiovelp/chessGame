@@ -74,6 +74,21 @@ public class Game : MonoBehaviour
         positions[chessman.GetXBoard(), chessman.GetYBoard()] = obj;
     }
 
+    public GameObject[,] GetPositions()
+    {
+        return positions;
+    }
+
+    public GameObject[] GetWhitePlayer()
+    {
+        return whitePlayer;
+    }
+    
+    public GameObject[] GetBlackPlayer()
+    {
+        return blackPlayer;
+    }
+
     public GameObject GetPosition(int x, int y)
     {
         return positions[x, y];
@@ -118,10 +133,18 @@ public class Game : MonoBehaviour
         if (currentPlayer == "white")
         {
             currentPlayer = "black";
+            if (IsBlackIa())
+            {
+                
+            }
         }
         else
         {
             currentPlayer = "white";
+            if (IsWhiteIa())
+            {
+                
+            }
         }
     }
 

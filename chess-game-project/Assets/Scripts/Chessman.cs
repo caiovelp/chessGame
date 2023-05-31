@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
+using UnityEditor.Media;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -132,6 +134,10 @@ public class Chessman : MonoBehaviour
         yBoard = y;
     }
 
+    public string GetName()
+    {
+        return this.name;
+    }
     /*
         Função do Unity que é chamada quando o usuário clica e solta o botão do mouse.
         Nesse caso, essa OnMouseUp é responsável pelo desenho dos moveplates.
@@ -148,7 +154,12 @@ public class Chessman : MonoBehaviour
 
                 // Inicia os novos moveplates depedendo da interação.
                 InitiateMovePlates();
-            }    
+            }
+            else if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player && controller.GetComponent<Game>().IsBlackIa())
+            {
+                // Quando for a vez do preto e ele ser a IA do jogo.
+                AIMove();
+            }
         }
         else
         {
@@ -396,6 +407,213 @@ public class Chessman : MonoBehaviour
         mpScript.SetReference(gameObject);
         mpScript.SetCoordinates(matrixX, matrixY);
     }
+
+    public void MovePlateIaSpawn(int matrixX, int matrixY, GameObject gc, bool attack)
+    {
+        // Recupera o valor do tabuleiro para converter em xy coordenadas
+        float x = matrixX;
+        float y = matrixY;
+
+        // Ajuste do offset para ficar de acordo com uma matrix 8x8
+        x *= 0.95f;
+        y *= 0.95f;
+
+        x -= 3.32f;
+        y -= 2.99f;
+
+        // Cria o gameobject do moveplate
+        GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
+        // Cria uma instância do moveplate e interage com essa instância, flag attack = true.
+        MovePlate mpScript = mp.GetComponent<MovePlate>();
+        mpScript.attack = attack;
+        mpScript.SetReference(gc);
+        mpScript.SetCoordinates(matrixX, matrixY); ;
+        mpScript.OnMouseUp();
+    }
+
+    private Piece[] SetWhitePieces(GameObject[] whitePieces)
+    {
+        Piece[] wps = new Piece[16];
+        int i = 0;
+        foreach (var whitePiece in whitePieces)
+        {
+            if (controller.GetComponent<Game>().GetPosition(whitePiece.GetComponent<Chessman>().GetXBoard(), whitePiece.GetComponent<Chessman>().GetYBoard()) == null) continue;
+            
+            Chessman gc = whitePiece.GetComponent<Chessman>();
+            int pieceTeam = 0;
+            int pieceType = 0;
+            switch (gc.GetName())
+            {
+                case "whitePawn":
+                    pieceType = 0;
+                    break;
+                case "whiteKnight":
+                    pieceType = 1;
+                    break;
+                case "whiteBishop":
+                    pieceType = 2;
+                    break;
+                case "whiteTower":
+                    pieceType = 3;
+                    break;
+                case "whiteQueen":
+                    pieceType = 4;
+                    break;
+                case "whiteKing":
+                    pieceType = 5;
+                    break;
+            }
+                
+            wps[i] = new Piece(pieceType, pieceTeam, gc.GetXBoard(), gc.GetYBoard());
+            i++;
+        }
+        
+
+        return wps;
+    }
+
+    private Piece[] SetBlackPieces(GameObject[] blackPieces)
+    {
+        Piece[] bps = new Piece[16];
+        int i = 0;
+        foreach (var blackPiece in blackPieces)
+        {
+            Chessman gc = blackPiece.GetComponent<Chessman>();
+            int pieceTeam = 1;
+            int pieceType = 0;
+            switch (gc.GetName())
+            {
+                case "blackPawn":
+                    pieceType = 0;
+                    break;
+                case "blackKnight":
+                    pieceType = 1;
+                    break;
+                case "blackBishop":
+                    pieceType = 2;
+                    break;
+                case "blackTower":
+                    pieceType = 3;
+                    break;
+                case "blackQueen":
+                    pieceType = 4;
+                    break;
+                case "blackKing":
+                    pieceType = 5;
+                    break;
+            }
+                
+            bps[i] = new Piece(pieceType, pieceTeam, gc.GetXBoard(), gc.GetYBoard());
+            i++;
+        }
+        
+
+        return bps;
+    }
+
+    private Piece[,] SetPiecesPosition(GameObject[] whitePieces, GameObject[] blackPieces)
+    {
+        Piece[,] pieces = new Piece[8,8];
+        foreach (var whitePiece in whitePieces)
+        {
+            Chessman gc = whitePiece.GetComponent<Chessman>();
+            int pieceTeam = 0;
+            int pieceType = 0;
+            switch (gc.GetName())
+            {
+                case "whitePawn":
+                    pieceType = 0;
+                    break;
+                case "whiteKnight":
+                    pieceType = 1;
+                    break;
+                case "whiteBishop":
+                    pieceType = 2;
+                    break;
+                case "whiteTower":
+                    pieceType = 3;
+                    break;
+                case "whiteQueen":
+                    pieceType = 4;
+                    break;
+                case "whiteKing":
+                    pieceType = 5;
+                    break;
+            }
+
+            pieces[gc.GetXBoard(), gc.GetYBoard()] = new Piece(pieceType, pieceTeam, gc.GetXBoard(), gc.GetYBoard());
+        }
+        foreach (var blackPiece in blackPieces)
+        {
+            Chessman gc = blackPiece.GetComponent<Chessman>();
+            int pieceTeam = 1;
+            int pieceType = 0;
+            switch (gc.GetName())
+            {
+                case "blackPawn":
+                    pieceType = 0;
+                    break;
+                case "blackKnight":
+                    pieceType = 1;
+                    break;
+                case "blackBishop":
+                    pieceType = 2;
+                    break;
+                case "blackTower":
+                    pieceType = 3;
+                    break;
+                case "blackQueen":
+                    pieceType = 4;
+                    break;
+                case "blackKing":
+                    pieceType = 5;
+                    break;
+            }
+
+            pieces[gc.GetXBoard(), gc.GetYBoard()] = new Piece(pieceType, pieceTeam, gc.GetXBoard(), gc.GetYBoard());
+        }
+
+        return pieces;
+    }
+
+    private Board SetBoard(Piece[,] pieces, Piece[] whitePieces, Piece[] blackPieces)
+    {
+        Board board = new Board();
+
+        board.positions = pieces;
+        board.wPieces = whitePieces;
+        board.bPieces = blackPieces;
+
+        return board;
+    }
+
+    public void AIMove()
+    {
+        GameObject[] whitePieces = controller.GetComponent<Game>().GetWhitePlayer();
+        GameObject[] blackPieces = controller.GetComponent<Game>().GetBlackPlayer();
+        
+        Piece[,] pieces = SetPiecesPosition(whitePieces, blackPieces);
+        Piece[] wPs = SetWhitePieces(whitePieces);
+        Piece[] bPs = SetBlackPieces(blackPieces);
+        Board board = SetBoard(pieces, wPs, bPs);
+        int currentPlayer = 0;
+        
+        if (controller.GetComponent<Game>().GetCurrentPlayer() == "white")
+            currentPlayer = 0;
+        else
+            currentPlayer = 1;
+        
+        Move move = AI.BestChoice(board, currentPlayer, 1);
+
+        int xAtual = move.x;
+        int yAtual = move.y;
+        int xDest = move.destX;
+        int yDest = move.destY;
+        bool attack = move.attack;
+
+        GameObject gc = controller.GetComponent<Game>().GetPosition(xAtual, yAtual);
+        MovePlateIaSpawn(xDest, yDest, gc, attack);
+    }  
 
     public void CallOnMouseUp()
     {
