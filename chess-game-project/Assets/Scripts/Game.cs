@@ -127,6 +127,12 @@ public class Game : MonoBehaviour
     public void Winner(string playerWinner)
     {
         gameOver = true;
+
+        var isTest = GameObject.FindGameObjectWithTag("EndText");
+        if (isTest == null)
+        {
+            return;
+        }
         
         GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>().enabled = true;
         GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>().text = "O " + playerWinner + " venceu! Pressione o mouse para reiniciar";
