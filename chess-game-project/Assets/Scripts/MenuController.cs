@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class MenuController : MonoBehaviour
 {
     public string mainSceneName = "Game";
+    public bool quit = false;
 
     public void StartGame()
     {
@@ -13,7 +14,8 @@ public class MenuController : MonoBehaviour
     public void QuitGame()
     {
         #if UNITY_EDITOR
-                    UnityEditor.EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
+            quit=true;
         #else
             Application.Quit();
         #endif
