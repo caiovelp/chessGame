@@ -28,14 +28,4 @@ public class MenuControllerTests
 
         Assert.AreEqual("Game", SceneManager.GetActiveScene().name);
     }
-
-    // [Test]
-    // public void QuitGame_QuitsApplication()
-    // {
-    //     // Chama a função QuitGame()
-    //     // menuController.QuitGame();
-
-    //     // Verifica se o aplicativo está sendo encerrado
-    //     Assert.IsTrue(menuController.quit);
-    // }
 }
