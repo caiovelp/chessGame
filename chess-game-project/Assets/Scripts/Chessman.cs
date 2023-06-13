@@ -149,35 +149,36 @@ public class Chessman : MonoBehaviour
     */
     private void OnMouseUp()
     {
+        if(controller.GetComponent<Game>().GetCurrentPlayer() == "white" &&  controller.GetComponent<Game>().IsWhiteIa())
+        {
+            AIMove();
+            return;
+        }
+
+        if(controller.GetComponent<Game>().GetCurrentPlayer() == "black" &&  controller.GetComponent<Game>().IsBlackIa())
+        {
+            AIMove();
+            return;
+        }
+
         // Só habilita a jogada se o for a vez do jogador da peça selecionada e se o player não for IA
-        if (player == "black")
-        {
-            if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player && !controller.GetComponent<Game>().IsBlackIa())
-            {
-                // Apaga os moveplates que estão no tabuleiro.
-                DestroyMovePlates();
-
-                // Inicia os novos moveplates depedendo da interação.
-                InitiateMovePlates();
-            }
-            else if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player && controller.GetComponent<Game>().IsBlackIa())
-            {
-                // Quando for a vez do preto e ele ser a IA do jogo.
-                AIMove();
-            }
-        }
-        else
-        {
-            if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player && !controller.GetComponent<Game>().IsWhiteIa())
-            {
-                // Apaga os moveplates que estão no tabuleiro.
-                DestroyMovePlates();
-
-                // Inicia os novos moveplates depedendo da interação.
-                InitiateMovePlates();
-            }
-        }
         
+        if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player && !controller.GetComponent<Game>().IsBlackIa())
+        {
+            // Apaga os moveplates que estão no tabuleiro.
+            DestroyMovePlates();
+
+            // Inicia os novos moveplates depedendo da interação.
+            InitiateMovePlates();
+        }
+        if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player && !controller.GetComponent<Game>().IsWhiteIa())
+        {
+            // Apaga os moveplates que estão no tabuleiro.
+            DestroyMovePlates();
+
+            // Inicia os novos moveplates depedendo da interação.
+            InitiateMovePlates();
+        }
     }
 
     // Função responsável por apagar os moveplates que estão desenhadas no tabuleiro
@@ -432,8 +433,8 @@ public class Chessman : MonoBehaviour
         MovePlate mpScript = mp.GetComponent<MovePlate>();
         mpScript.attack = attack;
         mpScript.SetReference(gc);
-        mpScript.SetCoordinates(matrixX, matrixY); ;
-        mpScript.OnMouseUp();
+        mpScript.SetCoordinates(matrixX, matrixY);
+        mpScript.Movement();
     }
 
     private Piece[] SetWhitePieces(GameObject[] whitePieces)
@@ -611,7 +612,7 @@ public class Chessman : MonoBehaviour
         else
             currentPlayer = 1;
         
-        Move move = AI.RandomChoice(board, currentPlayer);
+        Move move = AI.BestChoice(board, currentPlayer, 1);
 
         int xAtual = move.x;
         int yAtual = move.y;

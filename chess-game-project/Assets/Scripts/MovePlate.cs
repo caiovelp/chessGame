@@ -32,30 +32,38 @@ public class MovePlate : MonoBehaviour
     */
     public void OnMouseUp()
     {
-        controller = GameObject.FindGameObjectWithTag("GameController");
+
+        Movement();
+
+    }
+
+    public void EatMovement()
+    {
+        int i, j;
+        GameObject cp = controller.GetComponent<Game>().GetPosition(matrixX,matrixY);
+
+        if (cp.name == "whiteKing") controller.GetComponent<Game>().Winner("preto");
+        if (cp.name == "blackKing") controller.GetComponent<Game>().Winner("branco");
+
+        controller.GetComponent<Game>().AppendDestroyedPieces(cp);
+        (i,j) = controller.GetComponent<Game>().SearchDestroyedPieces(cp);
+        if (cp.GetComponent<Chessman>().GetPlayer() == "black")
+            controller.GetComponent<Game>().Create(cp.name, i + 6, j);
+        else
+            controller.GetComponent<Game>().Create(cp.name, i - 3, j);
+        controller.GetComponent<Game>().SearchAndDestroy(cp);
+            
+        controller.GetComponent<Game>().SerPositionSpriteEmpty(matrixX, matrixY);
+        controller.GetComponent<Game>().SetPositionEmpty(matrixX, matrixY);
+    }
+
+    public void Movement()
+    {
+        controller = GameObject.FindGameObjectWithTag("GameController"); 
 
         if(attack)
-        {
-            int i, j;
-            GameObject cp = controller.GetComponent<Game>().GetPosition(matrixX,matrixY);
-
-            if (cp.name == "whiteKing") controller.GetComponent<Game>().Winner("preto");
-            if (cp.name == "blackKing") controller.GetComponent<Game>().Winner("branco");
-
-            //TODO move to side
-            controller.GetComponent<Game>().AppendDestroyedPieces(cp);
-            (i,j) = controller.GetComponent<Game>().SearchDestroyedPieces(cp);
-            if (cp.GetComponent<Chessman>().GetPlayer() == "black")
-                controller.GetComponent<Game>().Create(cp.name, i + 6, j);
-            else
-                controller.GetComponent<Game>().Create(cp.name, i - 3, j);
-            controller.GetComponent<Game>().SearchAndDestroy(cp);
-            
-            controller.GetComponent<Game>().SerPositionSpriteEmpty(matrixX, matrixY);
-            controller.GetComponent<Game>().SetPositionEmpty(matrixX, matrixY);
-            // Destroy(cp);
-        }
-
+            EatMovement();
+        
         controller.GetComponent<Game>().SetPositionEmpty(reference.GetComponent<Chessman>().GetXBoard(), reference.GetComponent<Chessman>().GetYBoard());
 
         reference.GetComponent<Chessman>().SetXBoard(matrixX);
