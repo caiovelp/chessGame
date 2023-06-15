@@ -141,9 +141,40 @@ public class Chessman : MonoBehaviour
     {
         return whiteQueen[setID];
     }
+    
+    public Sprite GetWhiteTower()
+    {
+        return whiteTower[setID];
+    }    
+
+    public Sprite GetWhiteBishop()
+    {
+        return whiteBishop[setID];
+    }    
+
+    public Sprite GetWhiteKnight()
+    {
+        return whiteKnight[setID];
+    }
+
     public Sprite GetBlackQueen()
     {
         return blackQueen[setID];
+    }
+    
+    public Sprite GetBlackTower()
+    {
+        return blackTower[setID];
+    }    
+
+    public Sprite GetBlackBishop()
+    {
+        return blackBishop[setID];
+    }    
+
+    public Sprite GetBlackKnight()
+    {
+        return blackKnight[setID];
     }
 
     /*
