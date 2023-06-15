@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class MovePlate : MonoBehaviour
 {
@@ -32,6 +33,52 @@ public class MovePlate : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.2f, 0.6f, 1.0f);
             }
         }
+    }
+
+    public static PieceType ShowPromotionMenu()
+    {
+        PieceType selectedPiece = PieceType.Queen;
+        bool promote = true;
+
+        if (promote)
+        {
+            bool queen = EditorUtility.DisplayDialog("Promoção", "Escolha para qual peça será promovida:", "Rainha", "Torre");
+            if (queen)
+            {
+                selectedPiece = PieceType.Queen;
+            }
+            else
+            {
+                bool tower = EditorUtility.DisplayDialog("Promoção", "Escolha para qual peça será promovida:", "Torre", "Bispo");
+                if (tower)
+                {
+                    selectedPiece = PieceType.Tower;
+                }
+                else
+                {
+                    bool bishop = EditorUtility.DisplayDialog("Promoção", "Escolha para qual peça será promovida:", "Bispo", "Cavalo");
+                    if (bishop)
+                    {
+                        selectedPiece = PieceType.Bishop;
+                    }
+                    else
+                    {
+                        selectedPiece = PieceType.Knight;
+                    }
+                }
+            }
+        }
+
+        return selectedPiece;
+    }
+
+
+    public enum PieceType
+    {
+        Queen,
+        Tower,
+        Bishop,
+        Knight
     }
 
     /*
@@ -71,16 +118,53 @@ public class MovePlate : MonoBehaviour
         
         if (promote)
         {
+            PieceType promocao = ShowPromotionMenu();
             GameObject cp = controller.GetComponent<Game>().GetPosition(matrixX, matrixY);
             if (matrixY == 7)
             {
-                cp.name = "whiteQueen";
-                cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetWhiteQueen();   
+                if (promocao == PieceType.Tower)
+                {
+                    cp.name = "whiteTower";
+                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetWhiteTower();
+                }
+                if (promocao == PieceType.Queen)
+                {
+                    cp.name = "whiteQueen";
+                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetWhiteQueen();
+                }
+                if (promocao == PieceType.Bishop)
+                {
+                    cp.name = "whiteBishop";
+                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetWhiteBishop();
+                }
+                if (promocao == PieceType.Knight)
+                {
+                    cp.name = "whiteKnight";
+                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetWhiteKnight();
+                }
             }
             else
             {
-                cp.name = "blackQueen";
-                cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetBlackQueen();
+                if (promocao == PieceType.Tower)
+                {
+                    cp.name = "blackTower";
+                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetBlackTower();
+                }
+                if (promocao == PieceType.Queen)
+                {
+                    cp.name = "blackQueen";
+                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetBlackQueen();
+                }
+                if (promocao == PieceType.Bishop)
+                {
+                    cp.name = "blackBishop";
+                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetBlackBishop();
+                }
+                if (promocao == PieceType.Knight)
+                {
+                    cp.name = "blackKnight";
+                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetBlackKnight();
+                }
             }
         }
         //Alterna o jogador atual
