@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class MovePlate : MonoBehaviour
 {
@@ -35,57 +34,11 @@ public class MovePlate : MonoBehaviour
         }
     }
 
-    public static PieceType ShowPromotionMenu()
-    {
-        PieceType selectedPiece = PieceType.Queen;
-        bool promote = true;
-
-        if (promote)
-        {
-            bool queen = EditorUtility.DisplayDialog("Promoção", "Escolha para qual peça será promovida:", "Rainha", "Torre");
-            if (queen)
-            {
-                selectedPiece = PieceType.Queen;
-            }
-            else
-            {
-                bool tower = EditorUtility.DisplayDialog("Promoção", "Escolha para qual peça será promovida:", "Torre", "Bispo");
-                if (tower)
-                {
-                    selectedPiece = PieceType.Tower;
-                }
-                else
-                {
-                    bool bishop = EditorUtility.DisplayDialog("Promoção", "Escolha para qual peça será promovida:", "Bispo", "Cavalo");
-                    if (bishop)
-                    {
-                        selectedPiece = PieceType.Bishop;
-                    }
-                    else
-                    {
-                        selectedPiece = PieceType.Knight;
-                    }
-                }
-            }
-        }
-
-        return selectedPiece;
-    }
-
-
-    public enum PieceType
-    {
-        Queen,
-        Tower,
-        Bishop,
-        Knight
-    }
-
-/*
-    Função do Unity que é chamada quando o usuário clica e solta o botão do mouse.
-    Nesse caso, essa OnMouseUp é responsável pela troca de um moveplate com a peça
-    que está sofrendo a interação do usuário.
-*/
+    /*
+        Função do Unity que é chamada quando o usuário clica e solta o botão do mouse.
+        Nesse caso, essa OnMouseUp é responsável pela troca de um moveplate com a peça
+        que está sofrendo a interação do usuário.
+    */
     public void OnMouseUp()
     {
         controller = GameObject.FindGameObjectWithTag("GameController");
@@ -128,52 +81,15 @@ public class MovePlate : MonoBehaviour
         if (promote)
         {
             GameObject cp = controller.GetComponent<Game>().GetPosition(matrixX, matrixY);
-            PieceType promocao = ShowPromotionMenu();
             if (matrixY == 7)
             {
-                if(promocao == PieceType.Tower)
-                {
-                    cp.name = "whiteTower";
-                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetWhiteTower();
-                }
-                if(promocao == PieceType.Queen)
-                {
-                    cp.name = "whiteQueen";
-                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetWhiteQueen();
-                }
-                if(promocao == PieceType.Bishop)
-                {
-                    cp.name = "whiteBishop";
-                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetWhiteBishop();
-                }
-                if(promocao == PieceType.Knight)
-                {
-                    cp.name = "whiteKnight";
-                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetWhiteKnight();
-                }
+                cp.name = "whiteQueen";
+                cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetWhiteQueen();   
             }
             else
             {
-                if (promocao == PieceType.Tower)
-                {
-                    cp.name = "blackTower";
-                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetBlackTower();
-                }
-                if (promocao == PieceType.Queen)
-                {
-                    cp.name = "blackQueen";
-                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetBlackQueen();
-                }
-                if (promocao == PieceType.Bishop)
-                {
-                    cp.name = "blackBishop";
-                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetBlackBishop();
-                }
-                if (promocao == PieceType.Knight)
-                {
-                    cp.name = "blackKnight";
-                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetBlackKnight();
-                }
+                cp.name = "blackQueen";
+                cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetBlackQueen();
             }
         }
         //Alterna o jogador atual
