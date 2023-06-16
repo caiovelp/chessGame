@@ -17,7 +17,7 @@ public class Game : MonoBehaviour
 
     private bool gameOver = false;
     private bool blackIa = true;
-    private bool whiteIa = false;
+    private bool whiteIa = true;
 
     // Start is called before the first frame update
     public void Start()
