@@ -351,3 +351,55 @@ public class Chessman : MonoBehaviour
         }
         return moves;
     }
+
+    public List<Vector2Int> ChessPieceMoves(string movementName, ref GameObject[,] positions, bool line = false)
+    {   
+        int [,] coords = new int[1,1];
+        List<Vector2Int> moves = new List<Vector2Int>();
+        Game game = controller.GetComponent<Game>();
+        switch(movementName){
+            case "axis":
+                coords = new int[4,2] {{1,1},{1,-1},{-1,1},{-1,-1}};
+            break;
+            case "cross":
+                coords = new int[4,2] {{1,0},{-1,0},{0,1},{0,-1}};
+            break;
+            case "surround":
+                coords = new int[8,2] {{1,1},{1,0},{1,-1},{-1,1},{-1,0},{-1,-1},{0,1},{0,-1}};
+            break;
+            case "L":
+                coords = new int[8,2] {{1,2},{-1,2},{2,1},{2,-1},{1,-2},{-1,-2},{-2,1},{-2,-1}};
+            break;
+        }
+        bool aux = line;
+        for (int i = 0; i < coords.GetLength(0); i++)
+        {   
+            int x = xBoard + coords[i, 0];
+            int y = yBoard + coords[i, 1];
+            do
+            {
+                if (!game.PositionOnBoard(x, y)) aux = false;
+                else
+                {
+                    GameObject chessPiece = positions[x, y];
+                    if (chessPiece != null)
+                    {
+                        if (chessPiece.GetComponent<Chessman>().player != player)
+                            moves.Add(new Vector2Int(x, y));
+
+                        aux = false;
+                    }
+                    else
+                    {
+                        moves.Add(new Vector2Int(x, y));
+                        x += coords[i, 0];
+                        y += coords[i, 1];
+                    }
+                }
+            }
+            while(aux);
+            aux = line;
+        }
+        return moves;
+    }
+}
