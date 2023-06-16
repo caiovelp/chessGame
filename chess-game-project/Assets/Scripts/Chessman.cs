@@ -402,4 +402,33 @@ public class Chessman : MonoBehaviour
         }
         return moves;
     }
+
+    public List<Vector2Int> GetAvaliableMoves(ref GameObject[,] positions)
+    {   
+        switch (this.pieceName)
+        {
+            case "blackPawn":
+            case "whitePawn":
+                return PawnMoves(ref positions);
+            case "blackQueen":
+            case "whiteQueen": 
+                List<Vector2Int> moves = ChessPieceMoves("axis", ref positions, true);
+                moves.AddRange(ChessPieceMoves("cross", ref positions, true));
+                return moves;
+            case "whiteKnight":
+            case "blackKnight":
+                return ChessPieceMoves("L", ref positions);
+            case "blackKing":
+            case "whiteKing":
+                return ChessPieceMoves("surround", ref positions);
+            case "blackBishop":
+            case "whiteBishop":
+                return ChessPieceMoves("axis", ref positions, true);
+            case "blackTower":
+            case "whiteTower": 
+                return ChessPieceMoves("cross", ref positions, true);
+            default:
+                return new List<Vector2Int>();
+        }
+    }
 }
