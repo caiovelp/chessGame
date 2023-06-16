@@ -332,4 +332,22 @@ public class Chessman : MonoBehaviour
     {
         OnMouseUp();
     }
-}
+
+    public List<Vector2Int> PawnMoves(ref GameObject[,] positions) 
+    {
+        List<Vector2Int> moves = new List<Vector2Int>();
+        Game game = controller.GetComponent<Game>();
+        int[,] coords = player == "black" ? new int[2,2] {{-1,-1},{1,-1 }} : new int[2,2] {{-1,1},{1,1}};
+        for (int i = 0; i < coords.GetLength(0); i++)
+        {   
+            int x = xBoard + coords[i, 0];
+            int y = yBoard + coords[i, 1];
+            if (game.PositionOnBoard(x, y))
+            {
+                GameObject chessPiece = positions[x, y];
+                if (chessPiece != null && chessPiece.GetComponent<Chessman>().player != player )
+                    moves.Add(new Vector2Int(x, y));
+            }
+        }
+        return moves;
+    }
