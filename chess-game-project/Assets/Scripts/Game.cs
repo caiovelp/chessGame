@@ -77,6 +77,11 @@ public class Game : MonoBehaviour
         return positions[x, y];
     }
 
+    public GameObject[,] GetPositions()
+    {
+        return positions;
+    }
+
     // Função de define que uma posição (x, y) fique vazia.
     public void SetPositionEmpty(int x, int y) 
     {
