@@ -23,6 +23,9 @@ public class Chessman : MonoBehaviour
     public Sprite whiteQueen, whiteKing, whiteBishop, whiteTower, whiteKnight, whitePawn;
     public Sprite blackQueen, blackKing, blackBishop, blackTower, blackKnight, blackPawn;
 
+    private List<GameObject> movePlates = new List<GameObject>();
+    private List<Vector2Int> avaliableMoves = new List<Vector2Int>();
+
     /* 
         Função responsável por "ativar" as peças, ou seja, ela define as posições das peças,
         ativa o controlador e define o player que está interagindo com aquela peça.
