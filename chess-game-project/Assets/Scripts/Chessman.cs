@@ -138,114 +138,67 @@ public class Chessman : MonoBehaviour
     }
 
     // Função responsável por desenhar os moveplates no tabuleiro de acordo com a peça clicada.
-    public void InitiateMovePlates() 
+    public List<GameObject> InitiateMovePlates() 
     {
         //Um para cada peça
         switch (this.pieceName)
         {
             case "blackPawn":
-                PawnMovePlate(xBoard, yBoard - 1);
-                break;
+                return PawnMovePlate(xBoard, yBoard - 1);
             case "whitePawn":
-                PawnMovePlate(xBoard, yBoard + 1);
-                break;
+                return PawnMovePlate(xBoard, yBoard + 1);
             case "blackQueen":
             case "whiteQueen": 
-                CrossMovePlate();
-                AxisMovePlate();
-                break;
+                List<GameObject> mp = CrossMovePlate();
+                mp.AddRange(AxisMovePlate());
+                return mp;
             case "whiteKnight":
             case "blackKnight":
-                LMovePlate();
-                break;
+                return LMovePlate();
             case "blackKing":
             case "whiteKing":
-                SurroundMovePlate();
-                break;
+                return SurroundMovePlate();
             case "blackBishop":
             case "whiteBishop":
-                CrossMovePlate();
-                break;
+                return AxisMovePlate();
             case "blackTower":
             case "whiteTower": 
-                AxisMovePlate();
-                break;
-        }
-    }
-
-    /*
-        Função que cria as opções em movimentação em X de acordo com o tabuleiro
-    */
-    public void CrossMovePlate()
-    {
-        LineMovePlate(1,1);
-        LineMovePlate(1,-1);
-        LineMovePlate(-1,1);
-        LineMovePlate(-1,-1);
-    }
-
-    /*
-        Função que cria as opções em movimentação em + de acordo com os eixos do tabuleiro
-    */
-    public void AxisMovePlate()
-    {
-        LineMovePlate(1,0);
-        LineMovePlate(-1,0);
-        LineMovePlate(0,1);
-        LineMovePlate(0,-1);
-    }
-
-    /*
-        Função que cria uma linha de movimentação a partir da peça em questão de acordo com um vetor (x,y)
-        @param xIncrement - valor x do vetor
-        @param yIncrement - valor y do vetor
-    */
-    public void LineMovePlate(int xIncrement, int yIncrement)
-    {
-        Game sc = controller.GetComponent<Game>();
-
-        int x = xBoard + xIncrement;
-        int y = yBoard + yIncrement;
-
-        while(sc.PositionOnBoard(x,y) && sc.GetPosition(x,y) == null){
-            MovePlateSpawn(x,y);
-            x += xIncrement;
-            y += yIncrement;
-        }
-
-        if(sc.PositionOnBoard(x,y) && sc.GetPosition(x,y).GetComponent<Chessman>().player != player){
-            MovePlateAttackSpawn(x,y);
+                return CrossMovePlate();
+            default:
+                return new List<GameObject>();
         }
     }
 
     // Desenha os moveplate do peão.
-    public void PawnMovePlate(int x, int y)
-    {
+    public List<GameObject> PawnMovePlate(int x, int y)
+    {   
+        List<GameObject> moves = new List<GameObject>();
         Game sc = controller.GetComponent<Game>();
         if (sc.PositionOnBoard(x, y))
         {
+            
             // Se for a posição inicial do peão, spawnar dois movePlate
             if (sc.GetCurrentPlayer() == "white" && y == 2)
             {
                 if (sc.GetPosition(x, y) == null)
                 {
-                    MovePlateSpawn(x, y);
-                    MovePlateSpawn(x, y + 1);
+                    moves.Add(MovePlateSpawn(x, y));
+                    moves.Add(MovePlateSpawn(x, y + 1));
                 }
             }
             else if (sc.GetCurrentPlayer() == "black" && y == 5)
             {
                 if (sc.GetPosition(x, y) == null)
                 {
-                    MovePlateSpawn(x, y);
-                    MovePlateSpawn(x, y - 1);
+                    moves.Add(MovePlateSpawn(x, y));
+                    moves.Add(MovePlateSpawn(x, y - 1));
                 }
             }
             else 
             {
                 if (sc.GetPosition(x, y) == null)
                 {
-                    MovePlateSpawn(x, y);
+                    moves.Add(MovePlateSpawn(x, y));
                 }
             }
 
@@ -259,62 +212,75 @@ public class Chessman : MonoBehaviour
                 MovePlateAttackSpawn(x - 1, y);
             }
         }
+        return moves;
+    }
+
+    /*
+        Função que cria as opções em movimentação em X de acordo com o tabuleiro
+    */
+    public List<GameObject> CrossMovePlate()
+    {
+        List<GameObject> moves = new List<GameObject>();
+        GameObject[,] positions = controller.GetComponent<Game>().GetPositions();
+        avaliableMoves = ChessPieceMoves("cross", ref positions, true);
+        foreach (Vector2Int move in avaliableMoves)
+            moves.Add(PointMovePlate(move.x, move.y));
+        return moves;
+    }
+
+    /*
+        Função que cria as opções em movimentação em + de acordo com os eixos do tabuleiro
+    */
+    public List<GameObject> AxisMovePlate()
+    {
+        List<GameObject> moves = new List<GameObject>();
+        GameObject[,] positions = controller.GetComponent<Game>().GetPositions();
+        avaliableMoves = ChessPieceMoves("axis", ref positions, true);
+        foreach (Vector2Int move in avaliableMoves)
+            moves.Add(PointMovePlate(move.x, move.y));
+        return moves;
     }
     
     /*
         Função que cria as opções de movimentação somente em volta da peça
     */
-    public void SurroundMovePlate()
+    public List<GameObject> SurroundMovePlate()
     {
-        PointMovePlate(xBoard + 1, yBoard + 1);
-        PointMovePlate(xBoard + 1, yBoard);
-        PointMovePlate(xBoard + 1, yBoard - 1);
-        PointMovePlate(xBoard - 1, yBoard + 1);
-        PointMovePlate(xBoard - 1, yBoard);
-        PointMovePlate(xBoard - 1, yBoard - 1);
-        PointMovePlate(xBoard, yBoard + 1);
-        PointMovePlate(xBoard, yBoard - 1);
+        List<GameObject> moves = new List<GameObject>();
+        GameObject[,] positions = controller.GetComponent<Game>().GetPositions();
+        avaliableMoves = ChessPieceMoves("surround", ref positions);
+        foreach (Vector2Int move in avaliableMoves)
+            moves.Add(PointMovePlate(move.x, move.y));
+        return moves;
     }
 
     // Função resposável por ditar os movimento em "L"
-    public void LMovePlate()
+    public List<GameObject> LMovePlate()
     {
-        PointMovePlate(xBoard + 1, yBoard + 2);
-        PointMovePlate(xBoard - 1, yBoard + 2);
-        PointMovePlate(xBoard + 2, yBoard + 1);
-        PointMovePlate(xBoard + 2, yBoard - 1);
-        PointMovePlate(xBoard + 1, yBoard - 2);
-        PointMovePlate(xBoard - 1, yBoard - 2);
-        PointMovePlate(xBoard - 2, yBoard + 1);
-        PointMovePlate(xBoard - 2, yBoard - 1);
+        List<GameObject> moves = new List<GameObject>();
+        GameObject[,] positions = controller.GetComponent<Game>().GetPositions();
+        avaliableMoves = ChessPieceMoves("L", ref positions);
+        foreach (Vector2Int move in avaliableMoves)
+            moves.Add(PointMovePlate(move.x, move.y));
+        return moves;
     }
 
     // Função resposável por invocar a MovePlate nas coordenadas informados
-    public void PointMovePlate(int x, int y)
+    public GameObject PointMovePlate(int x, int y)
     {
-        Game gameScript = controller.GetComponent<Game>();
-        if (gameScript.PositionOnBoard(x, y))
-        {
-            GameObject chessPiece = gameScript.GetPosition(x, y);
-            /*  
-                Verifica se posição da jogada tem uma peça.
-                Se sim, invoca a MovePlate na posição.
-                Caso contrário, se o player da peça é diferente do atual invoca
-                a MovePlate de ataque na posição.
-            */ 
-            if (chessPiece == null)
-            {
-                MovePlateSpawn(x, y);
-            }
-            else if (chessPiece.GetComponent<Chessman>().player != player)
-            {
-                MovePlateAttackSpawn(x, y);
-            }
-        }
+        Game game = controller.GetComponent<Game>();
+        GameObject chessPiece = game.GetPosition(x, y);
+        GameObject mp = null;
+        if (chessPiece == null)
+            mp = MovePlateSpawn(x, y);
+        else if (chessPiece.GetComponent<Chessman>().player != player)
+            mp =  MovePlateAttackSpawn(x, y);
+    
+        return mp;
     }
 
     // Desenha os moveplates de acordo com uma matrix 8x8
-    public void MovePlateSpawn(int matrixX, int matrixY)
+    public GameObject MovePlateSpawn(int matrixX, int matrixY)
     {
         // Recupera o valor do tabuleiro para converter em xy coordenadas
         float x = matrixX;
@@ -334,10 +300,11 @@ public class Chessman : MonoBehaviour
         MovePlate mpScript = mp.GetComponent<MovePlate>();
         mpScript.SetReference(gameObject);
         mpScript.SetCoordinates(matrixX, matrixY);
+        return mp;
     }
 
     // Desenha os moveplates de acordo com uma matrix 8x8 trocando a flag de ataque para true.
-    public void MovePlateAttackSpawn(int matrixX, int matrixY)
+    public GameObject MovePlateAttackSpawn(int matrixX, int matrixY)
     {
         // Recupera o valor do tabuleiro para converter em xy coordenadas
         float x = matrixX;
@@ -358,6 +325,7 @@ public class Chessman : MonoBehaviour
         mpScript.attack = true;
         mpScript.SetReference(gameObject);
         mpScript.SetCoordinates(matrixX, matrixY);
+        return mp;
     }
 
     public void CallOnMouseUp()
