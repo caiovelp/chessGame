@@ -124,4 +124,20 @@ public class Game : MonoBehaviour
         GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>().enabled = true;
         GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>().text = "O " + playerWinner + " venceu! Pressione o mouse para reiniciar";
     }
+
+    public Vector2Int KingPositionOnMatrix()
+    {   
+        string kingName = currentPlayer == "white" ? "whiteKing" : "blackKing";
+        
+        for(int i = 0; i < 8; i++)
+        {
+            for(int j = 0; j < 8; j ++)
+            {
+                if (positions[i,j] != null && positions[i,j].GetComponent<Chessman>().GetName() == kingName)
+                    return new Vector2Int(i, j);
+            }
+        }
+        
+        return new Vector2Int(-1, -1);
+    }
 }
