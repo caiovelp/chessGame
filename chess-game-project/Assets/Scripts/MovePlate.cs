@@ -63,6 +63,16 @@ public class MovePlate : MonoBehaviour
         chessman.DestroyMovePlates();
     }
 
+    public int GetMatrixX()
+    {
+        return matrixX;
+    }
+
+    public int GetMatrixY()
+    {
+        return matrixY;
+    }
+
     //Função para definir as coordenadas de acordo com uma matriz.
     public void SetCoordinates(int x, int y) 
     {
