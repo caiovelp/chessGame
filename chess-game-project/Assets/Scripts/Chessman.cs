@@ -132,8 +132,8 @@ public class Chessman : MonoBehaviour
     // Função responsável por apagar os moveplates que estão desenhadas no tabuleiro
     public void DestroyMovePlates()
     {
-        GameObject[] movePlates = GameObject.FindGameObjectsWithTag("MovePlate");
-        foreach (var movePlate in movePlates)
+        GameObject[] allMovePlates = GameObject.FindGameObjectsWithTag("MovePlate");
+        foreach (GameObject movePlate in allMovePlates)
         {
             Destroy(movePlate);
         }
