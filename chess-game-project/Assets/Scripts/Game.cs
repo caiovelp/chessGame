@@ -29,8 +29,8 @@ public class Game : MonoBehaviour
             Create("whiteBishop", 5, 0), Create("whiteKnight", 6, 0), Create("whiteTower", 7, 0),
         };
 
-        blackPlayer = new GameObject[] {
-        
+        blackPlayer = new GameObject[] 
+        {
             Create("blackPawn", 0, 6), Create("blackPawn", 1, 6), Create("blackPawn", 2, 6),
             Create("blackPawn", 3, 6), Create("blackPawn", 4, 6), Create("blackPawn", 5, 6),
             Create("blackPawn", 6, 6), Create("blackPawn", 7, 6),
@@ -56,7 +56,7 @@ public class Game : MonoBehaviour
     {
         GameObject obj = Instantiate(chesspiece, new Vector3(0, 0, -1), Quaternion.identity);
         Chessman chessman = obj.GetComponent<Chessman>();
-        chessman.name = name;
+        chessman.SetName(name);
         chessman.SetXBoard(x);
         chessman.SetYBoard(y);
         chessman.Activate();
@@ -104,14 +104,7 @@ public class Game : MonoBehaviour
     // Função responsavel pela alternância do valor de currentPlayer
     public void NextTurn()
     {
-        if (currentPlayer == "white")
-        {
-            currentPlayer = "black";
-        }
-        else
-        {
-            currentPlayer = "white";
-        }
+        currentPlayer = currentPlayer == "white" ? "black" : "white";
     }
 
     public void Update()

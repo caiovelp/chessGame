@@ -17,6 +17,8 @@ public class Chessman : MonoBehaviour
     // Jogador
     private string player;
 
+    private string pieceName;
+
     // Peças de xadrez
     public Sprite whiteQueen, whiteKing, whiteBishop, whiteTower, whiteKnight, whitePawn;
     public Sprite blackQueen, blackKing, blackBishop, blackTower, blackKnight, blackPawn;
@@ -32,7 +34,7 @@ public class Chessman : MonoBehaviour
         // Ajusta as posições das peças
         SetCoordinates();
 
-        switch (this.name)
+        switch (this.pieceName)
         {
             case "whiteQueen": this.GetComponent<SpriteRenderer>().sprite = whiteQueen; player = "white"; break;
             case "whiteKing": this.GetComponent<SpriteRenderer>().sprite = whiteKing; player = "white"; break;
@@ -95,6 +97,16 @@ public class Chessman : MonoBehaviour
         yBoard = y;
     }
 
+    public void SetName( string name)
+    {
+        pieceName = name;
+    }
+
+    public string GetName()
+    {
+        return pieceName;
+    }
+
     /*
         Função do Unity que é chamada quando o usuário clica e solta o botão do mouse.
         Nesse caso, essa OnMouseUp é responsável pelo desenho dos moveplates.
@@ -126,7 +138,7 @@ public class Chessman : MonoBehaviour
     public void InitiateMovePlates() 
     {
         //Um para cada peça
-        switch (this.name)
+        switch (this.pieceName)
         {
             case "blackPawn":
                 PawnMovePlate(xBoard, yBoard - 1);
