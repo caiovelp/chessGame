@@ -120,10 +120,12 @@ public class Chessman : MonoBehaviour
         if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player)
         {
             // Apaga os moveplates que estão no tabuleiro.
+            movePlates.Clear();
             DestroyMovePlates();
 
             // Inicia os novos moveplates depedendo da interação.
-            InitiateMovePlates();
+            movePlates = InitiateMovePlates();
+            PreventCheck();
         }
     }
 
@@ -437,5 +439,68 @@ public class Chessman : MonoBehaviour
         foreach (Vector2Int move in simMoves)
             if(move.x == position.x && move.y == position.y) return true;
         return false;
+    }
+
+    public void PreventCheck ()
+    {
+        Game game = controller.GetComponent<Game>();
+        Vector2Int kingPosition = game.KingPositionOnMatrix();
+        List<GameObject> movePlatesToRemove = new List<GameObject>();
+        int actualX = this.xBoard;
+        int actualY = this.yBoard;
+        GameObject cp = game.GetPosition(actualX, actualY);
+
+        foreach (GameObject movePlate in movePlates)
+        {   
+            MovePlate mp_script = movePlate.GetComponent<MovePlate>();
+            int simX = mp_script.GetMatrixX();
+            int simY = mp_script.GetMatrixY();
+            if (this.pieceName == "blackKing" || this.pieceName == "whiteKing")
+                kingPosition = new Vector2Int(simX, simY);
+
+            GameObject[,] simPositions = new GameObject[8,8];
+            List<GameObject> simAttackingPieces = new List<GameObject>();
+
+            for (int y = 0; y < 8; y++)
+            {
+                for (int x = 0; x < 8; x++)
+                {
+                    if (game.GetPosition(x, y) != null)
+                    {
+                        simPositions[x, y] = game.GetPosition(x, y);
+                        string player = simPositions[x,y].GetComponent<Chessman>().player;
+                        if(player != this.player)
+                            simAttackingPieces.Add(simPositions[x, y]);
+                    }
+                }
+            }
+
+            simPositions[actualX, actualY] = null;
+            simPositions[simX, simY] = cp;
+
+            GameObject deadPiece = simAttackingPieces.Find(
+                delegate(GameObject piece)
+                {
+                    Chessman chessman = piece.GetComponent<Chessman>();
+                    return chessman.xBoard == simX && chessman.yBoard == simY;
+                }
+            );
+            if (deadPiece != null) simAttackingPieces.Remove(deadPiece);
+            
+            List<Vector2Int> simMoves = new List<Vector2Int>();
+            for (int i = 0; i < simAttackingPieces.Count; i++)
+            {   
+                Chessman chessman = simAttackingPieces[i].GetComponent<Chessman>();
+                List<Vector2Int> pieceMoves = chessman.GetAvaliableMoves(ref simPositions);
+                for (int j = 0; j < pieceMoves.Count; j++) simMoves.Add(pieceMoves[j]);
+            }
+            if (ContainsValidMove(ref simMoves, kingPosition)) movePlatesToRemove.Add(movePlate);
+        }
+
+        for (int i = 0; i< movePlatesToRemove.Count; i++)
+        {
+          movePlates.Remove(movePlatesToRemove[i]);
+          Destroy(movePlatesToRemove[i]);
+        } 
     }
 }
