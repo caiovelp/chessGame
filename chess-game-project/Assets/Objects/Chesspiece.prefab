@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: f5270244f731dcf48ae2c382d4e0a051, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0c1dfa41409ed49409fc040b6e7275b3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,18 +100,66 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   movePlate: {fileID: 8733931524249595489, guid: 715b9167f3bcc58449a4c119ca437a90, type: 3}
-  whiteQueen: {fileID: 21300000, guid: af285e5470912254bb7dd87d7e4cd875, type: 3}
-  whiteKing: {fileID: 21300000, guid: 6fa47f81535d3af47a14dfaf206c0ac3, type: 3}
-  whiteBishop: {fileID: 21300000, guid: e4d23743beaab2a4c9eaca648fdaf54c, type: 3}
-  whiteTower: {fileID: 21300000, guid: bc8d056b6b8bca6458f34a61f1b0ddb2, type: 3}
-  whiteKnight: {fileID: 21300000, guid: dfaaa13662871ec458927fb009f1732d, type: 3}
-  whitePawn: {fileID: 21300000, guid: f5270244f731dcf48ae2c382d4e0a051, type: 3}
-  blackQueen: {fileID: 21300000, guid: a466ed60dd3bcfa439f9b81a1019a211, type: 3}
-  blackKing: {fileID: 21300000, guid: 9fc6c94ae8b4d8a44bf2c4b5c787c0b1, type: 3}
-  blackBishop: {fileID: 21300000, guid: 6917c2c12030e3a45ab447fa85efc927, type: 3}
-  blackTower: {fileID: 21300000, guid: 817ae6a756e40a24a8894c84068a9932, type: 3}
-  blackKnight: {fileID: 21300000, guid: d748918eac626f3458abaa11b4c90d18, type: 3}
-  blackPawn: {fileID: 21300000, guid: 8545b8e299fa3b246bab2c93fd9cc510, type: 3}
+  whiteQueen:
+  - {fileID: 21300000, guid: 11e0d4fcb13bfbb41b6b1d75eb71bb23, type: 3}
+  - {fileID: 21300000, guid: 6c3d5b66277f6f448b0574d0249d0b83, type: 3}
+  - {fileID: 21300000, guid: cb5e7150d5497df479bffc176b1ebb33, type: 3}
+  - {fileID: 21300000, guid: a3849d8515a41a74b865def617b194ad, type: 3}
+  whiteKing:
+  - {fileID: 21300000, guid: 72f83b04a40b13b4c9adc2ea523fb7a3, type: 3}
+  - {fileID: 21300000, guid: e5222c4c1d4a16e49985754945e10005, type: 3}
+  - {fileID: 21300000, guid: 71f4f9c562438ea4b94cf46b813166f8, type: 3}
+  - {fileID: 21300000, guid: 01dc0cc2ca2c19743b4d2f10e93d800e, type: 3}
+  whiteBishop:
+  - {fileID: 21300000, guid: a63fb61b2d4ab8045996c002936fd7fe, type: 3}
+  - {fileID: 21300000, guid: 78b52cbf48dac1149a6035724b35f203, type: 3}
+  - {fileID: 21300000, guid: 7f5d4703ba4081e4b8628161ffd3c1bf, type: 3}
+  - {fileID: 21300000, guid: cd254f327a7e0074f9e5032a6157b297, type: 3}
+  whiteTower:
+  - {fileID: 21300000, guid: bf506a3e853a9354a8668aaeba577928, type: 3}
+  - {fileID: 21300000, guid: f1e2ef3864559c04cb4afb02ad2c29fe, type: 3}
+  - {fileID: 21300000, guid: 3c2fbc56d58beb341a2abf66b6fea3e0, type: 3}
+  - {fileID: 21300000, guid: 708a1042ab1c3db48854860c37460f84, type: 3}
+  whiteKnight:
+  - {fileID: 21300000, guid: 93f457a411d5290498590577158ad24b, type: 3}
+  - {fileID: 21300000, guid: 258834a3a2eee884781d873695f041c0, type: 3}
+  - {fileID: 21300000, guid: e4aa11d8489176b46a00e5f5b591b20a, type: 3}
+  - {fileID: 21300000, guid: 3b45865b4c29c454e91ed344f20434a1, type: 3}
+  whitePawn:
+  - {fileID: 21300000, guid: ff05d6d43ba1a09419413d9a8d7bc1f5, type: 3}
+  - {fileID: 21300000, guid: 0c1dfa41409ed49409fc040b6e7275b3, type: 3}
+  - {fileID: 21300000, guid: ccf8be9e937568d4dac4ed07786e4686, type: 3}
+  - {fileID: 21300000, guid: 93b4648578078ea49aaea07ace466d9d, type: 3}
+  blackQueen:
+  - {fileID: 21300000, guid: b35b83f3ac003bd41909a51ad5736bd7, type: 3}
+  - {fileID: 21300000, guid: 0a774f3a5e874124e9e35f1b2342ee1c, type: 3}
+  - {fileID: 21300000, guid: 9f593bcd3f2f3ec44a62b93f7dd61741, type: 3}
+  - {fileID: 21300000, guid: a4abc5f4ed35a4746b097cd32112a1e1, type: 3}
+  blackKing:
+  - {fileID: 21300000, guid: 2a89defd5c0a90147bf82074207892c7, type: 3}
+  - {fileID: 21300000, guid: cbd445f25671d1145a1a719239915fe6, type: 3}
+  - {fileID: 21300000, guid: bd57c27cd062e544cbb0579f907f8ca8, type: 3}
+  - {fileID: 21300000, guid: 46e76d8323eff7b4fb25ca2499e88c03, type: 3}
+  blackBishop:
+  - {fileID: 21300000, guid: d982285e378b6c4408d21b7757b54766, type: 3}
+  - {fileID: 21300000, guid: b5d376a3703182c478952672eb57b3bc, type: 3}
+  - {fileID: 21300000, guid: 934ccf10e2cb2574abbbf7c8b8a92559, type: 3}
+  - {fileID: 21300000, guid: 82fb57f850cf55e439757f85e81d74a8, type: 3}
+  blackTower:
+  - {fileID: 21300000, guid: 709a9d0191a5ed94cb17c342ed646480, type: 3}
+  - {fileID: 21300000, guid: 98d7a89f2fd11c640956ae8803b0accf, type: 3}
+  - {fileID: 21300000, guid: fb097f2b4e0cf404d9792e8a16dc6698, type: 3}
+  - {fileID: 21300000, guid: 29792fa18b1babb4b933acf3d2fdf693, type: 3}
+  blackKnight:
+  - {fileID: 21300000, guid: c357c44f76aa65f4796128df882e6914, type: 3}
+  - {fileID: 21300000, guid: 95c5b7d0ca4ba5c4481250f9a7184245, type: 3}
+  - {fileID: 21300000, guid: 62fb3249cd872e24882eefbcafe9d246, type: 3}
+  - {fileID: 21300000, guid: 50d91b16448e4dd4a9968279567f389c, type: 3}
+  blackPawn:
+  - {fileID: 21300000, guid: 2b0cdb36d3829fa44a34dc8c0c29f6e7, type: 3}
+  - {fileID: 21300000, guid: 96b6b3c0dd655da4c8f59796548fecf3, type: 3}
+  - {fileID: 21300000, guid: 72eee306ddce7d840b9b036edc1649cd, type: 3}
+  - {fileID: 21300000, guid: ca0731294a37c214d93c6249ff4af363, type: 3}
 --- !u!61 &9140348104037098822
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -129,7 +177,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.46, y: 0.66}
+    oldSize: {x: 1.28, y: 1.28}
     newSize: {x: 0.4, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

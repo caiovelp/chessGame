@@ -26,6 +26,12 @@ public class ChessmanTests
         gameObject.AddComponent<Chessman>();
         gameObject.AddComponent<SpriteRenderer>();
 
+        // Mock Sprites
+        var chessmanMaster = gameObject.GetComponent<Chessman>();
+        var spriteWhitePawn = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/White/Piece by Piece/New Cut/PeaoWhite-PLastico.png");
+        Sprite[] mockWhitePawn = new[] { spriteWhitePawn, spriteWhitePawn, spriteWhitePawn, spriteWhitePawn };
+        chessmanMaster.whitePawn = mockWhitePawn;
+
         // Create a move plate prefab
         var movePlatePrefab = new GameObject();
         movePlatePrefab.AddComponent<MovePlate>();
@@ -69,6 +75,12 @@ public class ChessmanTests
         var gameObject = new GameObject();
         gameObject.AddComponent<Chessman>();
         gameObject.AddComponent<SpriteRenderer>();
+
+        // Mock Sprites
+        var chessmanMaster = gameObject.GetComponent<Chessman>();
+        var spriteBlackPawn = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/Black/Piece by Piece/New Cut/PeaoPreto-PLastico.png");
+        Sprite[] mockBlackPawn = new[] { spriteBlackPawn, spriteBlackPawn, spriteBlackPawn, spriteBlackPawn };
+        chessmanMaster.blackPawn = mockBlackPawn;
 
         // Create a move plate prefab
         var movePlatePrefab = new GameObject();
@@ -121,6 +133,12 @@ public class ChessmanTests
         gameObject.AddComponent<Chessman>();
         gameObject.AddComponent<SpriteRenderer>();
 
+        // Mock Sprites
+        var chessmanMaster = gameObject.GetComponent<Chessman>();
+        var spriteWhiteBishop = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/White/Piece by Piece/New Cut/BispoWhite-PLastico.png");
+        Sprite[] mockWhiteBishop = new[] { spriteWhiteBishop, spriteWhiteBishop, spriteWhiteBishop, spriteWhiteBishop };
+        chessmanMaster.whiteBishop = mockWhiteBishop;
+
         // Create a move plate prefab
         var movePlatePrefab = new GameObject();
         movePlatePrefab.AddComponent<MovePlate>();
@@ -172,6 +190,12 @@ public class ChessmanTests
         gameObject.AddComponent<Chessman>();
         gameObject.AddComponent<SpriteRenderer>();
 
+        // Mock Sprites
+        var chessmanMaster = gameObject.GetComponent<Chessman>();
+        var spriteWhiteTower = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/White/Piece by Piece/New Cut/TorreWhite-PLastico.png");
+        Sprite[] mockWhiteTower = new[] { spriteWhiteTower, spriteWhiteTower, spriteWhiteTower, spriteWhiteTower };
+        chessmanMaster.whiteTower = mockWhiteTower;
+
         // Create a move plate prefab
         var movePlatePrefab = new GameObject();
         movePlatePrefab.AddComponent<MovePlate>();
@@ -220,6 +244,12 @@ public class ChessmanTests
         var gameObject = new GameObject();
         gameObject.AddComponent<Chessman>();
         gameObject.AddComponent<SpriteRenderer>();
+
+        // Mock Sprites
+        var chessmanMaster = gameObject.GetComponent<Chessman>();
+        var spriteWhiteKnight = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/White/Piece by Piece/New Cut/CavaloWhite-PLastico.png");
+        Sprite[] mockWhiteKnight = new[] { spriteWhiteKnight, spriteWhiteKnight, spriteWhiteKnight, spriteWhiteKnight };
+        chessmanMaster.whiteKnight = mockWhiteKnight;
 
         // Create a move plate prefab
         var movePlatePrefab = new GameObject();
@@ -270,6 +300,12 @@ public class ChessmanTests
         gameObject.AddComponent<Chessman>();
         gameObject.AddComponent<SpriteRenderer>();
 
+        // Mock Sprites
+        var chessmanMaster = gameObject.GetComponent<Chessman>();
+        var spriteWhiteQueen = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/White/Piece by Piece/New Cut/RainhaWhite-PLastico.png");
+        Sprite[] mockWhiteQueen = new[] { spriteWhiteQueen, spriteWhiteQueen, spriteWhiteQueen, spriteWhiteQueen };
+        chessmanMaster.whiteQueen = mockWhiteQueen;
+
         // Create a move plate prefab
         var movePlatePrefab = new GameObject();
         movePlatePrefab.AddComponent<MovePlate>();
@@ -318,6 +354,12 @@ public class ChessmanTests
         var gameObject = new GameObject();
         gameObject.AddComponent<Chessman>();
         gameObject.AddComponent<SpriteRenderer>();
+
+        // Mock Sprites
+        var chessmanMaster = gameObject.GetComponent<Chessman>();
+        var spriteWhiteKing = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/White/Piece by Piece/New Cut/ReiWhite-PLastico.png");
+        Sprite[] mockWhiteKing= new[] { spriteWhiteKing, spriteWhiteKing, spriteWhiteKing, spriteWhiteKing };
+        chessmanMaster.whiteKing = mockWhiteKing;
 
         // Create a move plate prefab
         var movePlatePrefab = new GameObject();
@@ -370,6 +412,12 @@ public class ChessmanTests
         gameObject.AddComponent<Chessman>();
         gameObject.AddComponent<SpriteRenderer>();
 
+        // Mock Sprites
+        var chessmanMaster = gameObject.GetComponent<Chessman>();
+        var spriteBlackBishop = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/Black/Piece by Piece/New Cut/BispoPreto-PLastico.png");
+        Sprite[] mockBlackBishop = new[] { spriteBlackBishop, spriteBlackBishop, spriteBlackBishop, spriteBlackBishop };
+        chessmanMaster.blackBishop = mockBlackBishop;
+
         // Create a move plate prefab
         var movePlatePrefab = new GameObject();
         movePlatePrefab.AddComponent<MovePlate>();
@@ -421,6 +469,12 @@ public class ChessmanTests
         gameObject.AddComponent<Chessman>();
         gameObject.AddComponent<SpriteRenderer>();
 
+        // Mock Sprites
+        var chessmanMaster = gameObject.GetComponent<Chessman>();
+        var spriteBlackTower = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/Black/Piece by Piece/New Cut/TorrePreto-PLastico.png");
+        Sprite[] mockBlackTower = new[] { spriteBlackTower, spriteBlackTower, spriteBlackTower, spriteBlackTower };
+        chessmanMaster.blackTower = mockBlackTower;
+
         // Create a move plate prefab
         var movePlatePrefab = new GameObject();
         movePlatePrefab.AddComponent<MovePlate>();
@@ -469,6 +523,12 @@ public class ChessmanTests
         var gameObject = new GameObject();
         gameObject.AddComponent<Chessman>();
         gameObject.AddComponent<SpriteRenderer>();
+
+        // Mock Sprites
+        var chessmanMaster = gameObject.GetComponent<Chessman>();
+        var spriteBlackKnight = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/Black/Piece by Piece/New Cut/CavaloPreto-PLastico.png");
+        Sprite[] mockBlackKnight = new[] { spriteBlackKnight, spriteBlackKnight, spriteBlackKnight, spriteBlackKnight };
+        chessmanMaster.blackKnight = mockBlackKnight;
 
         // Create a move plate prefab
         var movePlatePrefab = new GameObject();
@@ -519,6 +579,12 @@ public class ChessmanTests
         gameObject.AddComponent<Chessman>();
         gameObject.AddComponent<SpriteRenderer>();
 
+        // Mock Sprites
+        var chessmanMaster = gameObject.GetComponent<Chessman>();
+        var spriteBlackQueen = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/Black/Piece by Piece/New Cut/RainhaPreto-PLastico.png");
+        Sprite[] mockBlackQueen = new[] { spriteBlackQueen, spriteBlackQueen, spriteBlackQueen, spriteBlackQueen };
+        chessmanMaster.blackQueen = mockBlackQueen;
+
         // Create a move plate prefab
         var movePlatePrefab = new GameObject();
         movePlatePrefab.AddComponent<MovePlate>();
@@ -567,6 +633,12 @@ public class ChessmanTests
         var gameObject = new GameObject();
         gameObject.AddComponent<Chessman>();
         gameObject.AddComponent<SpriteRenderer>();
+
+        // Mock Sprites
+        var chessmanMaster = gameObject.GetComponent<Chessman>();
+        var spriteBlackKing = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/Black/Piece by Piece/New Cut/ReiPreto-PLastico.png");
+        Sprite[] mockBlackKing= new[] { spriteBlackKing, spriteBlackKing, spriteBlackKing, spriteBlackKing };
+        chessmanMaster.blackKing = mockBlackKing;
 
         // Create a move plate prefab
         var movePlatePrefab = new GameObject();
@@ -625,6 +697,15 @@ public class ChessmanTests
         gameObject.AddComponent<Chessman>();
         gameObject.AddComponent<SpriteRenderer>();
 
+        // Mock Sprites
+        var chessmanMaster = gameObject.GetComponent<Chessman>();
+        var spriteBlackPawn = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/Black/Piece by Piece/New Cut/PeaoWhite-PLastico.png");
+        Sprite[] mockBlackPawn = new[] { spriteBlackPawn, spriteBlackPawn, spriteBlackPawn, spriteBlackPawn };
+        chessmanMaster.blackPawn = mockBlackPawn;
+        var spriteWhitePawn = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/White/Piece by Piece/New Cut/PeaoWhite-PLastico.png");
+        Sprite[] mockWhitePawn = new[] { spriteWhitePawn, spriteWhitePawn, spriteWhitePawn, spriteWhitePawn };
+        chessmanMaster.whitePawn = mockWhitePawn;
+
         // Create a move plate prefab
         var movePlatePrefab = new GameObject();
         movePlatePrefab.AddComponent<MovePlate>();
@@ -679,6 +760,12 @@ public class ChessmanTests
         gameObject.AddComponent<Chessman>();
         gameObject.AddComponent<SpriteRenderer>();
 
+        // Mock Sprites
+        var chessmanMaster = gameObject.GetComponent<Chessman>();
+        var spriteWhitePawn = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/White/Piece by Piece/New Cut/PeaoWhite-PLastico.png");
+        Sprite[] mockWhitePawn = new[] { spriteWhitePawn, spriteWhitePawn, spriteWhitePawn, spriteWhitePawn };
+        chessmanMaster.whitePawn = mockWhitePawn;
+
         // Create a move plate prefab
         var movePlatePrefab = new GameObject();
         movePlatePrefab.AddComponent<MovePlate>();
@@ -730,6 +817,12 @@ public class ChessmanTests
         var gameObject = new GameObject();
         gameObject.AddComponent<Chessman>();
         gameObject.AddComponent<SpriteRenderer>();
+
+        // Mock Sprites
+        var chessmanMaster = gameObject.GetComponent<Chessman>();
+        var spriteWhitePawn = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/White/Piece by Piece/New Cut/PeaoWhite-PLastico.png");
+        Sprite[] mockWhitePawn = new[] { spriteWhitePawn, spriteWhitePawn, spriteWhitePawn, spriteWhitePawn };
+        chessmanMaster.whitePawn = mockWhitePawn;
 
         // Create a move plate prefab
         var movePlatePrefab = new GameObject();
@@ -784,6 +877,15 @@ public class ChessmanTests
         var gameObject = new GameObject();
         gameObject.AddComponent<Chessman>();
         gameObject.AddComponent<SpriteRenderer>();
+
+        // Mock Sprites
+        var chessmanMaster = gameObject.GetComponent<Chessman>();
+        var spriteBlackPawn = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/Black/Piece by Piece/New Cut/PeaoWhite-PLastico.png");
+        Sprite[] mockBlackPawn = new[] { spriteBlackPawn, spriteBlackPawn, spriteBlackPawn, spriteBlackPawn };
+        chessmanMaster.blackPawn = mockBlackPawn;
+        var spriteWhitePawn = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/White/Piece by Piece/New Cut/PeaoWhite-PLastico.png");
+        Sprite[] mockWhitePawn = new[] { spriteWhitePawn, spriteWhitePawn, spriteWhitePawn, spriteWhitePawn };
+        chessmanMaster.whitePawn = mockWhitePawn;
 
         // Create a move plate prefab
         var movePlatePrefab = new GameObject();
@@ -844,6 +946,15 @@ public class ChessmanTests
         gameObject.AddComponent<Chessman>();
         gameObject.AddComponent<SpriteRenderer>();
 
+        // Mock Sprites
+        var chessmanMaster = gameObject.GetComponent<Chessman>();
+        var spriteBlackPawn = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/Black/Piece by Piece/New Cut/PeaoPreto-PLastico.png");
+        Sprite[] mockBlackPawn = new[] { spriteBlackPawn, spriteBlackPawn, spriteBlackPawn, spriteBlackPawn };
+        chessmanMaster.blackPawn = mockBlackPawn;
+        var spriteWhiteQueen = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/White/Piece by Piece/New Cut/RainhaWhite-PLastico.png");
+        Sprite[] mockWhiteQueen = new[] { spriteWhiteQueen, spriteWhiteQueen, spriteWhiteQueen, spriteWhiteQueen };
+        chessmanMaster.whiteQueen = mockWhiteQueen;
+
         // Create a move plate prefab
         var movePlatePrefab = new GameObject();
         movePlatePrefab.AddComponent<MovePlate>();
@@ -902,6 +1013,16 @@ public class ChessmanTests
         var gameObject = new GameObject();
         gameObject.AddComponent<Chessman>();
         gameObject.AddComponent<SpriteRenderer>();
+
+        // Mock Sprites
+        var chessmanMaster = gameObject.GetComponent<Chessman>();
+        var spriteBlackPawn = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/Black/Piece by Piece/New Cut/PeaoPreto-PLastico.png");
+        Sprite[] mockBlackPawn = new[] { spriteBlackPawn, spriteBlackPawn, spriteBlackPawn, spriteBlackPawn };
+        chessmanMaster.blackPawn = mockBlackPawn;
+
+        var spriteWhiteKing = Resources.Load<Sprite>("../../../../Sprite/Pieces/Pieces/White/Piece by Piece/New Cut/ReiWhite-PLastico.png");
+        Sprite[] mockWhiteKing= new[] { spriteWhiteKing, spriteWhiteKing, spriteWhiteKing, spriteWhiteKing };
+        chessmanMaster.whiteKing = mockWhiteKing;
 
         // Create a move plate prefab
         var movePlatePrefab = new GameObject();
