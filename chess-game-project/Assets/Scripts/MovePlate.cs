@@ -32,31 +32,35 @@ public class MovePlate : MonoBehaviour
     */
     public void OnMouseUp()
     {
-        controller = GameObject.FindGameObjectWithTag("GameController");
+        GameObject controller = GameObject.FindGameObjectWithTag("GameController");
+
+        Chessman chessman = reference.GetComponent<Chessman>();
+        Game game = controller.GetComponent<Game>();
 
         if(attack)
         {
-            GameObject cp = controller.GetComponent<Game>().GetPosition(matrixX,matrixY);
-
-            if (cp.name == "whiteKing") controller.GetComponent<Game>().Winner("preto");
-            if (cp.name == "blackKing") controller.GetComponent<Game>().Winner("branco");
+            GameObject cp = game.GetPosition(matrixX, matrixY);
+            Chessman enemyChessman = cp.GetComponent<Chessman>();
+            if (enemyChessman.pieceName == "whiteKing") game.Winner("preto");
+            if (enemyChessman.pieceName == "blackKing") game.Winner("branco");
 
             //TODO move to side
             Destroy(cp);
         }
+        
 
-        controller.GetComponent<Game>().SetPositionEmpty(reference.GetComponent<Chessman>().GetXBoard(), reference.GetComponent<Chessman>().GetYBoard());
+        game.SetPositionEmpty(chessman.GetXBoard(), chessman.GetYBoard());
 
-        reference.GetComponent<Chessman>().SetXBoard(matrixX);
-        reference.GetComponent<Chessman>().SetYBoard(matrixY);
-        reference.GetComponent<Chessman>().SetCoordinates();
+        chessman.SetXBoard(matrixX);
+        chessman.SetYBoard(matrixY);
+        chessman.SetCoordinates();
 
-        controller.GetComponent<Game>().SetPosition(reference);
+        game.SetPosition(reference);
 
         //Alterna o jogador atual
-        controller.GetComponent<Game>().NextTurn();
+        game.NextTurn();
 
-        reference.GetComponent<Chessman>().DestroyMovePlates();
+        chessman.DestroyMovePlates();
     }
 
     //Função para definir as coordenadas de acordo com uma matriz.
