@@ -431,4 +431,11 @@ public class Chessman : MonoBehaviour
                 return new List<Vector2Int>();
         }
     }
+
+    public bool ContainsValidMove(ref List<Vector2Int> simMoves, Vector2Int position)
+    {
+        foreach (Vector2Int move in simMoves)
+            if(move.x == position.x && move.y == position.y) return true;
+        return false;
+    }
 }
