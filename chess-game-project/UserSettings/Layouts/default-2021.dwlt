@@ -14,17 +14,68 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
-    x: 0
-    y: 43
-    width: 1920
-    height: 989
+    x: 8
+    y: 53
+    width: 1902
+    height: 971
   m_ShowMode: 4
   m_Title: Game
-  m_RootView: {fileID: 6}
+  m_RootView: {fileID: 8}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
-  m_Maximized: 1
+  m_Maximized: 0
 --- !u!114 &2
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: TestRunnerWindow
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 450
+    height: 736
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 14}
+  m_Panes:
+  - {fileID: 14}
+  m_Selected: 0
+  m_LastSelected: 0
+--- !u!114 &3
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children:
+  - {fileID: 2}
+  - {fileID: 5}
+  m_Position:
+    serializedVersion: 2
+    x: 1452
+    y: 0
+    width: 450
+    height: 921
+  m_MinSize: {x: 100, y: 200}
+  m_MaxSize: {x: 8096, y: 16192}
+  vertical: 1
+  controlID: 58
+--- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -37,19 +88,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 9}
+  - {fileID: 11}
   - {fileID: 3}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 30
-    width: 1920
-    height: 939
+    width: 1902
+    height: 921
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 135
---- !u!114 &3
+  controlID: 57
+--- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -64,18 +115,18 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 1467
-    y: 0
-    width: 454
-    height: 939
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 13}
+    x: 0
+    y: 736
+    width: 450
+    height: 185
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 16}
   m_Panes:
-  - {fileID: 13}
+  - {fileID: 16}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &4
+--- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,16 +143,16 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 362
-    height: 556
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 14}
+    width: 359
+    height: 545
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 17}
   m_Panes:
-  - {fileID: 14}
+  - {fileID: 17}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &5
+--- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -117,18 +168,18 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 556
-    width: 1466
-    height: 383
+    y: 545
+    width: 1452
+    height: 376
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 17}
+  m_ActualView: {fileID: 20}
   m_Panes:
-  - {fileID: 12}
-  - {fileID: 17}
+  - {fileID: 15}
+  - {fileID: 20}
   m_Selected: 1
   m_LastSelected: 0
---- !u!114 &6
+--- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,22 +192,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 7}
-  - {fileID: 2}
-  - {fileID: 8}
+  - {fileID: 9}
+  - {fileID: 4}
+  - {fileID: 10}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1920
-    height: 989
+    width: 1902
+    height: 971
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
   m_UseBottomView: 1
   m_BottomViewHeight: 20
---- !u!114 &7
+--- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,12 +224,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1920
+    width: 1902
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
   m_LastLoadedLayoutName: 
---- !u!114 &8
+--- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,12 +245,12 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 969
-    width: 1920
+    y: 951
+    width: 1902
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
---- !u!114 &9
+--- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -212,19 +263,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 10}
-  - {fileID: 5}
+  - {fileID: 12}
+  - {fileID: 7}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1466
-    height: 939
+    width: 1452
+    height: 921
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 16
---- !u!114 &10
+  controlID: 91
+--- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -237,19 +288,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 4}
-  - {fileID: 11}
+  - {fileID: 6}
+  - {fileID: 13}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1466
-    height: 556
+    width: 1452
+    height: 545
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 17
---- !u!114 &11
+  controlID: 92
+--- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -264,19 +315,1041 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 363
+    x: 359
     y: 0
-    width: 1104
-    height: 556
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
-  m_ActualView: {fileID: 16}
+    width: 1093
+    height: 545
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 19}
   m_Panes:
-  - {fileID: 15}
-  - {fileID: 16}
+  - {fileID: 18}
+  - {fileID: 19}
   m_Selected: 1
   m_LastSelected: 0
---- !u!114 &12
+--- !u!114 &14
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 13401, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Test Runner
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 1460
+    y: 83
+    width: 449
+    height: 715
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+  m_Spl:
+    ID: 141
+    splitterInitialOffset: 0
+    currentActiveSplitter: -1
+    realSizes:
+    - 484
+    - 161
+    relativeSizes:
+    - 0.75
+    - 0.25
+    minSizes:
+    - 32
+    - 32
+    maxSizes:
+    - 0
+    - 0
+    lastTotalSize: 645
+    splitSize: 6
+    xOffset: 0
+    m_Version: 1
+    oldRealSizes: 
+    oldMinSizes: 
+    oldMaxSizes: 
+    oldSplitSize: 0
+  m_TestTypeToolbarIndex: 0
+  m_PlayModeTestListGUI:
+    m_Window: {fileID: 14}
+    m_NewResultList:
+    - id: 1005
+      uniqueId: '[chess-game-project][suite]'
+      name: chess-game-project
+      fullName: chess-game-project
+      resultStatus: 1
+      duration: 1.398021
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 
+      parentUniqueId: 
+    - id: 1026
+      uniqueId: '[Tests][D:/Unity/Projects/chessGame/chess-game-project/Library/ScriptAssemblies/Tests.dll][suite]'
+      name: Tests.dll
+      fullName: D:/Unity/Projects/chessGame/chess-game-project/Library/ScriptAssemblies/Tests.dll
+      resultStatus: 1
+      duration: 1.222874
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1005
+      parentUniqueId: '[chess-game-project][suite]'
+    - id: 1001
+      uniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+      name: ChessmanTests
+      fullName: ChessmanTests
+      resultStatus: 1
+      duration: 0.0491955
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1037
+      parentUniqueId: '[Tests][D:/Unity/Projects/chessGame/chess-game-project/Library/ScriptAssemblies/Tests.dll][suite]'
+    - id: 1016
+      uniqueId: Tests.dll/ChessmanTests/[Tests][ChessmanTests.ShouldCallOnMouseUp]
+      name: ShouldCallOnMouseUp
+      fullName: ChessmanTests.ShouldCallOnMouseUp
+      resultStatus: 1
+      duration: 0.0010314
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+    - id: 1019
+      uniqueId: Tests.dll/ChessmanTests/[Tests][ChessmanTests.ShouldInitializeAttackMovePlate_King_Side]
+      name: ShouldInitializeAttackMovePlate_King_Side
+      fullName: ChessmanTests.ShouldInitializeAttackMovePlate_King_Side
+      resultStatus: 1
+      duration: 0.001036
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+    - id: 1017
+      uniqueId: Tests.dll/ChessmanTests/[Tests][ChessmanTests.ShouldInitializeAttackMovePlate_Left_Pawn]
+      name: ShouldInitializeAttackMovePlate_Left_Pawn
+      fullName: ChessmanTests.ShouldInitializeAttackMovePlate_Left_Pawn
+      resultStatus: 1
+      duration: 0.0010109
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+    - id: 1018
+      uniqueId: Tests.dll/ChessmanTests/[Tests][ChessmanTests.ShouldInitializeAttackMovePlate_Queen_Up]
+      name: ShouldInitializeAttackMovePlate_Queen_Up
+      fullName: ChessmanTests.ShouldInitializeAttackMovePlate_Queen_Up
+      resultStatus: 1
+      duration: 0.0012158
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+    - id: 1014
+      uniqueId: Tests.dll/ChessmanTests/[Tests][ChessmanTests.ShouldInitializeAttackMovePlate_Right_Pawn]
+      name: ShouldInitializeAttackMovePlate_Right_Pawn
+      fullName: ChessmanTests.ShouldInitializeAttackMovePlate_Right_Pawn
+      resultStatus: 1
+      duration: 0.0011962
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+    - id: 1009
+      uniqueId: Tests.dll/ChessmanTests/[Tests][ChessmanTests.ShouldInitializeMovePlate_BlackBishop]
+      name: ShouldInitializeMovePlate_BlackBishop
+      fullName: ChessmanTests.ShouldInitializeMovePlate_BlackBishop
+      resultStatus: 1
+      duration: 0.0008644
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+    - id: 1013
+      uniqueId: Tests.dll/ChessmanTests/[Tests][ChessmanTests.ShouldInitializeMovePlate_BlackKing]
+      name: ShouldInitializeMovePlate_BlackKing
+      fullName: ChessmanTests.ShouldInitializeMovePlate_BlackKing
+      resultStatus: 1
+      duration: 0.0009618
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+    - id: 1011
+      uniqueId: Tests.dll/ChessmanTests/[Tests][ChessmanTests.ShouldInitializeMovePlate_BlackKnight]
+      name: ShouldInitializeMovePlate_BlackKnight
+      fullName: ChessmanTests.ShouldInitializeMovePlate_BlackKnight
+      resultStatus: 1
+      duration: 0.0007937
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+    - id: 1003
+      uniqueId: Tests.dll/ChessmanTests/[Tests][ChessmanTests.ShouldInitializeMovePlate_BlackPawn]
+      name: ShouldInitializeMovePlate_BlackPawn
+      fullName: ChessmanTests.ShouldInitializeMovePlate_BlackPawn
+      resultStatus: 1
+      duration: 0.0013425
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+    - id: 1012
+      uniqueId: Tests.dll/ChessmanTests/[Tests][ChessmanTests.ShouldInitializeMovePlate_BlackQueen]
+      name: ShouldInitializeMovePlate_BlackQueen
+      fullName: ChessmanTests.ShouldInitializeMovePlate_BlackQueen
+      resultStatus: 1
+      duration: 0.0010634
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+    - id: 1010
+      uniqueId: Tests.dll/ChessmanTests/[Tests][ChessmanTests.ShouldInitializeMovePlate_BlackTower]
+      name: ShouldInitializeMovePlate_BlackTower
+      fullName: ChessmanTests.ShouldInitializeMovePlate_BlackTower
+      resultStatus: 1
+      duration: 0.0009784
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+    - id: 1004
+      uniqueId: Tests.dll/ChessmanTests/[Tests][ChessmanTests.ShouldInitializeMovePlate_WhiteBishop]
+      name: ShouldInitializeMovePlate_WhiteBishop
+      fullName: ChessmanTests.ShouldInitializeMovePlate_WhiteBishop
+      resultStatus: 1
+      duration: 0.001056
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+    - id: 1008
+      uniqueId: Tests.dll/ChessmanTests/[Tests][ChessmanTests.ShouldInitializeMovePlate_WhiteKing]
+      name: ShouldInitializeMovePlate_WhiteKing
+      fullName: ChessmanTests.ShouldInitializeMovePlate_WhiteKing
+      resultStatus: 1
+      duration: 0.0009404
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+    - id: 1006
+      uniqueId: Tests.dll/ChessmanTests/[Tests][ChessmanTests.ShouldInitializeMovePlate_WhiteKnight]
+      name: ShouldInitializeMovePlate_WhiteKnight
+      fullName: ChessmanTests.ShouldInitializeMovePlate_WhiteKnight
+      resultStatus: 1
+      duration: 0.0010126
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+    - id: 1002
+      uniqueId: Tests.dll/ChessmanTests/[Tests][ChessmanTests.ShouldInitializeMovePlate_WhitePawn]
+      name: ShouldInitializeMovePlate_WhitePawn
+      fullName: ChessmanTests.ShouldInitializeMovePlate_WhitePawn
+      resultStatus: 1
+      duration: 0.0155234
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+    - id: 1007
+      uniqueId: Tests.dll/ChessmanTests/[Tests][ChessmanTests.ShouldInitializeMovePlate_WhiteQueen]
+      name: ShouldInitializeMovePlate_WhiteQueen
+      fullName: ChessmanTests.ShouldInitializeMovePlate_WhiteQueen
+      resultStatus: 1
+      duration: 0.0011271
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+    - id: 1005
+      uniqueId: Tests.dll/ChessmanTests/[Tests][ChessmanTests.ShouldInitializeMovePlate_WhiteTower]
+      name: ShouldInitializeMovePlate_WhiteTower
+      fullName: ChessmanTests.ShouldInitializeMovePlate_WhiteTower
+      resultStatus: 1
+      duration: 0.0010361
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+    - id: 1015
+      uniqueId: Tests.dll/ChessmanTests/[Tests][ChessmanTests.ShouldInitializeOneMovePlate_Pawn]
+      name: ShouldInitializeOneMovePlate_Pawn
+      fullName: ChessmanTests.ShouldInitializeOneMovePlate_Pawn
+      resultStatus: 1
+      duration: 0.0007871
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][ChessmanTests][suite]
+    - id: 1009
+      uniqueId: Tests.dll/[Tests][GameTests][suite]
+      name: GameTests
+      fullName: GameTests
+      resultStatus: 1
+      duration: 0.0351051
+      messages: 
+      output: 'ArgumentException: The Object you want to instantiate is null.
+
+        ArgumentException:
+        The Object you want to instantiate is null.
+
+        ArgumentException:
+        The Object you want to instantiate is null.
+
+        ArgumentException:
+        The Object you want to instantiate is null.
+
+        ArgumentException:
+        The Object you want to instantiate is null.
+
+        ArgumentException:
+        The Object you want to instantiate is null.
+
+        ArgumentException:
+        The Object you want to instantiate is null.
+
+        ArgumentException:
+        The Object you want to instantiate is null.
+
+        ArgumentException:
+        The Object you want to instantiate is null.
+
+        ArgumentException:
+        The Object you want to instantiate is null.
+
+        ArgumentException:
+        The Object you want to instantiate is null.
+
+        ArgumentException:
+        The Object you want to instantiate is null.
+
+        ArgumentException:
+        The Object you want to instantiate is null.
+
+        ArgumentException:
+        The Object you want to instantiate is null.
+
+        ArgumentException:
+        The Object you want to instantiate is null.
+
+        ArgumentException:
+        The Object you want to instantiate is null.
+
+        ArgumentException:
+        The Object you want to instantiate is null.
+
+        ArgumentException:
+        The Object you want to instantiate is null.
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1026
+      parentUniqueId: '[Tests][D:/Unity/Projects/chessGame/chess-game-project/Library/ScriptAssemblies/Tests.dll][suite]'
+    - id: 1012
+      uniqueId: Tests.dll/GameTests/[Tests][GameTests.Create_PieceInstantiatedWithCorrectProperties]
+      name: Create_PieceInstantiatedWithCorrectProperties
+      fullName: GameTests.Create_PieceInstantiatedWithCorrectProperties
+      resultStatus: 1
+      duration: 0.002801
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1009
+      parentUniqueId: Tests.dll/[Tests][GameTests][suite]
+    - id: 1013
+      uniqueId: Tests.dll/GameTests/[Tests][GameTests.PlayerTurns_Tests]
+      name: PlayerTurns_Tests
+      fullName: GameTests.PlayerTurns_Tests
+      resultStatus: 1
+      duration: 0.0004935
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1009
+      parentUniqueId: Tests.dll/[Tests][GameTests][suite]
+    - id: 1011
+      uniqueId: Tests.dll/GameTests/[Tests][GameTests.PositionOnBoard_PositionOutOfBounds_ReturnsFalse]
+      name: PositionOnBoard_PositionOutOfBounds_ReturnsFalse
+      fullName: GameTests.PositionOnBoard_PositionOutOfBounds_ReturnsFalse
+      resultStatus: 1
+      duration: 0.0006925
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1009
+      parentUniqueId: Tests.dll/[Tests][GameTests][suite]
+    - id: 1010
+      uniqueId: Tests.dll/GameTests/[Tests][GameTests.PositionOnBoard_PositionWithinBounds_ReturnsTrue]
+      name: PositionOnBoard_PositionWithinBounds_ReturnsTrue
+      fullName: GameTests.PositionOnBoard_PositionWithinBounds_ReturnsTrue
+      resultStatus: 1
+      duration: 0.0005556
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1009
+      parentUniqueId: Tests.dll/[Tests][GameTests][suite]
+    - id: 1015
+      uniqueId: Tests.dll/GameTests/[Tests][GameTests.ShoudStartGame_Test]
+      name: ShoudStartGame_Test
+      fullName: GameTests.ShoudStartGame_Test
+      resultStatus: 1
+      duration: 0.0015418
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1009
+      parentUniqueId: Tests.dll/[Tests][GameTests][suite]
+    - id: 1014
+      uniqueId: "Tests.dll/GameTests/[Tests][GameTests.ShouldInitializeAllP\xECeces_Test]"
+      name: "ShouldInitializeAllP\xECeces_Test"
+      fullName: "GameTests.ShouldInitializeAllP\xECeces_Test"
+      resultStatus: 1
+      duration: 0.0106354
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1009
+      parentUniqueId: Tests.dll/[Tests][GameTests][suite]
+    - id: 1027
+      uniqueId: Tests.dll/[Tests][MenuControllerTests][suite]
+      name: MenuControllerTests
+      fullName: MenuControllerTests
+      resultStatus: 1
+      duration: 1.1047775
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1041
+      parentUniqueId: '[Tests][D:/Unity/Projects/chessGame/chess-game-project/Library/ScriptAssemblies/Tests.dll][suite]'
+    - id: 1028
+      uniqueId: Tests.dll/MenuControllerTests/[Tests][MenuControllerTests.StartGame_LoadsMainScene]
+      name: StartGame_LoadsMainScene
+      fullName: MenuControllerTests.StartGame_LoadsMainScene
+      resultStatus: 1
+      duration: 1.1017466
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1027
+      parentUniqueId: Tests.dll/[Tests][MenuControllerTests][suite]
+    - id: 1016
+      uniqueId: Tests.dll/[Tests][MovementTest][suite]
+      name: MovementTest
+      fullName: MovementTest
+      resultStatus: 1
+      duration: 0.0246257
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1026
+      parentUniqueId: '[Tests][D:/Unity/Projects/chessGame/chess-game-project/Library/ScriptAssemblies/Tests.dll][suite]'
+    - id: 1037
+      uniqueId: Tests.dll/MovementTest/[Tests][MovementTest.Checkmate_Test]
+      name: Checkmate_Test
+      fullName: MovementTest.Checkmate_Test
+      resultStatus: 1
+      duration: 0.0101024
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1027
+      parentUniqueId: Tests.dll/[Tests][MovementTest][suite]
+    - id: 1020
+      uniqueId: Tests.dll/MovementTest/[Tests][MovementTest.Move_BishopToSelectedPosition]
+      name: Move_BishopToSelectedPosition
+      fullName: MovementTest.Move_BishopToSelectedPosition
+      resultStatus: 1
+      duration: 0.0024881
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1016
+      parentUniqueId: Tests.dll/[Tests][MovementTest][suite]
+    - id: 1017
+      uniqueId: Tests.dll/MovementTest/[Tests][MovementTest.Move_KnightToSelectedPosition]
+      name: Move_KnightToSelectedPosition
+      fullName: MovementTest.Move_KnightToSelectedPosition
+      resultStatus: 1
+      duration: 0.0005617
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1016
+      parentUniqueId: Tests.dll/[Tests][MovementTest][suite]
+    - id: 1018
+      uniqueId: Tests.dll/MovementTest/[Tests][MovementTest.Move_PawnToSelectedPosition]
+      name: Move_PawnToSelectedPosition
+      fullName: MovementTest.Move_PawnToSelectedPosition
+      resultStatus: 1
+      duration: 0.0005528
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1016
+      parentUniqueId: Tests.dll/[Tests][MovementTest][suite]
+    - id: 1025
+      uniqueId: Tests.dll/MovementTest/[Tests][MovementTest.Move_QueenKingToSelectedPositionAxis]
+      name: Move_QueenKingToSelectedPositionAxis
+      fullName: MovementTest.Move_QueenKingToSelectedPositionAxis
+      resultStatus: 1
+      duration: 0.0005245
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1016
+      parentUniqueId: Tests.dll/[Tests][MovementTest][suite]
+    - id: 1022
+      uniqueId: Tests.dll/MovementTest/[Tests][MovementTest.Move_QueenKingToSelectedPositionDown]
+      name: Move_QueenKingToSelectedPositionDown
+      fullName: MovementTest.Move_QueenKingToSelectedPositionDown
+      resultStatus: 1
+      duration: 0.0005237
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1016
+      parentUniqueId: Tests.dll/[Tests][MovementTest][suite]
+    - id: 1024
+      uniqueId: Tests.dll/MovementTest/[Tests][MovementTest.Move_QueenKingToSelectedPositionLeft]
+      name: Move_QueenKingToSelectedPositionLeft
+      fullName: MovementTest.Move_QueenKingToSelectedPositionLeft
+      resultStatus: 1
+      duration: 0.000527
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1016
+      parentUniqueId: Tests.dll/[Tests][MovementTest][suite]
+    - id: 1023
+      uniqueId: Tests.dll/MovementTest/[Tests][MovementTest.Move_QueenKingToSelectedPositionRight]
+      name: Move_QueenKingToSelectedPositionRight
+      fullName: MovementTest.Move_QueenKingToSelectedPositionRight
+      resultStatus: 1
+      duration: 0.0005203
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1016
+      parentUniqueId: Tests.dll/[Tests][MovementTest][suite]
+    - id: 1021
+      uniqueId: Tests.dll/MovementTest/[Tests][MovementTest.Move_QueenKingToSelectedPositionUP]
+      name: Move_QueenKingToSelectedPositionUP
+      fullName: MovementTest.Move_QueenKingToSelectedPositionUP
+      resultStatus: 1
+      duration: 0.0005232
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1016
+      parentUniqueId: Tests.dll/[Tests][MovementTest][suite]
+    - id: 1019
+      uniqueId: Tests.dll/MovementTest/[Tests][MovementTest.Move_TowerToSelectedPosition]
+      name: Move_TowerToSelectedPosition
+      fullName: MovementTest.Move_TowerToSelectedPosition
+      resultStatus: 1
+      duration: 0.0005214
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1016
+      parentUniqueId: Tests.dll/[Tests][MovementTest][suite]
+    - id: 1038
+      uniqueId: Tests.dll/MovementTest/[Tests][MovementTest.RedMoveplate_Test]
+      name: RedMoveplate_Test
+      fullName: MovementTest.RedMoveplate_Test
+      resultStatus: 1
+      duration: 0.0025403
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1027
+      parentUniqueId: Tests.dll/[Tests][MovementTest][suite]
+    m_ResultText: chess-game-project (1.398s)
+    m_ResultStacktrace: 
+    m_TestListState:
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: cb26407e
+      m_LastClickedID: 2118133451
+      m_ExpandedIDs: 03149dec5c42d5edfa2eb317bb864b249a6f8268dce72a71cb26407effffff7f
+      m_RenameOverlay:
+        m_UserAcceptedRename: 0
+        m_Name: 
+        m_OriginalName: 
+        m_EditFieldRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        m_UserData: 0
+        m_IsWaitingForDelay: 0
+        m_IsRenaming: 0
+        m_OriginalEventType: 11
+        m_IsRenamingFilename: 0
+        m_ClientGUIView: {fileID: 0}
+      m_SearchString: 
+    m_TestRunnerUIFilter:
+      PassedHidden: 0
+      FailedHidden: 0
+      NotRunHidden: 0
+      m_SearchString: 
+      selectedCategoryMask: 0
+      availableCategories:
+      - Uncategorized
+    m_SelectedOption: 0
+  m_EditModeTestListGUI:
+    m_Window: {fileID: 14}
+    m_NewResultList:
+    - id: 1000
+      uniqueId: '[chess-game-project][suite]'
+      name: chess-game-project
+      fullName: chess-game-project
+      resultStatus: 0
+      duration: 0
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 
+      parentUniqueId: 
+    m_ResultText: 
+    m_ResultStacktrace: 
+    m_TestListState:
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: cb26407effffff7f
+      m_RenameOverlay:
+        m_UserAcceptedRename: 0
+        m_Name: 
+        m_OriginalName: 
+        m_EditFieldRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        m_UserData: 0
+        m_IsWaitingForDelay: 0
+        m_IsRenaming: 0
+        m_OriginalEventType: 11
+        m_IsRenamingFilename: 0
+        m_ClientGUIView: {fileID: 0}
+      m_SearchString: 
+    m_TestRunnerUIFilter:
+      PassedHidden: 0
+      FailedHidden: 0
+      NotRunHidden: 0
+      m_SearchString: 
+      selectedCategoryMask: 0
+      availableCategories:
+      - Uncategorized
+--- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -296,10 +1369,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 629
-    width: 1465
-    height: 362
+    x: 8
+    y: 628
+    width: 1451
+    height: 355
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -318,22 +1391,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/Tests/PlayMode
+    - Assets/Assets/Sprites/Pieces/Black/Piece By Piece/New Cut
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/Tests/PlayMode
+  - Assets/Assets/Sprites/Pieces/Black/Piece By Piece/New Cut
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Unity\Projects\chessGame\chess-game-project
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 60.600006}
-    m_SelectedIDs: 10600000
-    m_LastClickedID: 24592
-    m_ExpandedIDs: 00000000ae5f0000b05f0000b25f0000b45f0000b65f0000b85f0000de5f000000ca9a3bffffff7f
+    m_SelectedIDs: 926e0000
+    m_LastClickedID: 28306
+    m_ExpandedIDs: 00000000b0600000b2600000b4600000b6600000b8600000ba600000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -361,7 +1434,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000ae5f0000b05f0000b25f0000b45f0000b65f0000b85f0000
+    m_ExpandedIDs: 00000000b0600000b2600000b4600000b6600000b8600000ba600000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -386,8 +1459,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 52600000
+    m_LastClickedInstanceID: 24658
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
@@ -405,7 +1478,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 5}
+      m_ClientGUIView: {fileID: 7}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -417,7 +1490,7 @@ MonoBehaviour:
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
---- !u!114 &13
+--- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -437,10 +1510,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1467
-    y: 73
-    width: 453
-    height: 918
+    x: 1460
+    y: 819
+    width: 449
+    height: 164
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -449,7 +1522,7 @@ MonoBehaviour:
   m_ObjectsLockedBeforeSerialization: []
   m_InstanceIDsLockedBeforeSerialization: 
   m_PreviewResizer:
-    m_CachedPref: 160
+    m_CachedPref: -160
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
@@ -459,7 +1532,7 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_PreviewWindow: {fileID: 0}
---- !u!114 &14
+--- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -479,10 +1552,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 73
-    width: 361
-    height: 535
+    x: 8
+    y: 83
+    width: 358
+    height: 524
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -493,7 +1566,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 2a85ffff6285ffffc692ffff3293ffff6a93ffffea94ffffd095ffff0896ffff6ea3ffff6ca4ffffa4a4ffff24a6ffff5ca8ffff92a8fffff2a8ffff72a9ffffaaa9ffff28abffff7cabffffb4abffff34adffff0aaeffff42aeffffc2afffffa8b0ffffe0b0ffff60b2ffff62b3ffff9ab3ffff1ab5ffff18b6ffff50b6ffffa4b7fffff8b7ffff30b8ffffaec5ffff8ec6ffffc6c6ffff46c8ffff1ac9ffff52c9ffffa8caffff88cbffffc0cbffff26d9ffff02daffff3adaffff8edbfffff2dbffff2adcffff8ee9ffffdae9ffff12eaffff68ebffff7cecffffb4ecffff28faffff1afbffff
+      m_ExpandedIDs: aae2ffffe2e2ffff8ef9ffff1afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -509,7 +1582,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 4}
+        m_ClientGUIView: {fileID: 6}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -517,7 +1590,7 @@ MonoBehaviour:
       m_IsLocked: 0
     m_CurrentSortingName: TransformSorting
   m_WindowGUID: 4c969a2b90040154d917609493e03593
---- !u!114 &15
+--- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -537,7 +1610,7 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 363
+    x: 362
     y: 73
     width: 1102
     height: 535
@@ -878,7 +1951,7 @@ MonoBehaviour:
   m_SceneVisActive: 1
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
---- !u!114 &16
+--- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -898,10 +1971,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 363
-    y: 73
-    width: 1102
-    height: 535
+    x: 367
+    y: 83
+    width: 1091
+    height: 524
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -949,29 +2022,29 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 1102
-      height: 514
-    m_Scale: {x: 0.47592592, y: 0.47592592}
-    m_Translation: {x: 551, y: 257}
+      width: 1091
+      height: 503
+    m_Scale: {x: 0.46574077, y: 0.46574074}
+    m_Translation: {x: 545.5, y: 251.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1157.7432
+      x: -1171.2524
       y: -540
-      width: 2315.4863
+      width: 2342.505
       height: 1080
     m_MinimalGUI: 1
-  m_defaultScale: 0.47592592
-  m_LastWindowPixelSize: {x: 1102, y: 535}
+  m_defaultScale: 0.46574074
+  m_LastWindowPixelSize: {x: 1091, y: 524}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
   m_XRRenderMode: 0
   m_RenderTexture: {fileID: 0}
---- !u!114 &17
+--- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -991,10 +2064,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 629
-    width: 1465
-    height: 362
+    x: 8
+    y: 628
+    width: 1451
+    height: 355
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
