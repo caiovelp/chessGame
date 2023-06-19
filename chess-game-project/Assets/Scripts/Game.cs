@@ -11,10 +11,13 @@ public class Game : MonoBehaviour
     private GameObject[,] positions = new GameObject[8,8];
     private GameObject[] whitePlayer = new GameObject[16];
     private GameObject[] blackPlayer = new GameObject[16];
+    private GameObject[,] destroyedPieces;
 
     private string currentPlayer = "white";
 
     private bool gameOver = false;
+    private bool blackIa = true;
+    private bool whiteIa = true;
 
     // Start is called before the first frame update
     public void Start()
@@ -38,7 +41,7 @@ public class Game : MonoBehaviour
             Create("blackQueen", 3, 7), Create("blackKing", 4, 7),
             Create("blackBishop", 5, 7), Create("blackKnight", 6, 7), Create("blackTower", 7, 7)
         };
-
+        this.destroyedPieces = new GameObject[4,8];
         // Coloca as peças no tabuleiro
         for (int i = 0; i < whitePlayer.Length; i++) 
         {
@@ -71,6 +74,48 @@ public class Game : MonoBehaviour
 
         positions[chessman.GetXBoard(), chessman.GetYBoard()] = obj;
     }
+    
+    public void SearchAndDestroy(GameObject cp)
+    {
+        if (cp.GetComponent<Chessman>().GetPlayer() == "white")
+        {
+            for (var i = 0; i < whitePlayer.Length; i++)
+            {
+                if (whitePlayer[i] == null || whitePlayer[i].Equals(cp))
+                {
+                    whitePlayer[i] = null;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            for (var i = 0; i < blackPlayer.Length; i++)
+            {
+                if (blackPlayer[i] == cp)
+                {
+                    blackPlayer[i] = null;
+                    break;
+                }
+            }
+        }
+    }
+    
+    public GameObject[,] GetPositions()
+    {
+        return positions;
+    }
+
+    public GameObject[] GetWhitePlayer()
+    {
+        return whitePlayer;
+    }
+    
+    public GameObject[] GetBlackPlayer()
+    {
+        return blackPlayer;
+    }
+
 
     public GameObject GetPosition(int x, int y)
     {
@@ -82,7 +127,11 @@ public class Game : MonoBehaviour
     {
         positions[x, y] = null;
     }
-
+    
+    public void SerPositionSpriteEmpty(int x, int y)
+    {
+        positions[x, y].GetComponent<SpriteRenderer>().sprite = null;   
+    }
 
     // Função verifica se dado um valor (x, y), esse par está dentro do tabuleiro 8x8.
     public bool PositionOnBoard(int x, int y) 
@@ -95,6 +144,16 @@ public class Game : MonoBehaviour
     {
         return currentPlayer;
     }
+     
+     public bool IsBlackIa()
+     {
+         return blackIa;
+     }
+     
+     public bool IsWhiteIa()
+     {
+         return whiteIa;
+     }
 
     public bool IsGameOver()
     {
@@ -123,10 +182,62 @@ public class Game : MonoBehaviour
             SceneManager.LoadScene("Game");
         }
     }
+    
+    public void AppendDestroyedPieces(GameObject cp)
+    {
+        if (cp.GetComponent<Chessman>().GetPlayer() == "white")
+        {
+            for (int i = 1; i >= 0 ; i--)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (destroyedPieces[i, j] == null)
+                    {
+                        destroyedPieces[i, j] = cp;
+                        return;
+                    }
+                }
+            }
+        }
+        else
+        {
+            for (int i = 2; i < 4; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (destroyedPieces[i, j] == null)
+                    {
+                        destroyedPieces[i, j] = cp;
+                        return;
+                    }
+                }
+            }    
+        }
+    }
+    
+    public (int i, int j) SearchDestroyedPieces(GameObject cp)
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 8; j++)
+            {
+                if (destroyedPieces[i, j] == cp)
+                    return (i, j);
+            }
+        }
+
+        return (-1, -1);
+    }
 
     public void Winner(string playerWinner)
     {
         gameOver = true;
+
+        var isTest = GameObject.FindGameObjectWithTag("EndText");
+        if (isTest == null)
+        {
+            return;
+        }
         
         GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>().enabled = true;
         GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>().text = "O " + playerWinner + " venceu! Pressione o mouse para reiniciar";
