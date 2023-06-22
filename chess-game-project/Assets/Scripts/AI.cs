@@ -351,7 +351,7 @@ public class Piece {
         }
  
         for(int i = 1; (i-x >= 0) && (i+y < 8); i++){
-            if (!board.VerifyInsideBoard(i - x, y + 1)) continue;
+            if (!board.VerifyInsideBoard(i - x, y + i)) continue;
             if(board.GetPiece(i-x, y+i) == null){
                 moves.Add(new Move(x,y, i-x, y+i));
             }else{
@@ -392,8 +392,8 @@ public class Piece {
 		
 		for(int i = -1; i <= 1; i+=2){
 			for(int z = -1; z <= 1; z+=2){
-                if (!board.VerifyInsideBoard(piece.x, piece.y + i)) continue;
-                target = board.GetPiece(x, y+i);
+                if (!board.VerifyInsideBoard(piece.x + i, piece.y + z)) continue;
+                target = board.GetPiece(x+i, y+z);
 				if(target == null){
 					moves.Add(new Move(x,y, x+i, y+z));
 				}else if(target.team != piece.team){
@@ -417,7 +417,6 @@ public class Piece {
         {
             if (board.GetPiece(piece.x, piece.y + delta) == null)
             {
-                // Na teoria, o peão nunca estaria no topo
                 moves.Add(new Move(piece.x, piece.y, piece.x, piece.y + delta));
                 if (firstMove == 1)
                 {
@@ -431,8 +430,8 @@ public class Piece {
         }
         for(int ii = -1; ii <= 1; ii+=2)
         {
-            if (!board.VerifyInsideBoard(piece.x + ii, piece.y + delta)) continue;
-                target = board.GetPiece(piece.x + ii, piece.y + delta);
+            if (!board.VerifyInsideBoard(piece.x + ii, piece.y + delta)) continue; 
+            target = board.GetPiece(piece.x + ii, piece.y + delta);
             if(target != null && target.team != this.team){
                 moves.Add(new Move(piece.x, piece.y, piece.x + ii, piece.y + delta, target.TypeToScore()));
             }
