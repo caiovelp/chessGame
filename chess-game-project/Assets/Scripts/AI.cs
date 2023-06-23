@@ -231,22 +231,22 @@ public class Piece {
         {
             if (piece.team == 0)
             {
-                if (!board.GetPiece(0, 0).move && VerifyRoque(board, 0))
+                if (board.GetPiece(0,0) != null && !board.GetPiece(0, 0).move && VerifyRoque(board, 0))
                 {
                     moves.Add(new Move(x,y, 0,0, roque: true));
                 } 
-                if (!board.GetPiece(7, 0).move && VerifyRoque(board, 7))
+                if (board.GetPiece(7, 0) != null && !board.GetPiece(7, 0).move && VerifyRoque(board, 7))
                 {
                     moves.Add(new Move(x,y, 0,0, roque: true));
                 }
             }
             else
             {
-                if (!board.GetPiece(0, 7).move && VerifyRoque(board, 0))
+                if (board.GetPiece(0,7) != null && !board.GetPiece(0, 7).move && VerifyRoque(board, 0))
                 {
                     moves.Add(new Move(x,y, 0,7, roque: true));
                 } 
-                if (!board.GetPiece(7, 7).move && VerifyRoque(board, 7))
+                if (board.GetPiece(7,7) != null && !board.GetPiece(7, 7).move && VerifyRoque(board, 7))
                 {
                     moves.Add(new Move(x,y, 7,7, roque: true));
                 } 
@@ -287,7 +287,6 @@ public class Piece {
         {
             if (board.GetPiece(piece.x, piece.y + delta) == null)
             {
-                // Na teoria, o peão nunca estaria no topo
                 moves.Add(new Move(piece.x, piece.y, piece.x, piece.y + delta));
                 if (firstMove == 1)
                 {

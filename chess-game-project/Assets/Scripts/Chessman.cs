@@ -679,7 +679,7 @@ public class Chessman : MonoBehaviour
         else
             currentPlayer = 1;
         
-        Move move = AI.RandomChoice(board, currentPlayer);
+        Move move = AI.BestChoice(board, currentPlayer, 2);
 
         int xAtual = move.x;
         int yAtual = move.y;
