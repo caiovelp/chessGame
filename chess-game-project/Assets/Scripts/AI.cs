@@ -175,7 +175,7 @@ public class Piece {
         }
  
         for(int i = 1; (i-x >= 0) && (i+y < 8); i++){
-            if (!board.VerifyInsideBoard(i - x, y + 1)) continue;
+            if (!board.VerifyInsideBoard(i - x, y + i)) continue;
             if(board.GetPiece(i-x, y+i) == null){
                 moves.Add(new Move(x,y, i-x, y+i));
             }else{
