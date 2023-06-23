@@ -68,7 +68,8 @@ public class Piece {
         }
         return this.adj(board); // Rei
     }
-        public Move[] Queen(Board board){
+    
+    public Move[] Queen(Board board){
         Move[] x = this.cross(board);
         Move[] y = this.Plus(board);
         Move[] z = new Move[x.Length + y.Length];
@@ -217,7 +218,7 @@ public class Piece {
 		for(int i = -1; i <= 1; i+=2){
 			for(int z = -1; z <= 1; z+=2){
                 if (!board.VerifyInsideBoard(piece.x + i, piece.y + z)) continue;
-                target = board.GetPiece(x + i, y+z);
+                target = board.GetPiece(x+i, y+z);
 				if(target == null){
 					moves.Add(new Move(x,y, x+i, y+z));
 				}else if(target.team != piece.team){
@@ -230,22 +231,22 @@ public class Piece {
         {
             if (piece.team == 0)
             {
-                if (!board.GetPiece(0, 0).move && VerifyRoque(board, 0))
+                if (board.GetPiece(0,0) != null && !board.GetPiece(0, 0).move && VerifyRoque(board, 0))
                 {
                     moves.Add(new Move(x,y, 0,0, roque: true));
                 } 
-                if (!board.GetPiece(7, 0).move && VerifyRoque(board, 7))
+                if (board.GetPiece(7, 0) != null && !board.GetPiece(7, 0).move && VerifyRoque(board, 7))
                 {
                     moves.Add(new Move(x,y, 0,0, roque: true));
                 }
             }
             else
             {
-                if (!board.GetPiece(0, 7).move && VerifyRoque(board, 0))
+                if (board.GetPiece(0,7) != null && !board.GetPiece(0, 7).move && VerifyRoque(board, 0))
                 {
                     moves.Add(new Move(x,y, 0,7, roque: true));
                 } 
-                if (!board.GetPiece(7, 7).move && VerifyRoque(board, 7))
+                if (board.GetPiece(7,7) != null && !board.GetPiece(7, 7).move && VerifyRoque(board, 7))
                 {
                     moves.Add(new Move(x,y, 7,7, roque: true));
                 } 
@@ -286,7 +287,6 @@ public class Piece {
         {
             if (board.GetPiece(piece.x, piece.y + delta) == null)
             {
-                // Na teoria, o peão nunca estaria no topo
                 moves.Add(new Move(piece.x, piece.y, piece.x, piece.y + delta));
                 if (firstMove == 1)
                 {
@@ -300,8 +300,8 @@ public class Piece {
         }
         for(int ii = -1; ii <= 1; ii+=2)
         {
-            if (!board.VerifyInsideBoard(piece.x + ii, piece.y + delta)) continue;
-                target = board.GetPiece(piece.x + ii, piece.y + delta);
+            if (!board.VerifyInsideBoard(piece.x + ii, piece.y + delta)) continue; 
+            target = board.GetPiece(piece.x + ii, piece.y + delta);
             if(target != null && target.team != this.team){
                 moves.Add(new Move(piece.x, piece.y, piece.x + ii, piece.y + delta, target.TypeToScore()));
             }
@@ -334,22 +334,39 @@ public class Piece {
 }
 public class Board {
     public Piece[,] positions = new Piece[8,8];
-    private int w = 0;
-    public Piece[] wPieces = new Piece[16];
-    private int b = 0;
-    public Piece[] bPieces = new Piece[16];
+    public List<Piece> wPieces = new();
+    public List<Piece> bPieces = new();
     public void AddPiece(int type, int team, int x, int y){
         Piece p = new Piece(type, team, x, y);
         positions[x, y]  = p;
-        if(team == 0){
-          wPieces[w] = p;
-          w+=1;
-        }else{
-          bPieces[b] = p;
-          b+=1;
+        if(team == 0) { 
+            wPieces.Add(p);
+        }else {
+            bPieces.Add(p);
+        }
+    }
+    public void AddPiece(Piece p){
+        positions[p.x, p.y]  = p;
+        if(p.team == 0) { 
+            wPieces.Add(p);
+        }else {
+            bPieces.Add(p);
         }
     }
 
+    public void RemovePiece(Piece p)
+    {
+        positions[p.x, p.y] = null;
+        if (p.team == 0)
+        {
+            wPieces.Remove(p);
+        }
+        else
+        {
+            bPieces.Remove(p);
+        }
+    }
+    
     public Piece[] GetPieces(int turn) {
         List<Piece> resp = new List<Piece>();
         if(turn == 0){
@@ -357,14 +374,14 @@ public class Board {
             {
                 if(p != null && p.enabled == 1){resp.Add(p);}
             }
-            return resp.ToArray();
+            
         }else{
             foreach (var p in bPieces)
             {
                 if(p != null && p.enabled == 1){resp.Add(p);}
             }
-            return resp.ToArray();
         }
+        return resp.ToArray();
     }
     public Piece GetPiece(int x, int y){
         return this.positions[x,y];
@@ -445,8 +462,51 @@ public class Board {
         }
     }
 }
-public class AI {
-	public static Move RandomChoice(Board board, int turn)
+
+public class AI{
+    public static Move BestChoice(Board board, int turn, int depth){
+        return _bestChoice(board, turn, depth, turn, -1, 9999);
+    }
+
+    private static Move _bestChoice(Board board, int turn, int depth, int maxmizeTurn, int alpha, int beta){        
+        Piece _p;
+        Move bestMove = Move.Fake();
+        foreach(var p in board.GetPieces(turn)){
+            foreach(var m in p.Movement(board)){
+                // Console.WriteLine("T"+turn +" - "+ m.x +" "+ m.y + " -> " + m.destX +" "+ m.destY +" $"+ m.score);
+                if(depth > 0){
+                    _p = board.GetPiece(m.destX, m.destY);
+                    if(_p != null) board.RemovePiece(_p);
+                    board._move(m); // Possivelmente parte de um bug (1)
+                    m.score += _bestChoice(board, (turn+1)%2, depth-1, maxmizeTurn, alpha, beta).score; // Recursive Score
+                    board._rMove(m); // Possivelmente parte de um bug (2)
+                    board.SetPiece(m.destX, m.destY, _p);
+                    if(_p != null) board.AddPiece(_p);
+                }
+                if(m.score > bestMove.score){ // Max(this, last)
+                    bestMove = m;
+                    // if(turn == maxmizeTurn){
+                    //     if(m.score > alpha){
+                    //         alpha = m.score;
+                    //         if(beta <= alpha){
+                    //             return Move.fake(); // Return doesn't matter here
+                    //         }
+                    //     }
+                    // }else{
+                    //     if(m.score > beta){
+                    //         beta = -m.score;
+                    //         if(beta <= alpha){
+                    //             return Move.fake(); // Return doesn't matter here
+                    //         }
+                    //     }
+                    // }
+                }
+            }
+        }
+        return bestMove;
+    }
+
+    public static Move RandomChoice(Board board, int turn)
     {
         List<Piece> pieces = new List<Piece>();
         foreach (var piece in board.GetPieces(turn))
@@ -461,4 +521,6 @@ public class AI {
 
         return movePiece[index];
     }
+
+    
 }
