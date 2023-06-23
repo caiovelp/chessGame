@@ -1,9 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Net.NetworkInformation;
-using UnityEditor.Media;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Chessman : MonoBehaviour
 {
