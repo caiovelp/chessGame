@@ -170,4 +170,28 @@ public class GameTests
         Assert.AreEqual(false, game.IsGameOver());
     }
 
+    [Test]
+    public void SetWhitePlayer_Test()
+    {
+        var mock = new GameObject[16];
+        
+        game.SetWhitePlayer(mock);
+
+        var player = game.GetWhitePlayer();
+        
+        Assert.AreEqual(mock, player);
+    }
+    
+    [Test]
+    public void SetBlackPlayer_Test()
+    {
+        var mock = new GameObject[16];
+        
+        game.SetBlackPlayer(mock);
+
+        var player = game.GetBlackPlayer();
+        
+        Assert.AreEqual(mock, player);
+    }
+
 }

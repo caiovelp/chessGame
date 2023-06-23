@@ -685,6 +685,12 @@ public class Chessman : MonoBehaviour
         bool attack = move.attack;
 
         GameObject gc = controller.GetComponent<Game>().GetPosition(xAtual, yAtual);
+
+        if (controller.tag == "Untagged") // É teste
+        {
+            return;
+        }
+        
         MovePlateIaSpawn(xDest, yDest, gc, attack);
     }
 

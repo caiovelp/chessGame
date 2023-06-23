@@ -242,4 +242,14 @@ public class Game : MonoBehaviour
         GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>().enabled = true;
         GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>().text = "O " + playerWinner + " venceu! Pressione o mouse para reiniciar";
     }
+
+    public void SetWhitePlayer(GameObject[] playerArray)
+    {
+        this.whitePlayer = playerArray;
+    }
+    
+    public void SetBlackPlayer(GameObject[] playerArray)
+    {
+        this.blackPlayer = playerArray;
+    }
 }
