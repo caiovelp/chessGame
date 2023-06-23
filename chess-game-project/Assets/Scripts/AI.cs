@@ -464,22 +464,39 @@ public class Piece {
 }
 public class Board {
     public Piece[,] positions = new Piece[8,8];
-    private int w = 0;
-    public Piece[] wPieces = new Piece[16];
-    private int b = 0;
-    public Piece[] bPieces = new Piece[16];
+    public List<Piece> wPieces = new();
+    public List<Piece> bPieces = new();
     public void AddPiece(int type, int team, int x, int y){
         Piece p = new Piece(type, team, x, y);
         positions[x, y]  = p;
-        if(team == 0){
-          wPieces[w] = p;
-          w+=1;
-        }else{
-          bPieces[b] = p;
-          b+=1;
+        if(team == 0) { 
+            wPieces.Add(p);
+        }else {
+            bPieces.Add(p);
+        }
+    }
+    public void AddPiece(Piece p){
+        positions[p.x, p.y]  = p;
+        if(p.team == 0) { 
+            wPieces.Add(p);
+        }else {
+            bPieces.Add(p);
         }
     }
 
+    public void RemovePiece(Piece p)
+    {
+        positions[p.x, p.y] = null;
+        if (p.team == 0)
+        {
+            wPieces.Remove(p);
+        }
+        else
+        {
+            bPieces.Remove(p);
+        }
+    }
+    
     public Piece[] GetPieces(int turn) {
         List<Piece> resp = new List<Piece>();
         if(turn == 0){
@@ -487,14 +504,14 @@ public class Board {
             {
                 if(p != null && p.enabled == 1){resp.Add(p);}
             }
-            return resp.ToArray();
+            
         }else{
             foreach (var p in bPieces)
             {
                 if(p != null && p.enabled == 1){resp.Add(p);}
             }
-            return resp.ToArray();
         }
+        return resp.ToArray();
     }
     public Piece GetPiece(int x, int y){
         return this.positions[x,y];
@@ -536,10 +553,12 @@ public class AI{
                 // Console.WriteLine("T"+turn +" - "+ m.x +" "+ m.y + " -> " + m.destX +" "+ m.destY +" $"+ m.score);
                 if(depth > 0){
                     _p = board.GetPiece(m.destX, m.destY);
+                    if(_p != null) board.RemovePiece(_p);
                     board._move(m); // Possivelmente parte de um bug (1)
                     m.score += _bestChoice(board, (turn+1)%2, depth-1, maxmizeTurn, alpha, beta).score; // Recursive Score
                     board._rMove(m); // Possivelmente parte de um bug (2)
                     board.SetPiece(m.destX, m.destY, _p);
+                    if(_p != null) board.AddPiece(_p);
                 }
                 if(m.score > bestMove.score){ // Max(this, last)
                     bestMove = m;

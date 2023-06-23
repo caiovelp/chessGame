@@ -590,9 +590,9 @@ public class Chessman : MonoBehaviour
         Board board = new Board();
 
         board.positions = pieces;
-        board.wPieces = whitePieces;
-        board.bPieces = blackPieces;
-
+        board.wPieces = new List<Piece>(whitePieces);
+        board.bPieces = new List<Piece>(blackPieces);
+        
         return board;
     }
 
@@ -612,7 +612,7 @@ public class Chessman : MonoBehaviour
         else
             currentPlayer = 1;
         
-        Move move = AI.BestChoice(board, currentPlayer, 1);
+        Move move = AI.BestChoice(board, currentPlayer, 2);
 
         int xAtual = move.x;
         int yAtual = move.y;
