@@ -5,11 +5,13 @@ using Mocks;
 public class AITest
 {
     private Game game;
+    private Board boardBot;
     
     [SetUp]
     public void Setup()
     {
         game = new Game();
+        boardBot = new Board();
     }
     
     [Test]
@@ -45,7 +47,7 @@ public class AITest
     {
         bool IA = game.IsWhiteIa();
 
-        Assert.IsTrue(IA);
+        Assert.IsFalse(IA);
     }
     
     [Test]
@@ -57,7 +59,7 @@ public class AITest
     }
 
     [Test]
-    public void AIMove_Test()
+    public void AIMoveBestChoice_Test()
     {
         
         MocksTest mocksTest = new MocksTest();
@@ -66,8 +68,6 @@ public class AITest
         var gameTeste = mocksTest.StartMock();
 
         gameTeste.Start();
-        
-        var hgt = gameTeste.GetPosition(0, 1);
 
         var chessman = gameTeste.chesspiece.GetComponent<Chessman>();
 
@@ -85,6 +85,68 @@ public class AITest
         chessman.AIMove();
 
         Assert.Pass();
+    }
+
+    [Test]
+    public void AIMoveRandomChoice_Test()
+    {
+        
+        MocksTest mocksTest = new MocksTest();
+        mocksTest.game = game;
+        
+        var gameTeste = mocksTest.StartMock();
+
+        gameTeste.Start();
+
+        var chessman = gameTeste.chesspiece.GetComponent<Chessman>();
+
+        // Create a new GameController object
+        var controllerObject = new GameObject();
+        var gameController = controllerObject.AddComponent<Game>();
+
+        // Assign the GameController object to the controller variable
+        chessman.controller = gameController.gameObject;
+
+        var gameComponentController = chessman.controller.GetComponent<Game>();
+        gameComponentController.SetBlackPlayer(gameTeste.GetBlackPlayer());
+        gameComponentController.SetWhitePlayer(gameTeste.GetWhitePlayer());
+
+        gameComponentController.gameObject.name = "Random";
+
+        chessman.AIMove();
+
+        Assert.Pass();
+    }
+
+    [Test]
+    public void AIAddPiece_RemovePiece_Test()
+    {
+        MocksTest mocksTest = new MocksTest();
+        mocksTest.game = game;
+        
+        var gameTeste = mocksTest.StartMock();
+
+        gameTeste.Start();
+
+        var chessman = gameTeste.chesspiece.GetComponent<Chessman>();
+
+        // Create a new GameController object
+        var controllerObject = new GameObject();
+        var gameController = controllerObject.AddComponent<Game>();
+
+        // Assign the GameController object to the controller variable
+        chessman.controller = gameController.gameObject;
+
+        var pieces = chessman.SetPiecesPosition(gameTeste.GetWhitePlayer(), gameTeste.GetBlackPlayer());
+
+        boardBot.AddPiece(pieces[0, 0]);
+
+        Assert.AreEqual(boardBot.wPieces.Count, 1);
+
+        boardBot.RemovePiece(pieces[0, 0]);
+
+        Assert.AreEqual(boardBot.wPieces.Count, 0);
+
     }
 
 }

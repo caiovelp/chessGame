@@ -582,7 +582,7 @@ public class Chessman : MonoBehaviour
         return bps;
     }
 
-    private Piece[,] SetPiecesPosition(GameObject[] whitePieces, GameObject[] blackPieces)
+    public Piece[,] SetPiecesPosition(GameObject[] whitePieces, GameObject[] blackPieces)
     {
         Piece[,] pieces = new Piece[8,8];
         foreach (var whitePiece in whitePieces)
@@ -674,8 +674,12 @@ public class Chessman : MonoBehaviour
             currentPlayer = 0;
         else
             currentPlayer = 1;
-        
-        Move move = AI.BestChoice(board, currentPlayer, 2);
+        var move = Move.Fake();
+
+        if (controller.name == "Random")
+            move = AI.RandomChoice(board, currentPlayer);
+        else
+            move = AI.BestChoice(board, currentPlayer, 1);
 
         int xAtual = move.x;
         int yAtual = move.y;
