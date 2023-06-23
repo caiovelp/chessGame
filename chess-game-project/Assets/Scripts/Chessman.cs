@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Chessman : MonoBehaviour
 {
@@ -159,33 +157,35 @@ public class Chessman : MonoBehaviour
     */
     private void OnMouseUp()
     {
-        if( player == "black")
+        if(controller.GetComponent<Game>().GetCurrentPlayer() == "white" &&  controller.GetComponent<Game>().IsWhiteIa())
         {
-            // Só habilita a jogada se o for a vez do jogador da peça selecionada
-            if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player && !controller.GetComponent<Game>().IsBlackIa())
-            {
-                // Apaga os moveplates que estão no tabuleiro.
-                DestroyMovePlates();
-
-                // Inicia os novos moveplates depedendo da interação.
-                InitiateMovePlates();
-            }
-            else if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player && controller.GetComponent<Game>().IsBlackIa())
-            {
-                // Quando for a vez do preto e ele ser a IA do jogo.
-                AIMove();
-            }
+            AIMove();
+            return;
         }
-        else
-        {
-            if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player)
-            {
-                // Apaga os moveplates que estão no tabuleiro.
-                DestroyMovePlates();
 
-                // Inicia os novos moveplates depedendo da interação.
-                InitiateMovePlates();
-            }
+        if(controller.GetComponent<Game>().GetCurrentPlayer() == "black" &&  controller.GetComponent<Game>().IsBlackIa())
+        {
+            AIMove();
+            return;
+        }
+
+        // Só habilita a jogada se o for a vez do jogador da peça selecionada e se o player não for IA
+        
+        if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player && !controller.GetComponent<Game>().IsBlackIa())
+        {
+            // Apaga os moveplates que estão no tabuleiro.
+            DestroyMovePlates();
+
+            // Inicia os novos moveplates depedendo da interação.
+            InitiateMovePlates();
+        }
+        if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player && !controller.GetComponent<Game>().IsWhiteIa())
+        {
+            // Apaga os moveplates que estão no tabuleiro.
+            DestroyMovePlates();
+
+            // Inicia os novos moveplates depedendo da interação.
+            InitiateMovePlates();
         }
     }
 
@@ -249,7 +249,7 @@ public class Chessman : MonoBehaviour
     /*
         Função que cria as opções em movimentação em + de acordo com os eixos do tabuleiro
     */
-    public void AxisMovePlate(bool rook = false)
+    public void AxisMovePlate()
     {
         LineMovePlate(1,0);
         LineMovePlate(-1,0);
@@ -406,7 +406,7 @@ public class Chessman : MonoBehaviour
     }
 
     // Função resposável por invocar a MovePlate nas coordenadas informados
-    public void PointMovePlate(int x, int y, bool king = false)
+    public void PointMovePlate(int x, int y)
     {
         Game gameScript = controller.GetComponent<Game>();
         if (gameScript.PositionOnBoard(x, y))
@@ -654,9 +654,8 @@ public class Chessman : MonoBehaviour
         Board board = new Board();
 
         board.positions = pieces;
-        board.wPieces = whitePieces;
-        board.bPieces = blackPieces;
-
+        board.wPieces = new List<Piece>(whitePieces);
+        board.bPieces = new List<Piece>(blackPieces);
         return board;
     }
 
@@ -676,7 +675,7 @@ public class Chessman : MonoBehaviour
         else
             currentPlayer = 1;
         
-        Move move = AI.RandomChoice(board, currentPlayer);
+        Move move = AI.BestChoice(board, currentPlayer, 2);
 
         int xAtual = move.x;
         int yAtual = move.y;

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovePlate : MonoBehaviour
@@ -111,8 +109,6 @@ public class MovePlate : MonoBehaviour
 
     public void EatMovement()
     {
-        int i = 0;
-        int j = 0;
         GameObject cp = controller.GetComponent<Game>().GetPosition(matrixX,matrixY);
         
         if (cp.name == "whiteKing") controller.GetComponent<Game>().Winner("preto");
