@@ -12,7 +12,7 @@ public class Game : MonoBehaviour
     private GameObject[] whitePlayer = new GameObject[16];
     private GameObject[] blackPlayer = new GameObject[16];
     private GameObject[,] destroyedPieces;
-    
+
     private string currentPlayer = "white";
 
     private bool gameOver = false;
@@ -234,6 +234,12 @@ public class Game : MonoBehaviour
     public void Winner(string playerWinner)
     {
         gameOver = true;
+
+        var isTest = GameObject.FindGameObjectWithTag("EndText");
+        if (isTest == null)
+        {
+            return;
+        }
         
         GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>().enabled = true;
         GameObject.FindGameObjectWithTag("EndText").GetComponent<Text>().text = "O " + playerWinner + " venceu! Pressione o mouse para reiniciar";

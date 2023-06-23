@@ -23,7 +23,8 @@ public class Chessman : MonoBehaviour
     public Sprite[] whiteQueen, whiteKing, whiteBishop, whiteTower, whiteKnight, whitePawn;
     public Sprite[] blackQueen, blackKing, blackBishop, blackTower, blackKnight, blackPawn;
     private int setID;
-
+    private bool move = false;
+    
 
     //Função que seleciona a skin das peças.
     public void SelectPeca(bool isForward)
@@ -133,16 +134,27 @@ public class Chessman : MonoBehaviour
     {
         yBoard = y;
     }
-
+    
     public string GetName()
     {
         return this.name;
     }
-
+    
     public string GetPlayer()
     {
         return this.player;
     }
+
+    public bool GetMove()
+    {
+        return move;
+    }
+    
+    public void SetMove(bool m = false)
+    {
+        this.move = m;
+    }
+
     /*
         Função do Unity que é chamada quando o usuário clica e solta o botão do mouse.
         Nesse caso, essa OnMouseUp é responsável pelo desenho dos moveplates.
@@ -284,7 +296,9 @@ public class Chessman : MonoBehaviour
                 if (sc.GetPosition(x, y) == null)
                 {
                     MovePlateSpawn(x, y);
-                    MovePlateSpawn(x, y + 1);
+                    if ((sc.GetPosition(x, y + 1) == null)){
+                        MovePlateSpawn(x, y + 1);
+                    }
                 }
             }
             else if (sc.GetCurrentPlayer() == "black" && y == 5)
@@ -292,7 +306,9 @@ public class Chessman : MonoBehaviour
                 if (sc.GetPosition(x, y) == null)
                 {
                     MovePlateSpawn(x, y);
-                    MovePlateSpawn(x, y - 1);
+                    if ((sc.GetPosition(x, y - 1) == null)){
+                        MovePlateSpawn(x, y - 1);
+                    }
                 }
             }
             else 
@@ -328,6 +344,56 @@ public class Chessman : MonoBehaviour
         PointMovePlate(xBoard - 1, yBoard - 1);
         PointMovePlate(xBoard, yBoard + 1);
         PointMovePlate(xBoard, yBoard - 1);
+        RoqueMovePlate();
+    }
+
+    //Essa função verifica se é possível fazer roque e spawna o moveplate
+    private void RoqueMovePlate()
+    {
+        string currentPlayer = controller.GetComponent<Game>().GetCurrentPlayer();
+        if (!move)
+        {
+            if(currentPlayer == "white")
+            {
+                if (controller.GetComponent<Game>().GetPosition(0, 0) != null && !controller.GetComponent<Game>().GetPosition(0, 0).GetComponent<Chessman>().GetMove() && VerificaRoque(0))
+                {
+                    MovePlateSpawn(0, 0, roque: true);
+                }
+
+                if (controller.GetComponent<Game>().GetPosition(7, 0) != null &&!controller.GetComponent<Game>().GetPosition(7, 0).GetComponent<Chessman>().GetMove() && VerificaRoque(7))
+                {
+                    MovePlateSpawn(7, 0, roque: true);
+                }
+            }
+            else
+            {
+                if (controller.GetComponent<Game>().GetPosition(0, 7) != null && !controller.GetComponent<Game>().GetPosition(0, 7).GetComponent<Chessman>().GetMove() && VerificaRoque(0) )
+                {
+                    MovePlateSpawn(0, 7, roque: true);
+                }
+
+                if (controller.GetComponent<Game>().GetPosition(7, 7) != null &&!controller.GetComponent<Game>().GetPosition(7, 7).GetComponent<Chessman>().GetMove() && VerificaRoque(7))
+                {
+                    MovePlateSpawn(7, 7, roque: true);
+                }
+            }
+        }
+    }
+
+    public bool VerificaRoque(int x)
+    {
+        if (xBoard > x)
+        {
+            for (int i = xBoard-1; i > x; i--)
+                if (controller.GetComponent<Game>().GetPosition(i, yBoard) != null)
+                    return false;
+            return true;
+        }
+
+        for (int i = xBoard+1; i < x; i++)
+            if (controller.GetComponent<Game>().GetPosition(i, yBoard) != null)
+                return false;
+        return true;
     }
 
     // Função resposável por ditar os movimento em "L"
@@ -368,7 +434,7 @@ public class Chessman : MonoBehaviour
     }
 
     // Desenha os moveplates de acordo com uma matrix 8x8
-    public void MovePlateSpawn(int matrixX, int matrixY)
+    public void MovePlateSpawn(int matrixX, int matrixY, bool roque = false, bool attack = false)
     {
         // Recupera o valor do tabuleiro para converter em xy coordenadas
         float x = matrixX;
@@ -386,6 +452,8 @@ public class Chessman : MonoBehaviour
 
         // Cria uma instância do moveplate e interage com essa instância.
         MovePlate mpScript = mp.GetComponent<MovePlate>();
+        mpScript.attack = attack;
+        mpScript.roque = roque;
         mpScript.SetReference(gameObject);
         mpScript.SetCoordinates(matrixX, matrixY);
     }
@@ -413,7 +481,7 @@ public class Chessman : MonoBehaviour
         mpScript.SetReference(gameObject);
         mpScript.SetCoordinates(matrixX, matrixY);
     }
-
+    
     public void MovePlateIaSpawn(int matrixX, int matrixY, GameObject gc, bool attack)
     {
         // Recupera o valor do tabuleiro para converter em xy coordenadas
@@ -433,8 +501,8 @@ public class Chessman : MonoBehaviour
         MovePlate mpScript = mp.GetComponent<MovePlate>();
         mpScript.attack = attack;
         mpScript.SetReference(gc);
-        mpScript.SetCoordinates(matrixX, matrixY);
-        mpScript.Movement();
+        mpScript.SetCoordinates(matrixX, matrixY); ;
+        mpScript.OnMouseUp();
     }
 
     private Piece[] SetWhitePieces(GameObject[] whitePieces)
@@ -592,7 +660,6 @@ public class Chessman : MonoBehaviour
         board.positions = pieces;
         board.wPieces = new List<Piece>(whitePieces);
         board.bPieces = new List<Piece>(blackPieces);
-        
         return board;
     }
 
@@ -612,7 +679,7 @@ public class Chessman : MonoBehaviour
         else
             currentPlayer = 1;
         
-        Move move = AI.BestChoice(board, currentPlayer, 2);
+        Move move = AI.RandomChoice(board, currentPlayer);
 
         int xAtual = move.x;
         int yAtual = move.y;
@@ -622,7 +689,7 @@ public class Chessman : MonoBehaviour
 
         GameObject gc = controller.GetComponent<Game>().GetPosition(xAtual, yAtual);
         MovePlateIaSpawn(xDest, yDest, gc, attack);
-    }  
+    }
 
     public void CallOnMouseUp()
     {

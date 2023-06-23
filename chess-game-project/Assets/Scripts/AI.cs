@@ -1,37 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-// using UnityEngine;
 using System;
-using System.Linq;
-
-using Codice.Client.BaseCommands;
-
-class Program{
-  public static void Main(String[] argv){
-    Board b = new Board();
-    b.AddPiece(0, 0, 2, 3);
-    b.AddPiece(0, 0, 4, 1);
-    b.AddPiece(0, 1, 3, 5);
-    
-    
-
-    Move bestMove = AI.BestChoice(b, 1, 3);
-    for(int i=7; i >= 0;i--){
-      for(int t=0; t<8;t++){
-        Piece a = b.GetPiece(t,i);
-        if(a == null){
-          Console.Write(' ');
-        }else{
-          Console.Write(a.type);
-        }
-        Console.Write("|");
-      }
-      Console.Write("\n");
-    }
-    
-    Console.WriteLine("Resp: "+ bestMove.x +" "+ bestMove.y + " -> " + bestMove.destX +" "+ bestMove.destY +" $"+ bestMove.score);
-  }
-}
+using System.Collections.Generic;
 
 public class Move {
     public int x;
@@ -40,7 +8,8 @@ public class Move {
     public int destY;
     public int score;
     public bool attack;
-    public Move(int _x, int _y, int _destX, int _destY)
+    public bool roque;
+    public Move(int _x, int _y, int _destX, int _destY, bool roque = false)
     {
         Board board = new Board();
         // if (!board.VerifyInsideBoard(_destX, _destX) || !board.VerifyInsideBoard(_x, _y))
@@ -52,6 +21,7 @@ public class Move {
         destX = _destX;
         destY = _destY;
         score = 0;
+        this.roque = roque;
         attack = false;
     }
     public Move(int _x, int _y, int _destX, int _destY, int _score){
@@ -71,12 +41,14 @@ public class Move {
         return new Move(0,0,0,0,-9999);
     }
 }
+
 public class Piece {
     public int enabled = 1;
     public int type;
     public int team;
     public int x;
     public int y;
+    public bool move = false;
     public Piece(int _type, int _team, int _x, int _y){
         type = _type;
         team = _team;
@@ -96,154 +68,7 @@ public class Piece {
         }
         return this.adj(board); // Rei
     }
-    public Move[] Cross(Board b)
-    {
-        Move[] x = LineMove(b, 1,1);
-        Move[] y = LineMove(b, 1,-1);
-        Move[] z = LineMove(b, -1,1);
-        Move[] w = LineMove(b, -1,-1);
-        Move[] moves = new Move[x.Length + y.Length + z.Length + w.Length];
-        x.CopyTo(moves, 0);
-        y.CopyTo(moves, x.Length);
-        z.CopyTo(moves, x.Length + y.Length);
-        w.CopyTo(moves, x.Length + y.Length + z.Length);
-        return moves;
-    }
-
-    /*
-        Função que cria as opções em movimentação em + de acordo com os eixos do tabuleiro
-    */
-    public Move[] Axis(Board b)
-    {
-        Move[] x = LineMove(b,1,0);
-        Move[] y = LineMove(b,-1,0);
-        Move[] z = LineMove(b,0,1);
-        Move[] w = LineMove(b,0,-1);
-        Move[] moves = new Move[x.Length + y.Length + z.Length + w.Length];
-        x.CopyTo(moves, 0);
-        y.CopyTo(moves, x.Length);
-        z.CopyTo(moves, x.Length + y.Length);
-        w.CopyTo(moves, x.Length + y.Length + z.Length);
-        return moves;
-    }
-    /*
-        Função que cria uma linha de movimentação a partir da peça em questão de acordo com um vetor (x,y)
-        @param xIncrement - valor x do vetor
-        @param yIncrement - valor y do vetor
-    */
-    public Move[] LineMove(Board b, int xIncrement, int yIncrement)
-    {
-        List<Move> moves = new List<Move>();
-        int destX = this.x + xIncrement;
-        int destY = this.y + yIncrement;
-
-        while(b.VerifyInsideBoard(destX,destY) && b.GetPiece(destX,destY) == null){
-            moves.Add(new Move(this.x, this.y, destX, destY));
-            destX += xIncrement;
-            destY += yIncrement;
-        }
-
-        if(b.VerifyInsideBoard(destX,destY) && b.GetPiece(destX,destY).team != this.team){
-            moves.Add(new Move(this.x, this.y, destX, destY, b.GetPiece(destX,destY).TypeToScore()));
-        }
-
-        return moves.ToArray();
-    }
-
-    // Desenha os  do peão.
-    public Move[] Pawn(Board b)
-    {
-        List<Move> moves = new List<Move>();
-        if (this.team == 0)
-        {
-            if (b.VerifyInsideBoard(x, y + 1) && b.GetPiece(x,y+1) == null) 
-                moves.Add(new Move(this.x, this.y, x, y+1));
-            
-            if (this.y == 1)
-            {
-                if (b.VerifyInsideBoard(x, y+2) && b.GetPiece(x,y+2) == null)
-                    moves.Add(new Move(this.x, this.y, x, y+2));
-            }
-            if(b.VerifyInsideBoard(x + 1,y + 1) && b.GetPiece(x + 1,y + 1) != null && b.GetPiece(x + 1,y + 1).team != this.team)
-                moves.Add(new Move(this.x, this.y, x + 1,y + 1, b.GetPiece(x + 1,y + 1).TypeToScore()));
-            
-            if(b.VerifyInsideBoard(x - 1, y + 1) && b.GetPiece(x - 1, y + 1) != null && b.GetPiece(x - 1, y + 1).team != this.team)
-                moves.Add(new Move(this.x, this.y,x - 1, y + 1, b.GetPiece(x - 1, y + 1).TypeToScore()));
-
-        }
-        else
-        {
-            if (b.VerifyInsideBoard(x, y - 1) && b.GetPiece(x, y - 1) == null)
-                moves.Add(new Move(this.x, this.y, x, y - 1));
-            if (this.y == 6)
-            {
-                if (b.VerifyInsideBoard(x, y - 2) && b.GetPiece(x, y - 2) == null)
-                    moves.Add(new Move(this.x, this.y, x, y - 2));
-            }
-            if(b.VerifyInsideBoard(x + 1, y - 1) && (b.GetPiece(x + 1, y - 1) != null && b.GetPiece(x + 1, y - 1).team != this.team))
-                moves.Add(new Move(this.x, this.y, x + 1, y - 1, b.GetPiece(x + 1, y - 1).TypeToScore()));
-            
-            if(b.VerifyInsideBoard(x - 1 , y - 1) && (b.GetPiece(x - 1, y - 1) != null && b.GetPiece(x - 1, y - 1).team != this.team))
-                moves.Add(new Move(this.x, this.y, x - 1, y - 1, b.GetPiece(x - 1, y - 1).TypeToScore()));
-            
-        }
-
-        return moves.ToArray();
-    }
-    public Move[] Surround(Board b)
-    {
-        List<Move> moves = new List<Move>();
-        moves.Add(Point(b, this.x + 1, this.y + 1));
-        moves.Add(Point(b, this.x + 1, this.y));
-        moves.Add(Point(b, this.x + 1, this.y - 1));
-        moves.Add(Point(b, this.x - 1, this.y + 1));
-        moves.Add(Point(b, this.x - 1, this.y));
-        moves.Add(Point(b, this.x - 1, this.y - 1));
-        moves.Add(Point(b, this.x, this.y + 1));
-        moves.Add(Point(b, this.x, this.y - 1));
-        return moves.ToArray();
-    }
-
-    // Função resposável por ditar os movimento em "L"
-    // public Move[] L(Board b)
-    // {
-    //     List<Move> moves = new List<Move>();
-    //     moves.Add(Point(b,this.x + 1, this.y + 2));
-    //     moves.Add(Point(b,this.x - 1, this.y + 2));
-    //     moves.Add(Point(b,this.x + 2, this.y + 1));
-    //     moves.Add(Point(b,this.x + 2, this.y - 1));
-    //     moves.Add(Point(b, this.x + 1, this.y - 2));
-    //     moves.Add(Point(b, this.x - 1, this.y - 2));
-    //     moves.Add(Point(b, this.x - 2, this.y + 1));
-    //     moves.Add(Point(b, this.x - 2, this.y - 1));
-    //     return moves.ToArray();
-    // }
-
-    // Função resposável por invocar a  nas coordenadas informados
-    public Move Point(Board b, int x, int y)
-    {
-        Move move = Move.Fake();
-        if (b.VerifyInsideBoard(x, y))
-        {
-            Piece piece= b.GetPiece(x, y);
-            /*  
-                Verifica se posição da jogada tem uma peça.
-                Se sim, invoca a  na posição.
-                Caso contrário, se o player da peça é diferente do atual invoca
-                a  de ataque na posição.
-            */ 
-            if (piece == null)
-            {
-                move = new Move(this.x, this.y, x, y);
-            }
-            else if (piece.team != this.team)
-            {
-                move = new Move(this.x, this.y, x, y, piece.TypeToScore());
-            }
-        }
-
-        return move;
-    }
+    
     public Move[] Queen(Board board){
         Move[] x = this.cross(board);
         Move[] y = this.Plus(board);
@@ -401,8 +226,53 @@ public class Piece {
 				}
 			}
 		}
+
+        if (!piece.move)
+        {
+            if (piece.team == 0)
+            {
+                if (!board.GetPiece(0, 0).move && VerifyRoque(board, 0))
+                {
+                    moves.Add(new Move(x,y, 0,0, roque: true));
+                } 
+                if (!board.GetPiece(7, 0).move && VerifyRoque(board, 7))
+                {
+                    moves.Add(new Move(x,y, 0,0, roque: true));
+                }
+            }
+            else
+            {
+                if (!board.GetPiece(0, 7).move && VerifyRoque(board, 0))
+                {
+                    moves.Add(new Move(x,y, 0,7, roque: true));
+                } 
+                if (!board.GetPiece(7, 7).move && VerifyRoque(board, 7))
+                {
+                    moves.Add(new Move(x,y, 7,7, roque: true));
+                } 
+            }
+        }
         return moves.ToArray();
 	}
+
+    public bool VerifyRoque(Board board, int x)
+    {
+        if (this.x > x)
+        {
+            for (int i = this.x - 1; i > x; i--)
+                if (board.GetPiece(i, this.y) != null) return false;
+
+            return true;
+        }
+        else
+        {
+            for (int i = this.x + 1; i < x; i++)
+                if (board.GetPiece(i, this.y) != null) return false;
+
+            return true;
+        }
+    }
+    
     // Adjacent squares
     public Move[] pawn(Board board){
 		Piece piece = this;
@@ -417,6 +287,7 @@ public class Piece {
         {
             if (board.GetPiece(piece.x, piece.y + delta) == null)
             {
+                // Na teoria, o peão nunca estaria no topo
                 moves.Add(new Move(piece.x, piece.y, piece.x, piece.y + delta));
                 if (firstMove == 1)
                 {
@@ -527,16 +398,69 @@ public class Board {
         return true;
     }
     public void _move(Move _move){
-        Move(_move.x, _move.y, _move.destX, _move.destY);
+        if (_move.roque)
+            RoqueMove(_move.x, _move.y, _move.destX, _move.destY);
+        else
+            Move(_move.x, _move.y, _move.destX, _move.destY);
     }
-    public void _rMove(Move _move){
-        Move(_move.destX, _move.destY, _move.x, _move.y);
+    public void _rMove(Move _move)
+    {
+        if (_move.roque)
+            RoqueRMove(_move.x, _move.y, _move.destX, _move.destY);
+        else
+            Move(_move.destX, _move.destY, _move.x, _move.y);
     }
+
+    private void RoqueRMove(int x, int y, int xd, int yd)
+    {
+        if (x == 0)
+        {
+            positions[2, y].x = x;
+            positions[x, y] = this.positions[2, y];
+            positions[3, yd].x = xd;
+            positions[xd, yd] = this.positions[3, yd];
+            positions[2, y] = null;
+            positions[3, yd] = null;
+        }
+        else
+        {
+            positions[6, y].x = x;
+            positions[x, y] = this.positions[6, y];
+            positions[5, yd].x = xd;
+            positions[xd, yd] = this.positions[5, yd];
+            positions[6, y] = null;
+            positions[5, yd] = null;
+        }
+    }
+
     public void Move(int x, int y, int xd, int yd){
         positions[x,y].x = xd;
         positions[x,y].y = yd;
         positions[xd,yd] = this.positions[x,y];
+        positions[xd,yd].move = true;
         positions[x,y] = null;
+    }
+
+    public void RoqueMove(int x, int y, int xd, int yd)
+    {
+        if(positions[x,y].x == 0)
+        {
+            positions[x, y].x = 2;
+            positions[2, y] = this.positions[x, y];
+            positions[xd, yd].x = 3;
+            positions[3, y] = this.positions[xd, yd];
+            positions[x, y] = null;
+            positions[xd, yd] = null;
+        }
+        else
+        {
+            positions[x, y].x = 6;
+            positions[6, y] = this.positions[x, y];
+            positions[xd, yd].x = 5;
+            positions[5, y] = this.positions[xd, yd];
+            positions[x, y] = null;
+            positions[xd, yd] = null;
+        }
     }
 }
 
@@ -598,4 +522,6 @@ public class AI{
 
         return movePiece[index];
     }
+
+    
 }
