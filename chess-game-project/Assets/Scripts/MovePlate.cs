@@ -39,6 +39,12 @@ public class MovePlate : MonoBehaviour
             }
         }
 
+        if (promote)
+        {
+            // a cor da sprite muda para roxo
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.2f, 0.6f, 1.0f);
+        }
+
         if (roque)
         {
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, .5f, 0.0f, 1.0f);
@@ -127,6 +133,7 @@ public class MovePlate : MonoBehaviour
         {
             EatMovement();
         }
+
         controller.GetComponent<Game>().SetPositionEmpty(reference.GetComponent<Chessman>().GetXBoard(), reference.GetComponent<Chessman>().GetYBoard());
 
         reference.GetComponent<Chessman>().SetXBoard(matrixX);

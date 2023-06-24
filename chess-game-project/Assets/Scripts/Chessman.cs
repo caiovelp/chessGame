@@ -558,8 +558,9 @@ public class Chessman : MonoBehaviour
         // Cria uma instância do moveplate e interage com essa instância, flag attack = true.
         MovePlate mpScript = mp.GetComponent<MovePlate>();
         mpScript.attack = attack;
-        mpScript.SetReference(gameObject);
-        mpScript.SetCoordinates(matrixX, matrixY);
+        mpScript.SetReference(gc);
+        mpScript.SetCoordinates(matrixX, matrixY); ;
+        mpScript.OnMouseUp();
     }
 
     private Piece[] SetWhitePieces(GameObject[] whitePieces)
