@@ -530,7 +530,7 @@ public class Chessman : MonoBehaviour
                     pieceType = 4;
                     break;
                 case "whiteKing":
-                    pieceType = 5;
+                    pieceType = 999;
                     break;
             }
                 
@@ -570,7 +570,7 @@ public class Chessman : MonoBehaviour
                     pieceType = 4;
                     break;
                 case "blackKing":
-                    pieceType = 5;
+                    pieceType = 999;
                     break;
             }
                 
@@ -582,7 +582,7 @@ public class Chessman : MonoBehaviour
         return bps;
     }
 
-    private Piece[,] SetPiecesPosition(GameObject[] whitePieces, GameObject[] blackPieces)
+    public Piece[,] SetPiecesPosition(GameObject[] whitePieces, GameObject[] blackPieces)
     {
         Piece[,] pieces = new Piece[8,8];
         foreach (var whitePiece in whitePieces)
@@ -609,7 +609,7 @@ public class Chessman : MonoBehaviour
                     pieceType = 4;
                     break;
                 case "whiteKing":
-                    pieceType = 5;
+                    pieceType = 999;
                     break;
             }
 
@@ -639,7 +639,7 @@ public class Chessman : MonoBehaviour
                     pieceType = 4;
                     break;
                 case "blackKing":
-                    pieceType = 5;
+                    pieceType = 999;
                     break;
             }
 
@@ -674,8 +674,12 @@ public class Chessman : MonoBehaviour
             currentPlayer = 0;
         else
             currentPlayer = 1;
-        
-        Move move = AI.BestChoice(board, currentPlayer, 2);
+        var move = Move.Fake();
+
+        if (controller.name == "Random")
+            move = AI.RandomChoice(board, currentPlayer);
+        else
+            move = AI.BestChoice(board, currentPlayer, 1);
 
         int xAtual = move.x;
         int yAtual = move.y;
@@ -684,6 +688,12 @@ public class Chessman : MonoBehaviour
         bool attack = move.attack;
 
         GameObject gc = controller.GetComponent<Game>().GetPosition(xAtual, yAtual);
+
+        if (controller.tag == "Untagged") // É teste
+        {
+            return;
+        }
+        
         MovePlateIaSpawn(xDest, yDest, gc, attack);
     }
 

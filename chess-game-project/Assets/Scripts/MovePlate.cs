@@ -113,7 +113,7 @@ public class MovePlate : MonoBehaviour
         
         if (cp.name == "whiteKing") controller.GetComponent<Game>().Winner("preto");
         if (cp.name == "blackKing") controller.GetComponent<Game>().Winner("branco");
-
+        
         controller.GetComponent<Game>().SearchAndDestroy(cp);
         controller.GetComponent<Game>().SerPositionSpriteEmpty(matrixX, matrixY);
         controller.GetComponent<Game>().SetPositionEmpty(matrixX, matrixY);
