@@ -530,7 +530,7 @@ public class Chessman : MonoBehaviour
                     pieceType = 4;
                     break;
                 case "whiteKing":
-                    pieceType = 5;
+                    pieceType = 999;
                     break;
             }
                 
@@ -570,7 +570,7 @@ public class Chessman : MonoBehaviour
                     pieceType = 4;
                     break;
                 case "blackKing":
-                    pieceType = 5;
+                    pieceType = 999;
                     break;
             }
                 
@@ -609,7 +609,7 @@ public class Chessman : MonoBehaviour
                     pieceType = 4;
                     break;
                 case "whiteKing":
-                    pieceType = 5;
+                    pieceType = 999;
                     break;
             }
 
@@ -639,7 +639,7 @@ public class Chessman : MonoBehaviour
                     pieceType = 4;
                     break;
                 case "blackKing":
-                    pieceType = 5;
+                    pieceType = 999;
                     break;
             }
 
