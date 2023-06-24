@@ -10,6 +10,7 @@ public class Chessman : MonoBehaviour
     public GameObject controller;
     public GameObject movePlate;
 
+
     // Posições
     private int xBoard = -1;
     private int yBoard = -1;
@@ -425,7 +426,7 @@ public class Chessman : MonoBehaviour
         MovePlate mpScript = mp.GetComponent<MovePlate>();
         mpScript.promote = promote;
         mpScript.attack = attack;
-        
+
         mpScript.SetReference(gameObject);
         mpScript.SetCoordinates(matrixX, matrixY);
     }
