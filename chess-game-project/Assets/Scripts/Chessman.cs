@@ -8,6 +8,7 @@ public class Chessman : MonoBehaviour
     public GameObject controller;
     public GameObject movePlate;
 
+
     // Posições
     private int xBoard = -1;
     private int yBoard = -1;
@@ -130,15 +131,55 @@ public class Chessman : MonoBehaviour
     {
         yBoard = y;
     }
-    
+
+    public string GetPlayer()
+    {
+        return this.player;
+    }
+
     public string GetName()
     {
         return this.name;
     }
-    
-    public string GetPlayer()
+
+    public Sprite GetWhiteQueen()
     {
-        return this.player;
+        return whiteQueen[setID];
+    }
+
+    public Sprite GetWhiteTower()
+    {
+        return whiteTower[setID];
+    }
+
+    public Sprite GetWhiteBishop()
+    {
+        return whiteBishop[setID];
+    }
+
+    public Sprite GetWhiteKnight()
+    {
+        return whiteKnight[setID];
+    }
+
+    public Sprite GetBlackQueen()
+    {
+        return blackQueen[setID];
+    }
+
+    public Sprite GetBlackTower()
+    {
+        return blackTower[setID];
+    }
+
+    public Sprite GetBlackBishop()
+    {
+        return blackBishop[setID];
+    }
+
+    public Sprite GetBlackKnight()
+    {
+        return blackKnight[setID];
     }
 
     public bool GetMove()
@@ -276,7 +317,7 @@ public class Chessman : MonoBehaviour
         }
 
         if(sc.PositionOnBoard(x,y) && sc.GetPosition(x,y).GetComponent<Chessman>().player != player){
-            MovePlateAttackSpawn(x,y);
+            MovePlateSpawn(x,y, attack: true);
         }
     }
 
@@ -284,6 +325,8 @@ public class Chessman : MonoBehaviour
     public void PawnMovePlate(int x, int y)
     {
         Game sc = controller.GetComponent<Game>();
+        bool promote = false;
+        
         if (sc.PositionOnBoard(x, y))
         {
             // Se for a posição inicial do peão, spawnar dois movePlate
@@ -292,9 +335,7 @@ public class Chessman : MonoBehaviour
                 if (sc.GetPosition(x, y) == null)
                 {
                     MovePlateSpawn(x, y);
-                    if ((sc.GetPosition(x, y + 1) == null)){
-                        MovePlateSpawn(x, y + 1);
-                    }
+                    MovePlateSpawn(x, y + 1);
                 }
             }
             else if (sc.GetCurrentPlayer() == "black" && y == 5)
@@ -302,27 +343,46 @@ public class Chessman : MonoBehaviour
                 if (sc.GetPosition(x, y) == null)
                 {
                     MovePlateSpawn(x, y);
-                    if ((sc.GetPosition(x, y - 1) == null)){
-                        MovePlateSpawn(x, y - 1);
-                    }
+                    MovePlateSpawn(x, y - 1);
                 }
             }
-            else 
+            else if (sc.GetCurrentPlayer() == "white")
             {
                 if (sc.GetPosition(x, y) == null)
                 {
-                    MovePlateSpawn(x, y);
+                    if (y == 7)
+                        promote = true;
+                    MovePlateSpawn(x, y, promote: promote);
                 }
             }
-
+            else if (sc.GetCurrentPlayer() == "black")
+            {
+                if (sc.GetPosition(x, y) == null)
+                {
+                    if (y == 0)
+                        promote = true;
+                    MovePlateSpawn(x, y, promote: promote);
+                }
+            }
+    
             if (sc.PositionOnBoard(x + 1, y) && sc.GetPosition(x + 1, y) != null && sc.GetPosition(x + 1, y).GetComponent<Chessman>().player != player)
             {
-                MovePlateAttackSpawn(x + 1, y);
+                if (y == 7 && sc.GetCurrentPlayer() == "white")
+                    promote = true;
+                else if (y == 0 && sc.GetCurrentPlayer() == "black")
+                    promote = true;
+                
+                MovePlateSpawn(x + 1, y, attack: true, promote: promote);
             }
 
             if (sc.PositionOnBoard(x - 1, y) && sc.GetPosition(x - 1, y) != null && sc.GetPosition(x - 1, y).GetComponent<Chessman>().player != player)
             {
-                MovePlateAttackSpawn(x - 1, y);
+                if (y == 7 && sc.GetCurrentPlayer() == "white")
+                    promote = true;
+                else if (y == 0 && sc.GetCurrentPlayer() == "black")
+                    promote = true;
+                
+                MovePlateSpawn(x - 1, y, attack: true, promote: promote);
             }
         }
     }
@@ -424,13 +484,14 @@ public class Chessman : MonoBehaviour
             }
             else if (chessPiece.GetComponent<Chessman>().player != player)
             {
-                MovePlateAttackSpawn(x, y);
+                MovePlateSpawn(x, y, attack: true);
             }
         }
     }
 
-    // Desenha os moveplates de acordo com uma matrix 8x8
-    public void MovePlateSpawn(int matrixX, int matrixY, bool roque = false, bool attack = false)
+    // Desenha os moveplates de acordo com uma matrix 8x8 caso seja uma ação de ataque xor promoção de peão
+    //                          passe os respectivos atributos como true
+    public void MovePlateSpawn(int matrixX, int matrixY, bool roque = false, bool attack = false, bool promote = false)
     {
         // Recupera o valor do tabuleiro para converter em xy coordenadas
         float x = matrixX;
@@ -448,6 +509,7 @@ public class Chessman : MonoBehaviour
 
         // Cria uma instância do moveplate e interage com essa instância.
         MovePlate mpScript = mp.GetComponent<MovePlate>();
+        mpScript.promote = promote;
         mpScript.attack = attack;
         mpScript.roque = roque;
         mpScript.SetReference(gameObject);
@@ -477,7 +539,7 @@ public class Chessman : MonoBehaviour
         mpScript.SetReference(gameObject);
         mpScript.SetCoordinates(matrixX, matrixY);
     }
-    
+
     public void MovePlateIaSpawn(int matrixX, int matrixY, GameObject gc, bool attack)
     {
         // Recupera o valor do tabuleiro para converter em xy coordenadas

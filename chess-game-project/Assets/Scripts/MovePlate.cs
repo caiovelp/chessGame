@@ -1,4 +1,8 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class MovePlate : MonoBehaviour
 {
@@ -6,12 +10,18 @@ public class MovePlate : MonoBehaviour
 
     GameObject reference = null;
 
+
     //Posições do tabuleiro
     int matrixX;
     int matrixY;
 
     // false: movimento, true: ataque
     public bool attack = false;
+    public bool promote = false;
+
+    // Escolha da promoção
+    public string pecaPromo = "Tower";
+
     public bool roque = false;
 
     // Chamada quando o moveplate é criado
@@ -21,6 +31,18 @@ public class MovePlate : MonoBehaviour
         {
             // A cor do sprite muda para vermelho
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+        
+            if (promote)
+            {
+                // a cor da sprite muda para roxo
+                gameObject.GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.2f, 0.6f, 1.0f);
+            }
+        }
+
+        if (promote)
+        {
+            // a cor da sprite muda para roxo
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.2f, 0.6f, 1.0f);
         }
 
         if (roque)
@@ -28,6 +50,28 @@ public class MovePlate : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1.0f, .5f, 0.0f, 1.0f);
         }
     }
+
+    //Funções que mudam o nome da escolha de peça. Atrelados aos Butões do Panel
+    public void PromoteToQueen()
+    {
+        pecaPromo = "Queen";
+    }
+
+    public void PromoteToTower()
+    {
+        pecaPromo = "Tower";
+    }
+
+    public void PromoteToBishop()
+    {
+        pecaPromo = "Bishop";
+    }
+
+    public void PromoteToKnight()
+    {
+        pecaPromo = "Knight";
+    }
+
 
     /*
         Função do Unity que é chamada quando o usuário clica e solta o botão do mouse.
@@ -99,6 +143,58 @@ public class MovePlate : MonoBehaviour
 
         controller.GetComponent<Game>().SetPosition(reference);
 
+        //Função de promoção, muda a peça para a escolhida
+        if (promote)
+        {
+
+            GameObject cp = controller.GetComponent<Game>().GetPosition(matrixX, matrixY);
+            if (matrixY == 7)
+            {
+                if (pecaPromo == "Tower")
+                {
+                    cp.name = "whiteTower";
+                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetWhiteTower();
+                }
+                if (pecaPromo == "Queen")
+                {
+                    cp.name = "whiteQueen";
+                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetWhiteQueen();
+                }
+                if (pecaPromo == "Bishop")
+                {
+                    cp.name = "whiteBishop";
+                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetWhiteBishop();
+                }
+                if (pecaPromo == "Knight")
+                {
+                    cp.name = "whiteKnight";
+                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetWhiteKnight();
+                }
+            }
+            else
+            {
+                if (pecaPromo == "Tower")
+                {
+                    cp.name = "blackTower";
+                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetBlackTower();
+                }
+                if (pecaPromo == "Queen")
+                {
+                    cp.name = "blackQueen";
+                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetBlackQueen();
+                }
+                if (pecaPromo == "Bishop")
+                {
+                    cp.name = "blackBishop";
+                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetBlackBishop();
+                }
+                if (pecaPromo == "Knight")
+                {
+                    cp.name = "blackKnight";
+                    cp.GetComponent<SpriteRenderer>().sprite = reference.GetComponent<Chessman>().GetBlackKnight();
+                }
+            }
+        }
         //Alterna o jogador atual
         controller.GetComponent<Game>().NextTurn();
 
