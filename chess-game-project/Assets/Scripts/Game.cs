@@ -76,7 +76,48 @@ public class Game : MonoBehaviour
 
         positions[chessman.GetXBoard(), chessman.GetYBoard()] = obj;
     }
+
+    public void SearchAndDestroy(GameObject cp)
+    {
+        if (cp.GetComponent<Chessman>().GetPlayer() == "white")
+        {
+            for (var i = 0; i < whitePlayer.Length; i++)
+            {
+                if (whitePlayer[i] == null || whitePlayer[i].Equals(cp))
+                {
+                    whitePlayer[i] = null;
+                    break;
+                }
+            }
+        }
+        else
+        {
+            for (var i = 0; i < blackPlayer.Length; i++)
+            {
+                if (blackPlayer[i] == cp)
+                {
+                    blackPlayer[i] = null;
+                    break;
+                }
+            }
+        }
+    }
+
+    public GameObject[,] GetPositions()
+    {
+        return positions;
+    }
+
+    public GameObject[] GetWhitePlayer()
+    {
+        return whitePlayer;
+    }
     
+    public GameObject[] GetBlackPlayer()
+    {
+        return blackPlayer;
+    }
+
     public GameObject GetPosition(int x, int y)
     {
         return positions[x, y];

@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Chessman : MonoBehaviour
 {
@@ -22,7 +20,8 @@ public class Chessman : MonoBehaviour
     public Sprite[] whiteQueen, whiteKing, whiteBishop, whiteTower, whiteKnight, whitePawn;
     public Sprite[] blackQueen, blackKing, blackBishop, blackTower, blackKnight, blackPawn;
     private int setID;
-
+    private bool move = false;
+    
 
     //Função que seleciona a skin das peças.
     public void SelectPeca(bool isForward)
@@ -178,14 +177,45 @@ public class Chessman : MonoBehaviour
         return blackKnight[setID];
     }
 
+    public bool GetMove()
+    {
+        return move;
+    }
+    
+    public void SetMove(bool m = false)
+    {
+        this.move = m;
+    }
+
     /*
         Função do Unity que é chamada quando o usuário clica e solta o botão do mouse.
         Nesse caso, essa OnMouseUp é responsável pelo desenho dos moveplates.
     */
     private void OnMouseUp()
     {
-        // Só habilita a jogada se o for a vez do jogador da peça selecionada
-        if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player)
+        if(controller.GetComponent<Game>().GetCurrentPlayer() == "white" &&  controller.GetComponent<Game>().IsWhiteIa())
+        {
+            AIMove();
+            return;
+        }
+
+        if(controller.GetComponent<Game>().GetCurrentPlayer() == "black" &&  controller.GetComponent<Game>().IsBlackIa())
+        {
+            AIMove();
+            return;
+        }
+
+        // Só habilita a jogada se o for a vez do jogador da peça selecionada e se o player não for IA
+        
+        if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player && !controller.GetComponent<Game>().IsBlackIa())
+        {
+            // Apaga os moveplates que estão no tabuleiro.
+            DestroyMovePlates();
+
+            // Inicia os novos moveplates depedendo da interação.
+            InitiateMovePlates();
+        }
+        if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player && !controller.GetComponent<Game>().IsWhiteIa())
         {
             // Apaga os moveplates que estão no tabuleiro.
             DestroyMovePlates();
@@ -365,6 +395,56 @@ public class Chessman : MonoBehaviour
         PointMovePlate(xBoard - 1, yBoard - 1);
         PointMovePlate(xBoard, yBoard + 1);
         PointMovePlate(xBoard, yBoard - 1);
+        RoqueMovePlate();
+    }
+
+    //Essa função verifica se é possível fazer roque e spawna o moveplate
+    private void RoqueMovePlate()
+    {
+        string currentPlayer = controller.GetComponent<Game>().GetCurrentPlayer();
+        if (!move)
+        {
+            if(currentPlayer == "white")
+            {
+                if (controller.GetComponent<Game>().GetPosition(0, 0) != null && !controller.GetComponent<Game>().GetPosition(0, 0).GetComponent<Chessman>().GetMove() && VerificaRoque(0))
+                {
+                    MovePlateSpawn(0, 0, roque: true);
+                }
+
+                if (controller.GetComponent<Game>().GetPosition(7, 0) != null &&!controller.GetComponent<Game>().GetPosition(7, 0).GetComponent<Chessman>().GetMove() && VerificaRoque(7))
+                {
+                    MovePlateSpawn(7, 0, roque: true);
+                }
+            }
+            else
+            {
+                if (controller.GetComponent<Game>().GetPosition(0, 7) != null && !controller.GetComponent<Game>().GetPosition(0, 7).GetComponent<Chessman>().GetMove() && VerificaRoque(0) )
+                {
+                    MovePlateSpawn(0, 7, roque: true);
+                }
+
+                if (controller.GetComponent<Game>().GetPosition(7, 7) != null &&!controller.GetComponent<Game>().GetPosition(7, 7).GetComponent<Chessman>().GetMove() && VerificaRoque(7))
+                {
+                    MovePlateSpawn(7, 7, roque: true);
+                }
+            }
+        }
+    }
+
+    public bool VerificaRoque(int x)
+    {
+        if (xBoard > x)
+        {
+            for (int i = xBoard-1; i > x; i--)
+                if (controller.GetComponent<Game>().GetPosition(i, yBoard) != null)
+                    return false;
+            return true;
+        }
+
+        for (int i = xBoard+1; i < x; i++)
+            if (controller.GetComponent<Game>().GetPosition(i, yBoard) != null)
+                return false;
+        return true;
     }
 
     // Função resposável por ditar os movimento em "L"
@@ -404,9 +484,9 @@ public class Chessman : MonoBehaviour
         }
     }
 
-    // Desenha os moveplates de acordo com uma matrix 8x8, caso seja uma ação de ataque xor promoção de peão
+    // Desenha os moveplates de acordo com uma matrix 8x8 caso seja uma ação de ataque xor promoção de peão
     //                          passe os respectivos atributos como true
-    public void MovePlateSpawn(int matrixX, int matrixY, bool attack = false, bool promote = false)
+    public void MovePlateSpawn(int matrixX, int matrixY, bool roque = false, bool attack = false, bool promote = false)
     {
         // Recupera o valor do tabuleiro para converter em xy coordenadas
         float x = matrixX;
@@ -426,9 +506,241 @@ public class Chessman : MonoBehaviour
         MovePlate mpScript = mp.GetComponent<MovePlate>();
         mpScript.promote = promote;
         mpScript.attack = attack;
-
+        mpScript.roque = roque;
         mpScript.SetReference(gameObject);
         mpScript.SetCoordinates(matrixX, matrixY);
+    }
+
+    // Desenha os moveplates de acordo com uma matrix 8x8 trocando a flag de ataque para true.
+    public void MovePlateAttackSpawn(int matrixX, int matrixY)
+    {
+        // Recupera o valor do tabuleiro para converter em xy coordenadas
+        float x = matrixX;
+        float y = matrixY;
+
+        // Ajuste do offset para ficar de acordo com uma matrix 8x8
+        x *= 0.95f;
+        y *= 0.95f;
+
+        x -= 3.32f;
+        y -= 2.99f;
+
+        // Cria o gameobject do moveplate
+        GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
+
+        // Cria uma instância do moveplate e interage com essa instância, flag attack = true.
+        MovePlate mpScript = mp.GetComponent<MovePlate>();
+        mpScript.attack = true;
+        mpScript.SetReference(gameObject);
+        mpScript.SetCoordinates(matrixX, matrixY);
+    }
+
+    public void MovePlateIaSpawn(int matrixX, int matrixY, GameObject gc, bool attack)
+    {
+        // Recupera o valor do tabuleiro para converter em xy coordenadas
+        float x = matrixX;
+        float y = matrixY;
+
+        // Ajuste do offset para ficar de acordo com uma matrix 8x8
+        x *= 0.95f;
+        y *= 0.95f;
+
+        x -= 3.32f;
+        y -= 2.99f;
+
+        // Cria o gameobject do moveplate
+        GameObject mp = Instantiate(movePlate, new Vector3(x, y, -3.0f), Quaternion.identity);
+        // Cria uma instância do moveplate e interage com essa instância, flag attack = true.
+        MovePlate mpScript = mp.GetComponent<MovePlate>();
+        mpScript.attack = attack;
+        mpScript.SetReference(gameObject);
+        mpScript.SetCoordinates(matrixX, matrixY);
+    }
+
+    private Piece[] SetWhitePieces(GameObject[] whitePieces)
+    {
+        Piece[] wps = new Piece[16];
+        int i = 0;
+        foreach (var whitePiece in whitePieces)
+        {
+            if (whitePiece == null) continue;
+            
+            Chessman gc = whitePiece.GetComponent<Chessman>();
+            int pieceTeam = 0;
+            int pieceType = 0;
+            switch (gc.GetName())
+            {
+                case "whitePawn":
+                    pieceType = 0;
+                    break;
+                case "whiteKnight":
+                    pieceType = 1;
+                    break;
+                case "whiteBishop":
+                    pieceType = 2;
+                    break;
+                case "whiteTower":
+                    pieceType = 3;
+                    break;
+                case "whiteQueen":
+                    pieceType = 4;
+                    break;
+                case "whiteKing":
+                    pieceType = 5;
+                    break;
+            }
+                
+            wps[i] = new Piece(pieceType, pieceTeam, gc.GetXBoard(), gc.GetYBoard());
+            i++;
+        }
+        
+
+        return wps;
+    }
+
+    private Piece[] SetBlackPieces(GameObject[] blackPieces)
+    {
+        Piece[] bps = new Piece[16];
+        int i = 0;
+        foreach (var blackPiece in blackPieces)
+        {
+            if (blackPiece == null) continue;
+            Chessman gc = blackPiece.GetComponent<Chessman>();
+            int pieceTeam = 1;
+            int pieceType = 0;
+            switch (gc.GetName())
+            {
+                case "blackPawn":
+                    pieceType = 0;
+                    break;
+                case "blackKnight":
+                    pieceType = 1;
+                    break;
+                case "blackBishop":
+                    pieceType = 2;
+                    break;
+                case "blackTower":
+                    pieceType = 3;
+                    break;
+                case "blackQueen":
+                    pieceType = 4;
+                    break;
+                case "blackKing":
+                    pieceType = 5;
+                    break;
+            }
+                
+            bps[i] = new Piece(pieceType, pieceTeam, gc.GetXBoard(), gc.GetYBoard());
+            i++;
+        }
+        
+
+        return bps;
+    }
+
+    private Piece[,] SetPiecesPosition(GameObject[] whitePieces, GameObject[] blackPieces)
+    {
+        Piece[,] pieces = new Piece[8,8];
+        foreach (var whitePiece in whitePieces)
+        {
+            if (whitePiece == null) continue;
+            Chessman gc = whitePiece.GetComponent<Chessman>();
+            int pieceTeam = 0;
+            int pieceType = 0;
+            switch (gc.GetName())
+            {
+                case "whitePawn":
+                    pieceType = 0;
+                    break;
+                case "whiteKnight":
+                    pieceType = 1;
+                    break;
+                case "whiteBishop":
+                    pieceType = 2;
+                    break;
+                case "whiteTower":
+                    pieceType = 3;
+                    break;
+                case "whiteQueen":
+                    pieceType = 4;
+                    break;
+                case "whiteKing":
+                    pieceType = 5;
+                    break;
+            }
+
+            pieces[gc.GetXBoard(), gc.GetYBoard()] = new Piece(pieceType, pieceTeam, gc.GetXBoard(), gc.GetYBoard());
+        }
+        foreach (var blackPiece in blackPieces)
+        {
+            if (blackPiece == null) continue;
+            Chessman gc = blackPiece.GetComponent<Chessman>();
+            int pieceTeam = 1;
+            int pieceType = 0;
+            switch (gc.GetName())
+            {
+                case "blackPawn":
+                    pieceType = 0;
+                    break;
+                case "blackKnight":
+                    pieceType = 1;
+                    break;
+                case "blackBishop":
+                    pieceType = 2;
+                    break;
+                case "blackTower":
+                    pieceType = 3;
+                    break;
+                case "blackQueen":
+                    pieceType = 4;
+                    break;
+                case "blackKing":
+                    pieceType = 5;
+                    break;
+            }
+
+            pieces[gc.GetXBoard(), gc.GetYBoard()] = new Piece(pieceType, pieceTeam, gc.GetXBoard(), gc.GetYBoard());
+        }
+
+        return pieces;
+    }
+
+    private Board SetBoard(Piece[,] pieces, Piece[] whitePieces, Piece[] blackPieces)
+    {
+        Board board = new Board();
+
+        board.positions = pieces;
+        board.wPieces = new List<Piece>(whitePieces);
+        board.bPieces = new List<Piece>(blackPieces);
+        return board;
+    }
+
+    public void AIMove()
+    {
+        GameObject[] whitePieces = controller.GetComponent<Game>().GetWhitePlayer();
+        GameObject[] blackPieces = controller.GetComponent<Game>().GetBlackPlayer();
+        
+        Piece[,] pieces = SetPiecesPosition(whitePieces, blackPieces);
+        Piece[] wPs = SetWhitePieces(whitePieces);
+        Piece[] bPs = SetBlackPieces(blackPieces);
+        Board board = SetBoard(pieces, wPs, bPs);
+        int currentPlayer = 0;
+        
+        if (controller.GetComponent<Game>().GetCurrentPlayer() == "white")
+            currentPlayer = 0;
+        else
+            currentPlayer = 1;
+        
+        Move move = AI.BestChoice(board, currentPlayer, 2);
+
+        int xAtual = move.x;
+        int yAtual = move.y;
+        int xDest = move.destX;
+        int yDest = move.destY;
+        bool attack = move.attack;
+
+        GameObject gc = controller.GetComponent<Game>().GetPosition(xAtual, yAtual);
+        MovePlateIaSpawn(xDest, yDest, gc, attack);
     }
 
     public void CallOnMouseUp()
