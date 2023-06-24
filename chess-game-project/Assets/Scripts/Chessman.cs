@@ -137,6 +137,11 @@ public class Chessman : MonoBehaviour
         return this.player;
     }
 
+    public string GetName()
+    {
+        return this.name;
+    }
+
     public Sprite GetWhiteQueen()
     {
         return whiteQueen[setID];
