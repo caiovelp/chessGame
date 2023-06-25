@@ -332,19 +332,12 @@ public class Piece {
         return moves.ToArray();
     }
 }
+
 public class Board {
     public Piece[,] positions = new Piece[8,8];
     public List<Piece> wPieces = new();
     public List<Piece> bPieces = new();
-    public void AddPiece(int type, int team, int x, int y){
-        Piece p = new Piece(type, team, x, y);
-        positions[x, y]  = p;
-        if(team == 0) { 
-            wPieces.Add(p);
-        }else {
-            bPieces.Add(p);
-        }
-    }
+
     public void AddPiece(Piece p){
         positions[p.x, p.y]  = p;
         if(p.team == 0) { 
@@ -383,9 +376,11 @@ public class Board {
         }
         return resp.ToArray();
     }
+
     public Piece GetPiece(int x, int y){
         return this.positions[x,y];
     }
+
     public void SetPiece(int x, int y, Piece p){
         this.positions[x,y] = p;
     }
@@ -396,12 +391,14 @@ public class Board {
             return false;
         return true;
     }
+
     public void _move(Move _move){
         if (_move.roque)
             RoqueMove(_move.x, _move.y, _move.destX, _move.destY);
         else
             Move(_move.x, _move.y, _move.destX, _move.destY);
     }
+    
     public void _rMove(Move _move)
     {
         if (_move.roque)
