@@ -56,7 +56,14 @@ public class Piece {
         y = _y;
     }
 	public int TypeToScore(){
-    	return this.type+1;
+        switch(type){
+            case 0: return 1; // Peao
+            case 1: return 3; // Cavalo
+            case 2: return 5; // Bispo
+            case 3: return 9; // Castelo   
+            case 4: return 13; // Rainha    
+        }
+        return 9999999; // Rei
 	}
     public Move[] Movement(Board board){
         switch(type){
@@ -465,6 +472,10 @@ public class AI{
         return _bestChoice(board, turn, depth, turn, -1, 9999);
     }
 
+    public static Move FakeMove(){
+        return Move.Fake();
+    }
+
     private static Move _bestChoice(Board board, int turn, int depth, int maxmizeTurn, int alpha, int beta){        
         Piece _p;
         Move bestMove = Move.Fake();
@@ -475,12 +486,15 @@ public class AI{
                     _p = board.GetPiece(m.destX, m.destY);
                     if(_p != null) board.RemovePiece(_p);
                     board._move(m); // Possivelmente parte de um bug (1)
-                    m.score += _bestChoice(board, (turn+1)%2, depth-1, maxmizeTurn, alpha, beta).score; // Recursive Score
+                    m.score -= _bestChoice(board, (turn+1)%2, depth-1, maxmizeTurn, alpha, beta).score; // Recursive Score
                     board._rMove(m); // Possivelmente parte de um bug (2)
                     board.SetPiece(m.destX, m.destY, _p);
                     if(_p != null) board.AddPiece(_p);
                 }
-                if(m.score > bestMove.score){ // Max(this, last)
+                Random r = new Random();
+                int chance = r.Next(10);
+                if(m.score > bestMove.score || (m.score == bestMove.score && chance == 0)){ // Max(this, last)
+                // if(m.score > bestMove.score){ // Max(this, last)
                     bestMove = m;
                     // if(turn == maxmizeTurn){
                     //     if(m.score > alpha){

@@ -13,7 +13,7 @@ public class Game : MonoBehaviour
     private string currentPlayer = "white";
 
     private bool gameOver = false;
-    private bool blackIa = true;
+    private bool blackIa = false;
     private bool whiteIa = false;
 
     // Start is called before the first frame update
