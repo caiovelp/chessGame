@@ -29,7 +29,7 @@ Web: https://caiovelp.itch.io/chess2web
 
 ![Menu](https://i.ibb.co/6gbwFV9/Menu.jpg)
 ![Menu de Customização](https://i.ibb.co/GFHRBSB/Customizacao.jpg)
-![Jogo](https://i.ibb.co/HgB7Lkq/Jogo.jpg)
+![Jogo](https://i.ibb.co/c1jdnK9/Jogo.jpg)
 
 
 ## Créditos
