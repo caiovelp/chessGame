@@ -14,91 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
-    x: 1920
-    y: 8
+    x: 0
+    y: 43
     width: 1920
-    height: 1032
-  m_ShowMode: 0
-  m_Title: Profiler
-  m_RootView: {fileID: 4}
-  m_MinSize: {x: 880, y: 237}
-  m_MaxSize: {x: 4000, y: 4021}
-  m_Maximized: 0
---- !u!114 &2
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 12004, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PixelRect:
-    serializedVersion: 2
-    x: 8
-    y: 53
-    width: 1902
-    height: 971
+    height: 989
   m_ShowMode: 4
   m_Title: Game
-  m_RootView: {fileID: 11}
+  m_RootView: {fileID: 8}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
-  m_Maximized: 0
---- !u!114 &3
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProfilerWindow
-  m_EditorClassIdentifier: 
-  m_Children: []
-  m_Position:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1920
-    height: 1032
-  m_MinSize: {x: 880, y: 216}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 17}
-  m_Panes:
-  - {fileID: 17}
-  m_Selected: 0
-  m_LastSelected: 0
---- !u!114 &4
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Children:
-  - {fileID: 3}
-  m_Position:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1920
-    height: 1032
-  m_MinSize: {x: 880, y: 237}
-  m_MaxSize: {x: 4000, y: 4021}
-  vertical: 0
-  controlID: 7081
---- !u!114 &5
+  m_Maximized: 1
+--- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,16 +41,16 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 450
-    height: 736
+    width: 454
+    height: 750
   m_MinSize: {x: 101, y: 121}
   m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 18}
+  m_ActualView: {fileID: 14}
   m_Panes:
-  - {fileID: 18}
+  - {fileID: 14}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &6
+--- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,19 +63,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
+  - {fileID: 2}
   - {fileID: 5}
-  - {fileID: 8}
   m_Position:
     serializedVersion: 2
-    x: 1452
+    x: 1466
     y: 0
-    width: 450
-    height: 921
+    width: 454
+    height: 939
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 52
---- !u!114 &7
+  controlID: 153
+--- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,19 +88,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 14}
-  - {fileID: 6}
+  - {fileID: 11}
+  - {fileID: 3}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 30
-    width: 1902
-    height: 921
+    width: 1920
+    height: 939
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 90
---- !u!114 &8
+  controlID: 152
+--- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,17 +116,17 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 736
-    width: 450
-    height: 185
+    y: 750
+    width: 454
+    height: 189
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 20}
+  m_ActualView: {fileID: 16}
   m_Panes:
-  - {fileID: 20}
+  - {fileID: 16}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &9
+--- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -217,16 +143,16 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 359
-    height: 545
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 21}
+    width: 244
+    height: 839
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 17}
   m_Panes:
-  - {fileID: 21}
+  - {fileID: 17}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &10
+--- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,18 +168,18 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 545
-    width: 1452
-    height: 376
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 24}
+    y: 839
+    width: 1466
+    height: 100
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
+  m_ActualView: {fileID: 20}
   m_Panes:
-  - {fileID: 19}
-  - {fileID: 24}
+  - {fileID: 15}
+  - {fileID: 20}
   m_Selected: 1
   m_LastSelected: 0
---- !u!114 &11
+--- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -266,22 +192,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 12}
-  - {fileID: 7}
-  - {fileID: 13}
+  - {fileID: 9}
+  - {fileID: 4}
+  - {fileID: 10}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1902
-    height: 971
+    width: 1920
+    height: 989
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_UseTopView: 1
   m_TopViewHeight: 30
   m_UseBottomView: 1
   m_BottomViewHeight: 20
---- !u!114 &12
+--- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -298,12 +224,12 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1902
+    width: 1920
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
   m_LastLoadedLayoutName: 
---- !u!114 &13
+--- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -319,12 +245,12 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 951
-    width: 1902
+    y: 969
+    width: 1920
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
---- !u!114 &14
+--- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -337,19 +263,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 15}
-  - {fileID: 10}
+  - {fileID: 12}
+  - {fileID: 7}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1452
-    height: 921
+    width: 1466
+    height: 939
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 91
---- !u!114 &15
+  controlID: 18
+--- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -362,19 +288,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 9}
-  - {fileID: 16}
+  - {fileID: 6}
+  - {fileID: 13}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1452
-    height: 545
+    width: 1466
+    height: 839
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 92
---- !u!114 &16
+  controlID: 19
+--- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -389,715 +315,19 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 359
+    x: 244
     y: 0
-    width: 1093
-    height: 545
+    width: 1222
+    height: 839
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
-  m_ActualView: {fileID: 23}
+  m_ActualView: {fileID: 19}
   m_Panes:
-  - {fileID: 22}
-  - {fileID: 23}
+  - {fileID: 18}
+  - {fileID: 19}
   m_Selected: 1
   m_LastSelected: 0
---- !u!114 &17
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 12070, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 880, y: 216}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Profiler
-    m_Image: {fileID: -1089619856830078684, guid: 0000000000000000d000000000000000, type: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: 1920
-    y: 8
-    width: 1920
-    height: 1011
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
-    m_OverlaysVisible: 1
-  m_Recording: 0
-  m_ActiveNativePlatformSupportModuleName: 
-  m_AllModules:
-  - rid: 6309017941590409233
-  - rid: 6309017941590409234
-  - rid: 6309017941590409235
-  - rid: 6309017941590409236
-  - rid: 6309017941590409237
-  - rid: 6309017941590409238
-  - rid: 6309017941590409239
-  - rid: 6309017941590409240
-  - rid: 6309017941590409241
-  - rid: 6309017941590409242
-  - rid: 6309017941590409243
-  - rid: 6309017941590409244
-  - rid: 6309017941590409245
-  - rid: 6309017941590409246
-  - rid: 6309017941590409247
-  - rid: 6309017941590409248
-  m_CallstackRecordMode: 1
-  m_ClearOnPlay: 0
-  references:
-    version: 2
-    RefIds:
-    - rid: 6309017941590409233
-      type: {class: CPUProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
-      data:
-        m_Identifier: UnityEditorInternal.Profiling.CPUProfilerModule, UnityEditor.CoreModule,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        m_PaneScroll: {x: 0, y: 0}
-        m_ViewType: 0
-        updateViewLive: 0
-        m_CurrentFrameIndex: 299
-        m_HierarchyOverruledThreadFromSelection: 0
-        m_ProfilerViewFilteringOptions: 1
-        m_FrameDataHierarchyView:
-          m_Serialized: 1
-          m_TreeViewState:
-            scrollPos: {x: 0, y: 0}
-            m_SelectedIDs: 
-            m_LastClickedID: 0
-            m_ExpandedIDs: 
-            m_RenameOverlay:
-              m_UserAcceptedRename: 0
-              m_Name: 
-              m_OriginalName: 
-              m_EditFieldRect:
-                serializedVersion: 2
-                x: 0
-                y: 0
-                width: 0
-                height: 0
-              m_UserData: 0
-              m_IsWaitingForDelay: 0
-              m_IsRenaming: 0
-              m_OriginalEventType: 11
-              m_IsRenamingFilename: 0
-              m_ClientGUIView: {fileID: 0}
-            m_SearchString: 
-          m_MultiColumnHeaderState:
-            m_Columns:
-            - width: 1402
-              sortedAscending: 1
-              headerContent:
-                m_Text: Overview
-                m_Image: {fileID: 0}
-                m_Tooltip: 
-              contextMenuText: 
-              headerTextAlignment: 0
-              sortingArrowAlignment: 2
-              minWidth: 200
-              maxWidth: 1000000
-              autoResize: 1
-              allowToggleVisibility: 0
-              canSort: 1
-              userData: 0
-            - width: 80
-              sortedAscending: 0
-              headerContent:
-                m_Text: Total
-                m_Image: {fileID: 0}
-                m_Tooltip: 
-              contextMenuText: 
-              headerTextAlignment: 0
-              sortingArrowAlignment: 2
-              minWidth: 50
-              maxWidth: 1000000
-              autoResize: 0
-              allowToggleVisibility: 1
-              canSort: 1
-              userData: 0
-            - width: 80
-              sortedAscending: 0
-              headerContent:
-                m_Text: Self
-                m_Image: {fileID: 0}
-                m_Tooltip: 
-              contextMenuText: 
-              headerTextAlignment: 0
-              sortingArrowAlignment: 2
-              minWidth: 50
-              maxWidth: 1000000
-              autoResize: 0
-              allowToggleVisibility: 1
-              canSort: 1
-              userData: 0
-            - width: 80
-              sortedAscending: 0
-              headerContent:
-                m_Text: Calls
-                m_Image: {fileID: 0}
-                m_Tooltip: 
-              contextMenuText: 
-              headerTextAlignment: 0
-              sortingArrowAlignment: 2
-              minWidth: 50
-              maxWidth: 1000000
-              autoResize: 0
-              allowToggleVisibility: 1
-              canSort: 1
-              userData: 0
-            - width: 80
-              sortedAscending: 0
-              headerContent:
-                m_Text: GC Alloc
-                m_Image: {fileID: 0}
-                m_Tooltip: 
-              contextMenuText: 
-              headerTextAlignment: 0
-              sortingArrowAlignment: 2
-              minWidth: 50
-              maxWidth: 1000000
-              autoResize: 0
-              allowToggleVisibility: 1
-              canSort: 1
-              userData: 0
-            - width: 80
-              sortedAscending: 0
-              headerContent:
-                m_Text: Time ms
-                m_Image: {fileID: 0}
-                m_Tooltip: 
-              contextMenuText: 
-              headerTextAlignment: 0
-              sortingArrowAlignment: 2
-              minWidth: 50
-              maxWidth: 1000000
-              autoResize: 0
-              allowToggleVisibility: 1
-              canSort: 1
-              userData: 0
-            - width: 80
-              sortedAscending: 0
-              headerContent:
-                m_Text: Self ms
-                m_Image: {fileID: 0}
-                m_Tooltip: 
-              contextMenuText: 
-              headerTextAlignment: 0
-              sortingArrowAlignment: 2
-              minWidth: 50
-              maxWidth: 1000000
-              autoResize: 0
-              allowToggleVisibility: 1
-              canSort: 1
-              userData: 0
-            - width: 25
-              sortedAscending: 0
-              headerContent:
-                m_Text: 
-                m_Image: {fileID: -5161429177145976760, guid: 0000000000000000d000000000000000, type: 0}
-                m_Tooltip: Warnings
-              contextMenuText: 
-              headerTextAlignment: 0
-              sortingArrowAlignment: 2
-              minWidth: 25
-              maxWidth: 25
-              autoResize: 0
-              allowToggleVisibility: 1
-              canSort: 1
-              userData: 0
-            m_VisibleColumns: 0000000001000000020000000300000004000000050000000600000007000000
-            m_SortedColumns: 05000000
-          m_ThreadIndexInThreadNames: 0
-          m_DetailedViewType: 0
-          m_DetailedViewSpliterState:
-            ID: 0
-            splitterInitialOffset: 0
-            currentActiveSplitter: -1
-            realSizes:
-            - 0
-            - 0
-            relativeSizes:
-            - 0.7
-            - 0.3
-            minSizes:
-            - 450
-            - 50
-            maxSizes:
-            - 0
-            - 0
-            lastTotalSize: 0
-            splitSize: 6
-            xOffset: 0
-            m_Version: 1
-            oldRealSizes: 
-            oldMinSizes: 
-            oldMaxSizes: 
-            oldSplitSize: 0
-          m_DetailedObjectsView:
-            m_SelectedID: -1
-            m_TreeViewState:
-              scrollPos: {x: 0, y: 0}
-              m_SelectedIDs: 
-              m_LastClickedID: 0
-              m_ExpandedIDs: 
-              m_RenameOverlay:
-                m_UserAcceptedRename: 0
-                m_Name: 
-                m_OriginalName: 
-                m_EditFieldRect:
-                  serializedVersion: 2
-                  x: 0
-                  y: 0
-                  width: 0
-                  height: 0
-                m_UserData: 0
-                m_IsWaitingForDelay: 0
-                m_IsRenaming: 0
-                m_OriginalEventType: 11
-                m_IsRenamingFilename: 0
-                m_ClientGUIView: {fileID: 0}
-              m_SearchString: 
-            m_MultiColumnHeaderState:
-              m_Columns: []
-              m_VisibleColumns: 
-              m_SortedColumns: 
-            m_VertSplit:
-              ID: 0
-              splitterInitialOffset: 0
-              currentActiveSplitter: 0
-              realSizes: []
-              relativeSizes: []
-              minSizes: []
-              maxSizes: []
-              lastTotalSize: 0
-              splitSize: 0
-              xOffset: 0
-              m_Version: 1
-              oldRealSizes: 
-              oldMinSizes: 
-              oldMaxSizes: 
-              oldSplitSize: 0
-          m_DetailedCallsView:
-            m_SelectedID: -1
-            m_VertSplit:
-              ID: 0
-              splitterInitialOffset: 0
-              currentActiveSplitter: 0
-              realSizes: []
-              relativeSizes: []
-              minSizes: []
-              maxSizes: []
-              lastTotalSize: 0
-              splitSize: 0
-              xOffset: 0
-              m_Version: 1
-              oldRealSizes: 
-              oldMinSizes: 
-              oldMaxSizes: 
-              oldSplitSize: 0
-            m_CalleesTreeView:
-              m_ViewState:
-                scrollPos: {x: 0, y: 0}
-                m_SelectedIDs: 
-                m_LastClickedID: 0
-                m_ExpandedIDs: 
-                m_RenameOverlay:
-                  m_UserAcceptedRename: 0
-                  m_Name: 
-                  m_OriginalName: 
-                  m_EditFieldRect:
-                    serializedVersion: 2
-                    x: 0
-                    y: 0
-                    width: 0
-                    height: 0
-                  m_UserData: 0
-                  m_IsWaitingForDelay: 0
-                  m_IsRenaming: 0
-                  m_OriginalEventType: 11
-                  m_IsRenamingFilename: 0
-                  m_ClientGUIView: {fileID: 0}
-                m_SearchString: 
-              m_ViewHeaderState:
-                m_Columns: []
-                m_VisibleColumns: 
-                m_SortedColumns: 
-            m_CallersTreeView:
-              m_ViewState:
-                scrollPos: {x: 0, y: 0}
-                m_SelectedIDs: 
-                m_LastClickedID: 0
-                m_ExpandedIDs: 
-                m_RenameOverlay:
-                  m_UserAcceptedRename: 0
-                  m_Name: 
-                  m_OriginalName: 
-                  m_EditFieldRect:
-                    serializedVersion: 2
-                    x: 0
-                    y: 0
-                    width: 0
-                    height: 0
-                  m_UserData: 0
-                  m_IsWaitingForDelay: 0
-                  m_IsRenaming: 0
-                  m_OriginalEventType: 11
-                  m_IsRenamingFilename: 0
-                  m_ClientGUIView: {fileID: 0}
-                m_SearchString: 
-              m_ViewHeaderState:
-                m_Columns: []
-                m_VisibleColumns: 
-                m_SortedColumns: 
-          m_FullThreadName: Main Thread
-          m_ThreadName: Main Thread
-          <threadId>k__BackingField: 20832
-          <threadIndex>k__BackingField: 0
-          m_GroupName: 
-    - rid: 6309017941590409234
-      type: {class: GPUProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
-      data:
-        m_Identifier: UnityEditorInternal.Profiling.GPUProfilerModule, UnityEditor.CoreModule,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        m_PaneScroll: {x: 0, y: 0}
-        m_ViewType: 0
-        updateViewLive: 0
-        m_CurrentFrameIndex: -1
-        m_HierarchyOverruledThreadFromSelection: 0
-        m_ProfilerViewFilteringOptions: 1
-        m_FrameDataHierarchyView:
-          m_Serialized: 0
-          m_TreeViewState:
-            scrollPos: {x: 0, y: 0}
-            m_SelectedIDs: 
-            m_LastClickedID: 0
-            m_ExpandedIDs: 
-            m_RenameOverlay:
-              m_UserAcceptedRename: 0
-              m_Name: 
-              m_OriginalName: 
-              m_EditFieldRect:
-                serializedVersion: 2
-                x: 0
-                y: 0
-                width: 0
-                height: 0
-              m_UserData: 0
-              m_IsWaitingForDelay: 0
-              m_IsRenaming: 0
-              m_OriginalEventType: 11
-              m_IsRenamingFilename: 0
-              m_ClientGUIView: {fileID: 0}
-            m_SearchString: 
-          m_MultiColumnHeaderState:
-            m_Columns: []
-            m_VisibleColumns: 
-            m_SortedColumns: 
-          m_ThreadIndexInThreadNames: 0
-          m_DetailedViewType: 0
-          m_DetailedViewSpliterState:
-            ID: 0
-            splitterInitialOffset: 0
-            currentActiveSplitter: 0
-            realSizes: []
-            relativeSizes: []
-            minSizes: []
-            maxSizes: []
-            lastTotalSize: 0
-            splitSize: 0
-            xOffset: 0
-            m_Version: 1
-            oldRealSizes: 
-            oldMinSizes: 
-            oldMaxSizes: 
-            oldSplitSize: 0
-          m_DetailedObjectsView:
-            m_SelectedID: 0
-            m_TreeViewState:
-              scrollPos: {x: 0, y: 0}
-              m_SelectedIDs: 
-              m_LastClickedID: 0
-              m_ExpandedIDs: 
-              m_RenameOverlay:
-                m_UserAcceptedRename: 0
-                m_Name: 
-                m_OriginalName: 
-                m_EditFieldRect:
-                  serializedVersion: 2
-                  x: 0
-                  y: 0
-                  width: 0
-                  height: 0
-                m_UserData: 0
-                m_IsWaitingForDelay: 0
-                m_IsRenaming: 0
-                m_OriginalEventType: 11
-                m_IsRenamingFilename: 0
-                m_ClientGUIView: {fileID: 0}
-              m_SearchString: 
-            m_MultiColumnHeaderState:
-              m_Columns: []
-              m_VisibleColumns: 
-              m_SortedColumns: 
-            m_VertSplit:
-              ID: 0
-              splitterInitialOffset: 0
-              currentActiveSplitter: 0
-              realSizes: []
-              relativeSizes: []
-              minSizes: []
-              maxSizes: []
-              lastTotalSize: 0
-              splitSize: 0
-              xOffset: 0
-              m_Version: 1
-              oldRealSizes: 
-              oldMinSizes: 
-              oldMaxSizes: 
-              oldSplitSize: 0
-          m_DetailedCallsView:
-            m_SelectedID: 0
-            m_VertSplit:
-              ID: 0
-              splitterInitialOffset: 0
-              currentActiveSplitter: 0
-              realSizes: []
-              relativeSizes: []
-              minSizes: []
-              maxSizes: []
-              lastTotalSize: 0
-              splitSize: 0
-              xOffset: 0
-              m_Version: 1
-              oldRealSizes: 
-              oldMinSizes: 
-              oldMaxSizes: 
-              oldSplitSize: 0
-            m_CalleesTreeView:
-              m_ViewState:
-                scrollPos: {x: 0, y: 0}
-                m_SelectedIDs: 
-                m_LastClickedID: 0
-                m_ExpandedIDs: 
-                m_RenameOverlay:
-                  m_UserAcceptedRename: 0
-                  m_Name: 
-                  m_OriginalName: 
-                  m_EditFieldRect:
-                    serializedVersion: 2
-                    x: 0
-                    y: 0
-                    width: 0
-                    height: 0
-                  m_UserData: 0
-                  m_IsWaitingForDelay: 0
-                  m_IsRenaming: 0
-                  m_OriginalEventType: 11
-                  m_IsRenamingFilename: 0
-                  m_ClientGUIView: {fileID: 0}
-                m_SearchString: 
-              m_ViewHeaderState:
-                m_Columns: []
-                m_VisibleColumns: 
-                m_SortedColumns: 
-            m_CallersTreeView:
-              m_ViewState:
-                scrollPos: {x: 0, y: 0}
-                m_SelectedIDs: 
-                m_LastClickedID: 0
-                m_ExpandedIDs: 
-                m_RenameOverlay:
-                  m_UserAcceptedRename: 0
-                  m_Name: 
-                  m_OriginalName: 
-                  m_EditFieldRect:
-                    serializedVersion: 2
-                    x: 0
-                    y: 0
-                    width: 0
-                    height: 0
-                  m_UserData: 0
-                  m_IsWaitingForDelay: 0
-                  m_IsRenaming: 0
-                  m_OriginalEventType: 11
-                  m_IsRenamingFilename: 0
-                  m_ClientGUIView: {fileID: 0}
-                m_SearchString: 
-              m_ViewHeaderState:
-                m_Columns: []
-                m_VisibleColumns: 
-                m_SortedColumns: 
-          m_FullThreadName: Main Thread
-          m_ThreadName: Main Thread
-          <threadId>k__BackingField: 0
-          <threadIndex>k__BackingField: -1
-          m_GroupName: 
-    - rid: 6309017941590409235
-      type: {class: RenderingProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
-      data:
-        m_Identifier: UnityEditorInternal.Profiling.RenderingProfilerModule, UnityEditor.CoreModule,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        m_PaneScroll: {x: 0, y: 0}
-    - rid: 6309017941590409236
-      type: {class: MemoryProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
-      data:
-        m_Identifier: UnityEditorInternal.Profiling.MemoryProfilerModule, UnityEditor.CoreModule,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        m_PaneScroll: {x: 0, y: 0}
-        m_ViewSplit:
-          ID: 0
-          splitterInitialOffset: 0
-          currentActiveSplitter: -1
-          realSizes:
-          - 0
-          - 0
-          relativeSizes:
-          - 0.7
-          - 0.3
-          minSizes:
-          - 450
-          - 50
-          maxSizes:
-          - 0
-          - 0
-          lastTotalSize: 0
-          splitSize: 6
-          xOffset: 0
-          m_Version: 1
-          oldRealSizes: 
-          oldMinSizes: 
-          oldMaxSizes: 
-          oldSplitSize: 0
-    - rid: 6309017941590409237
-      type: {class: AudioProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
-      data:
-        m_Identifier: UnityEditorInternal.Profiling.AudioProfilerModule, UnityEditor.CoreModule,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        m_PaneScroll: {x: 0, y: 0}
-        m_ShowInactiveDSPChains: 0
-        m_HighlightAudibleDSPChains: 1
-        m_DSPGraphZoomFactor: 1
-    - rid: 6309017941590409238
-      type: {class: VideoProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
-      data:
-        m_Identifier: UnityEditorInternal.Profiling.VideoProfilerModule, UnityEditor.CoreModule,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        m_PaneScroll: {x: 0, y: 0}
-    - rid: 6309017941590409239
-      type: {class: PhysicsProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
-      data:
-        m_Identifier: UnityEditorInternal.Profiling.PhysicsProfilerModule, UnityEditor.CoreModule,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        m_PaneScroll: {x: 0, y: 0}
-    - rid: 6309017941590409240
-      type: {class: Physics2DProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
-      data:
-        m_Identifier: UnityEditorInternal.Profiling.Physics2DProfilerModule, UnityEditor.CoreModule,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        m_PaneScroll: {x: 0, y: 0}
-    - rid: 6309017941590409241
-      type: {class: NetworkingMessagesProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
-      data:
-        m_Identifier: UnityEditorInternal.Profiling.NetworkingMessagesProfilerModule,
-          UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        m_PaneScroll: {x: 0, y: 0}
-    - rid: 6309017941590409242
-      type: {class: NetworkingOperationsProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
-      data:
-        m_Identifier: UnityEditorInternal.Profiling.NetworkingOperationsProfilerModule,
-          UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        m_PaneScroll: {x: 0, y: 0}
-        m_NetworkSplit:
-          ID: 0
-          splitterInitialOffset: 0
-          currentActiveSplitter: -1
-          realSizes:
-          - 0
-          - 0
-          relativeSizes:
-          - 0.2
-          - 0.8
-          minSizes:
-          - 100
-          - 100
-          maxSizes:
-          - 0
-          - 0
-          lastTotalSize: 0
-          splitSize: 6
-          xOffset: 0
-          m_Version: 1
-          oldRealSizes: 
-          oldMinSizes: 
-          oldMaxSizes: 
-          oldSplitSize: 0
-        msgNames:
-        - UserMessage
-        - ObjectDestroy
-        - ClientRpc
-        - ObjectSpawn
-        - Owner
-        - Command
-        - LocalPlayerTransform
-        - SyncEvent
-        - SyncVars
-        - SyncList
-        - ObjectSpawnScene
-        - NetworkInfo
-        - SpawnFinished
-        - ObjectHide
-        - CRC
-        - ClientAuthority
-    - rid: 6309017941590409243
-      type: {class: UIProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
-      data:
-        m_Identifier: UnityEditorInternal.Profiling.UIProfilerModule, UnityEditor.CoreModule,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        m_PaneScroll: {x: 0, y: 0}
-    - rid: 6309017941590409244
-      type: {class: UIDetailsProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
-      data:
-        m_Identifier: UnityEditorInternal.Profiling.UIDetailsProfilerModule, UnityEditor.CoreModule,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        m_PaneScroll: {x: 0, y: 0}
-    - rid: 6309017941590409245
-      type: {class: GlobalIlluminationProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
-      data:
-        m_Identifier: UnityEditorInternal.Profiling.GlobalIlluminationProfilerModule,
-          UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        m_PaneScroll: {x: 0, y: 0}
-    - rid: 6309017941590409246
-      type: {class: VirtualTexturingProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
-      data:
-        m_Identifier: UnityEditorInternal.Profiling.VirtualTexturingProfilerModule,
-          UnityEditor.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        m_PaneScroll: {x: 0, y: 0}
-        m_VTProfilerView:
-          rid: 6309017941590409249
-    - rid: 6309017941590409247
-      type: {class: FileIOProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
-      data:
-        m_Identifier: UnityEditorInternal.Profiling.FileIOProfilerModule, UnityEditor.CoreModule,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        m_PaneScroll: {x: 0, y: 0}
-    - rid: 6309017941590409248
-      type: {class: AssetLoadingProfilerModule, ns: UnityEditorInternal.Profiling, asm: UnityEditor.CoreModule}
-      data:
-        m_Identifier: UnityEditorInternal.Profiling.AssetLoadingProfilerModule, UnityEditor.CoreModule,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        m_PaneScroll: {x: 0, y: 0}
-    - rid: 6309017941590409249
-      type: {class: VirtualTexturingProfilerView, ns: UnityEditor, asm: UnityEditor.CoreModule}
-      data:
-        m_SortAscending: 0
-        m_SortedColumn: -1
---- !u!114 &18
+--- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1117,22 +347,22 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1460
-    y: 83
-    width: 449
-    height: 715
+    x: 1466
+    y: 73
+    width: 453
+    height: 729
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
     m_SaveData: []
     m_OverlaysVisible: 1
   m_Spl:
-    ID: 141
+    ID: 216
     splitterInitialOffset: 0
     currentActiveSplitter: -1
     realSizes:
-    - 484
-    - 161
+    - 494
+    - 165
     relativeSizes:
     - 0.75
     - 0.25
@@ -1142,7 +372,7 @@ MonoBehaviour:
     maxSizes:
     - 0
     - 0
-    lastTotalSize: 645
+    lastTotalSize: 659
     splitSize: 6
     xOffset: 0
     m_Version: 1
@@ -1152,14 +382,14 @@ MonoBehaviour:
     oldSplitSize: 0
   m_TestTypeToolbarIndex: 0
   m_PlayModeTestListGUI:
-    m_Window: {fileID: 18}
+    m_Window: {fileID: 14}
     m_NewResultList:
     - id: 1005
       uniqueId: '[chess-game-project][suite]'
       name: chess-game-project
       fullName: chess-game-project
       resultStatus: 1
-      duration: 1.398021
+      duration: 2.3741052
       messages: 
       output: 
       stacktrace: 
@@ -1175,7 +405,7 @@ MonoBehaviour:
       name: Tests.dll
       fullName: D:/Unity/Projects/chessGame/chess-game-project/Library/ScriptAssemblies/Tests.dll
       resultStatus: 1
-      duration: 1.222874
+      duration: 2.12257
       messages: 
       output: 
       stacktrace: 
@@ -1187,13 +417,213 @@ MonoBehaviour:
       parentId: 1005
       parentUniqueId: '[chess-game-project][suite]'
     - id: 1001
+      uniqueId: Tests.dll/[Tests][AITest][suite]
+      name: AITest
+      fullName: AITest
+      resultStatus: 1
+      duration: 0.0794725
+      messages: 
+      output: 
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 1
+      categories: []
+      parentId: 1050
+      parentUniqueId: '[Tests][D:/Unity/Projects/chessGame/chess-game-project/Library/ScriptAssemblies/Tests.dll][suite]'
+    - id: 1009
+      uniqueId: Tests.dll/AITest/[Tests][AITest.AIAddPiece_RemovePiece_Test]
+      name: AIAddPiece_RemovePiece_Test
+      fullName: AITest.AIAddPiece_RemovePiece_Test
+      resultStatus: 1
+      duration: 0.0292468
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][AITest][suite]
+    - id: 1004
+      uniqueId: Tests.dll/AITest/[Tests][AITest.AIDetectPlayerBlack_Test]
+      name: AIDetectPlayerBlack_Test
+      fullName: AITest.AIDetectPlayerBlack_Test
+      resultStatus: 1
+      duration: 0.000852
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][AITest][suite]
+    - id: 1003
+      uniqueId: Tests.dll/AITest/[Tests][AITest.AIDetectPlayerWhite_Test]
+      name: AIDetectPlayerWhite_Test
+      fullName: AITest.AIDetectPlayerWhite_Test
+      resultStatus: 1
+      duration: 0.0004308
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][AITest][suite]
+    - id: 1002
+      uniqueId: Tests.dll/AITest/[Tests][AITest.AIGetPositions_Test]
+      name: AIGetPositions_Test
+      fullName: AITest.AIGetPositions_Test
+      resultStatus: 1
+      duration: 0.0020748
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][AITest][suite]
+    - id: 1007
+      uniqueId: Tests.dll/AITest/[Tests][AITest.AIMoveBestChoice_Test]
+      name: AIMoveBestChoice_Test
+      fullName: AITest.AIMoveBestChoice_Test
+      resultStatus: 1
+      duration: 0.0172257
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 'at AITest.AIMoveBestChoice_Test () [0x00078] in D:\Unity\Projects\chessGame\chess-game-project\Assets\Scripts\Tests\PlayMode\AITest.cs:87
+
+'
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][AITest][suite]
+    - id: 1008
+      uniqueId: Tests.dll/AITest/[Tests][AITest.AIMoveRandomChoice_Test]
+      name: AIMoveRandomChoice_Test
+      fullName: AITest.AIMoveRandomChoice_Test
+      resultStatus: 1
+      duration: 0.0106823
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 'at AITest.AIMoveRandomChoice_Test () [0x0008a] in D:\Unity\Projects\chessGame\chess-game-project\Assets\Scripts\Tests\PlayMode\AITest.cs:118
+
+'
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][AITest][suite]
+    - id: 1006
+      uniqueId: Tests.dll/AITest/[Tests][AITest.AIReturnBlackIA_Test]
+      name: AIReturnBlackIA_Test
+      fullName: AITest.AIReturnBlackIA_Test
+      resultStatus: 1
+      duration: 0.0007275
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][AITest][suite]
+    - id: 1005
+      uniqueId: Tests.dll/AITest/[Tests][AITest.AIReturnWhiteIA_Test]
+      name: AIReturnWhiteIA_Test
+      fullName: AITest.AIReturnWhiteIA_Test
+      resultStatus: 1
+      duration: 0.0006386
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1001
+      parentUniqueId: Tests.dll/[Tests][AITest][suite]
+    - id: 1001
       uniqueId: Tests.dll/[Tests][ChessmanTests][suite]
       name: ChessmanTests
       fullName: ChessmanTests
       resultStatus: 1
-      duration: 0.0491955
+      duration: 0.3156432
       messages: 
-      output: 
+      output: "ArgumentException: The Object you want to instantiate is null.\r\nSentry:
+        (Warning) Failed to end session because there is none active. \r\nArgumentException:
+        The Object you want to instantiate is null.\r\nSentry: (Warning) Failed to
+        end session because there is none active. \r\nArgumentException: The Object
+        you want to instantiate is null.\r\n"
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -1207,7 +637,7 @@ MonoBehaviour:
       name: ShouldCallOnMouseUp
       fullName: ChessmanTests.ShouldCallOnMouseUp
       resultStatus: 1
-      duration: 0.0010314
+      duration: 0.0013507
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1229,7 +659,7 @@ MonoBehaviour:
       name: ShouldInitializeAttackMovePlate_King_Side
       fullName: ChessmanTests.ShouldInitializeAttackMovePlate_King_Side
       resultStatus: 1
-      duration: 0.001036
+      duration: 0.0010694
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1251,7 +681,7 @@ MonoBehaviour:
       name: ShouldInitializeAttackMovePlate_Left_Pawn
       fullName: ChessmanTests.ShouldInitializeAttackMovePlate_Left_Pawn
       resultStatus: 1
-      duration: 0.0010109
+      duration: 0.0011228
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1273,7 +703,7 @@ MonoBehaviour:
       name: ShouldInitializeAttackMovePlate_Queen_Up
       fullName: ChessmanTests.ShouldInitializeAttackMovePlate_Queen_Up
       resultStatus: 1
-      duration: 0.0012158
+      duration: 0.0012675
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1295,7 +725,7 @@ MonoBehaviour:
       name: ShouldInitializeAttackMovePlate_Right_Pawn
       fullName: ChessmanTests.ShouldInitializeAttackMovePlate_Right_Pawn
       resultStatus: 1
-      duration: 0.0011962
+      duration: 0.0022434
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1317,7 +747,7 @@ MonoBehaviour:
       name: ShouldInitializeMovePlate_BlackBishop
       fullName: ChessmanTests.ShouldInitializeMovePlate_BlackBishop
       resultStatus: 1
-      duration: 0.0008644
+      duration: 0.0009165
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1339,7 +769,7 @@ MonoBehaviour:
       name: ShouldInitializeMovePlate_BlackKing
       fullName: ChessmanTests.ShouldInitializeMovePlate_BlackKing
       resultStatus: 1
-      duration: 0.0009618
+      duration: 0.0011374
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1361,7 +791,7 @@ MonoBehaviour:
       name: ShouldInitializeMovePlate_BlackKnight
       fullName: ChessmanTests.ShouldInitializeMovePlate_BlackKnight
       resultStatus: 1
-      duration: 0.0007937
+      duration: 0.0008959
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1383,7 +813,7 @@ MonoBehaviour:
       name: ShouldInitializeMovePlate_BlackPawn
       fullName: ChessmanTests.ShouldInitializeMovePlate_BlackPawn
       resultStatus: 1
-      duration: 0.0013425
+      duration: 0.0018246
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1405,7 +835,7 @@ MonoBehaviour:
       name: ShouldInitializeMovePlate_BlackQueen
       fullName: ChessmanTests.ShouldInitializeMovePlate_BlackQueen
       resultStatus: 1
-      duration: 0.0010634
+      duration: 0.0012042
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1427,7 +857,7 @@ MonoBehaviour:
       name: ShouldInitializeMovePlate_BlackTower
       fullName: ChessmanTests.ShouldInitializeMovePlate_BlackTower
       resultStatus: 1
-      duration: 0.0009784
+      duration: 0.001057
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1449,7 +879,7 @@ MonoBehaviour:
       name: ShouldInitializeMovePlate_WhiteBishop
       fullName: ChessmanTests.ShouldInitializeMovePlate_WhiteBishop
       resultStatus: 1
-      duration: 0.001056
+      duration: 0.0011354
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1471,7 +901,7 @@ MonoBehaviour:
       name: ShouldInitializeMovePlate_WhiteKing
       fullName: ChessmanTests.ShouldInitializeMovePlate_WhiteKing
       resultStatus: 1
-      duration: 0.0009404
+      duration: 0.00142
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1493,7 +923,7 @@ MonoBehaviour:
       name: ShouldInitializeMovePlate_WhiteKnight
       fullName: ChessmanTests.ShouldInitializeMovePlate_WhiteKnight
       resultStatus: 1
-      duration: 0.0010126
+      duration: 0.0010893
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1515,7 +945,7 @@ MonoBehaviour:
       name: ShouldInitializeMovePlate_WhitePawn
       fullName: ChessmanTests.ShouldInitializeMovePlate_WhitePawn
       resultStatus: 1
-      duration: 0.0155234
+      duration: 0.0026094
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1537,7 +967,7 @@ MonoBehaviour:
       name: ShouldInitializeMovePlate_WhiteQueen
       fullName: ChessmanTests.ShouldInitializeMovePlate_WhiteQueen
       resultStatus: 1
-      duration: 0.0011271
+      duration: 0.0013838
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1559,7 +989,7 @@ MonoBehaviour:
       name: ShouldInitializeMovePlate_WhiteTower
       fullName: ChessmanTests.ShouldInitializeMovePlate_WhiteTower
       resultStatus: 1
-      duration: 0.0010361
+      duration: 0.0012621
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1581,7 +1011,7 @@ MonoBehaviour:
       name: ShouldInitializeOneMovePlate_Pawn
       fullName: ChessmanTests.ShouldInitializeOneMovePlate_Pawn
       resultStatus: 1
-      duration: 0.0007871
+      duration: 0.0008109
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1603,61 +1033,41 @@ MonoBehaviour:
       name: GameTests
       fullName: GameTests
       resultStatus: 1
-      duration: 0.0351051
+      duration: 0.578005
       messages: 
-      output: 'ArgumentException: The Object you want to instantiate is null.
-
-        ArgumentException:
-        The Object you want to instantiate is null.
-
-        ArgumentException: The
-        Object you want to instantiate is null.
-
-        ArgumentException: The Object
-        you want to instantiate is null.
-
-        ArgumentException: The Object you
-        want to instantiate is null.
-
-        ArgumentException: The Object you want
-        to instantiate is null.
-
-        ArgumentException: The Object you want to
-        instantiate is null.
-
-        ArgumentException: The Object you want to instantiate
-        is null.
-
-        ArgumentException: The Object you want to instantiate is
-        null.
-
-        ArgumentException: The Object you want to instantiate is null.
-
-        ArgumentException:
-        The Object you want to instantiate is null.
-
-        ArgumentException: The
-        Object you want to instantiate is null.
-
-        ArgumentException: The Object
-        you want to instantiate is null.
-
-        ArgumentException: The Object you
-        want to instantiate is null.
-
-        ArgumentException: The Object you want
-        to instantiate is null.
-
-        ArgumentException: The Object you want to
-        instantiate is null.
-
-        ArgumentException: The Object you want to instantiate
-        is null.
-
-        ArgumentException: The Object you want to instantiate is
-        null.
-
-'
+      output: "Sentry: (Warning) Failed to end session because there is none active.
+        \r\nArgumentException: The Object you want to instantiate is null.\r\nSentry:
+        (Warning) Failed to end session because there is none active. \r\nArgumentException:
+        The Object you want to instantiate is null.\r\nSentry: (Warning) Failed to
+        end session because there is none active. \r\nArgumentException: The Object
+        you want to instantiate is null.\r\nSentry: (Warning) Failed to end session
+        because there is none active. \r\nArgumentException: The Object you want
+        to instantiate is null.\r\nSentry: (Warning) Failed to end session because
+        there is none active. \r\nArgumentException: The Object you want to instantiate
+        is null.\r\nSentry: (Warning) Failed to end session because there is none
+        active. \r\nArgumentException: The Object you want to instantiate is null.\r\nSentry:
+        (Warning) Failed to end session because there is none active. \r\nArgumentException:
+        The Object you want to instantiate is null.\r\nSentry: (Warning) Failed to
+        end session because there is none active. \r\nArgumentException: The Object
+        you want to instantiate is null.\r\nSentry: (Warning) Failed to end session
+        because there is none active. \r\nArgumentException: The Object you want
+        to instantiate is null.\r\nSentry: (Warning) Failed to end session because
+        there is none active. \r\nArgumentException: The Object you want to instantiate
+        is null.\r\nSentry: (Warning) Failed to end session because there is none
+        active. \r\nArgumentException: The Object you want to instantiate is null.\r\nSentry:
+        (Warning) Failed to end session because there is none active. \r\nArgumentException:
+        The Object you want to instantiate is null.\r\nSentry: (Warning) Failed to
+        end session because there is none active. \r\nArgumentException: The Object
+        you want to instantiate is null.\r\nSentry: (Warning) Failed to end session
+        because there is none active. \r\nArgumentException: The Object you want
+        to instantiate is null.\r\nSentry: (Warning) Failed to end session because
+        there is none active. \r\nArgumentException: The Object you want to instantiate
+        is null.\r\nSentry: (Warning) Failed to end session because there is none
+        active. \r\nArgumentException: The Object you want to instantiate is null.\r\nSentry:
+        (Warning) Failed to end session because there is none active. \r\nArgumentException:
+        The Object you want to instantiate is null.\r\nSentry: (Warning) Failed to
+        end session because there is none active. \r\nArgumentException: The Object
+        you want to instantiate is null.\r\n"
       stacktrace: 
       notRunnable: 0
       ignoredOrSkipped: 0
@@ -1671,7 +1081,7 @@ MonoBehaviour:
       name: Create_PieceInstantiatedWithCorrectProperties
       fullName: GameTests.Create_PieceInstantiatedWithCorrectProperties
       resultStatus: 1
-      duration: 0.002801
+      duration: 0.0017618
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1693,7 +1103,7 @@ MonoBehaviour:
       name: PlayerTurns_Tests
       fullName: GameTests.PlayerTurns_Tests
       resultStatus: 1
-      duration: 0.0004935
+      duration: 0.0004743
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1715,7 +1125,7 @@ MonoBehaviour:
       name: PositionOnBoard_PositionOutOfBounds_ReturnsFalse
       fullName: GameTests.PositionOnBoard_PositionOutOfBounds_ReturnsFalse
       resultStatus: 1
-      duration: 0.0006925
+      duration: 0.0003927
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1737,7 +1147,7 @@ MonoBehaviour:
       name: PositionOnBoard_PositionWithinBounds_ReturnsTrue
       fullName: GameTests.PositionOnBoard_PositionWithinBounds_ReturnsTrue
       resultStatus: 1
-      duration: 0.0005556
+      duration: 0.0003715
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1754,12 +1164,56 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1009
       parentUniqueId: Tests.dll/[Tests][GameTests][suite]
+    - id: 1035
+      uniqueId: Tests.dll/GameTests/[Tests][GameTests.SetBlackPlayer_Test]
+      name: SetBlackPlayer_Test
+      fullName: GameTests.SetBlackPlayer_Test
+      resultStatus: 1
+      duration: 0.0004019
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1027
+      parentUniqueId: Tests.dll/[Tests][GameTests][suite]
+    - id: 1034
+      uniqueId: Tests.dll/GameTests/[Tests][GameTests.SetWhitePlayer_Test]
+      name: SetWhitePlayer_Test
+      fullName: GameTests.SetWhitePlayer_Test
+      resultStatus: 1
+      duration: 0.000411
+      messages: 
+      output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
+        This is not allowed.  MonoBehaviours can only be added using AddComponent().
+        Alternatively, your script can inherit from ScriptableObject or no base class
+        at all
+
+'
+      stacktrace: 
+      notRunnable: 0
+      ignoredOrSkipped: 0
+      description: 
+      isSuite: 0
+      categories:
+      - Uncategorized
+      parentId: 1027
+      parentUniqueId: Tests.dll/[Tests][GameTests][suite]
     - id: 1015
       uniqueId: Tests.dll/GameTests/[Tests][GameTests.ShoudStartGame_Test]
       name: ShoudStartGame_Test
       fullName: GameTests.ShoudStartGame_Test
       resultStatus: 1
-      duration: 0.0015418
+      duration: 0.0015679
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1781,7 +1235,7 @@ MonoBehaviour:
       name: "ShouldInitializeAllP\xECeces_Test"
       fullName: "GameTests.ShouldInitializeAllP\xECeces_Test"
       resultStatus: 1
-      duration: 0.0106354
+      duration: 0.0138629
       messages: 
       output: 'You are trying to create a MonoBehaviour using the ''new'' keyword. 
         This is not allowed.  MonoBehaviours can only be added using AddComponent().
@@ -1802,8 +1256,8 @@ MonoBehaviour:
       uniqueId: Tests.dll/[Tests][MenuControllerTests][suite]
       name: MenuControllerTests
       fullName: MenuControllerTests
-      resultStatus: 0
-      duration: 0
+      resultStatus: 1
+      duration: 1.1129221
       messages: 
       output: 
       stacktrace: 
@@ -1818,8 +1272,8 @@ MonoBehaviour:
       uniqueId: Tests.dll/MenuControllerTests/[Tests][MenuControllerTests.StartGame_LoadsMainScene]
       name: StartGame_LoadsMainScene
       fullName: MenuControllerTests.StartGame_LoadsMainScene
-      resultStatus: 0
-      duration: 0
+      resultStatus: 1
+      duration: 1.1048073
       messages: 
       output: 
       stacktrace: 
@@ -1836,7 +1290,7 @@ MonoBehaviour:
       name: MovementTest
       fullName: MovementTest
       resultStatus: 1
-      duration: 0.0246257
+      duration: 0.0281375
       messages: 
       output: 
       stacktrace: 
@@ -1851,8 +1305,8 @@ MonoBehaviour:
       uniqueId: Tests.dll/MovementTest/[Tests][MovementTest.Checkmate_Test]
       name: Checkmate_Test
       fullName: MovementTest.Checkmate_Test
-      resultStatus: 0
-      duration: 0
+      resultStatus: 1
+      duration: 0.013422
       messages: 
       output: 
       stacktrace: 
@@ -1869,7 +1323,7 @@ MonoBehaviour:
       name: Move_BishopToSelectedPosition
       fullName: MovementTest.Move_BishopToSelectedPosition
       resultStatus: 1
-      duration: 0.0024881
+      duration: 0.0026257
       messages: 
       output: 
       stacktrace: 
@@ -1886,7 +1340,7 @@ MonoBehaviour:
       name: Move_KnightToSelectedPosition
       fullName: MovementTest.Move_KnightToSelectedPosition
       resultStatus: 1
-      duration: 0.0005617
+      duration: 0.0005823
       messages: 
       output: 
       stacktrace: 
@@ -1903,7 +1357,7 @@ MonoBehaviour:
       name: Move_PawnToSelectedPosition
       fullName: MovementTest.Move_PawnToSelectedPosition
       resultStatus: 1
-      duration: 0.0005528
+      duration: 0.0005396
       messages: 
       output: 
       stacktrace: 
@@ -1920,7 +1374,7 @@ MonoBehaviour:
       name: Move_QueenKingToSelectedPositionAxis
       fullName: MovementTest.Move_QueenKingToSelectedPositionAxis
       resultStatus: 1
-      duration: 0.0005245
+      duration: 0.000551
       messages: 
       output: 
       stacktrace: 
@@ -1937,7 +1391,7 @@ MonoBehaviour:
       name: Move_QueenKingToSelectedPositionDown
       fullName: MovementTest.Move_QueenKingToSelectedPositionDown
       resultStatus: 1
-      duration: 0.0005237
+      duration: 0.0005204
       messages: 
       output: 
       stacktrace: 
@@ -1954,7 +1408,7 @@ MonoBehaviour:
       name: Move_QueenKingToSelectedPositionLeft
       fullName: MovementTest.Move_QueenKingToSelectedPositionLeft
       resultStatus: 1
-      duration: 0.000527
+      duration: 0.0005284
       messages: 
       output: 
       stacktrace: 
@@ -1971,7 +1425,7 @@ MonoBehaviour:
       name: Move_QueenKingToSelectedPositionRight
       fullName: MovementTest.Move_QueenKingToSelectedPositionRight
       resultStatus: 1
-      duration: 0.0005203
+      duration: 0.0005172
       messages: 
       output: 
       stacktrace: 
@@ -1988,7 +1442,7 @@ MonoBehaviour:
       name: Move_QueenKingToSelectedPositionUP
       fullName: MovementTest.Move_QueenKingToSelectedPositionUP
       resultStatus: 1
-      duration: 0.0005232
+      duration: 0.0005148
       messages: 
       output: 
       stacktrace: 
@@ -2005,7 +1459,7 @@ MonoBehaviour:
       name: Move_TowerToSelectedPosition
       fullName: MovementTest.Move_TowerToSelectedPosition
       resultStatus: 1
-      duration: 0.0005214
+      duration: 0.0005772
       messages: 
       output: 
       stacktrace: 
@@ -2021,8 +1475,8 @@ MonoBehaviour:
       uniqueId: Tests.dll/MovementTest/[Tests][MovementTest.RedMoveplate_Test]
       name: RedMoveplate_Test
       fullName: MovementTest.RedMoveplate_Test
-      resultStatus: 0
-      duration: 0
+      resultStatus: 1
+      duration: 0.0013699
       messages: 
       output: 
       stacktrace: 
@@ -2034,13 +1488,13 @@ MonoBehaviour:
       - Uncategorized
       parentId: 1029
       parentUniqueId: Tests.dll/[Tests][MovementTest][suite]
-    m_ResultText: chess-game-project (1.398s)
+    m_ResultText: chess-game-project (2.374s)
     m_ResultStacktrace: 
     m_TestListState:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: cb26407e
       m_LastClickedID: 2118133451
-      m_ExpandedIDs: 03149dec5c42d5edfa2eb317bb864b249a6f8268dce72a71cb26407effffff7f
+      m_ExpandedIDs: 03149dec5c42d5edfa2eb317bb864b2417f2bf299a6f8268dce72a71cb26407effffff7f
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -2068,7 +1522,7 @@ MonoBehaviour:
       - Uncategorized
     m_SelectedOption: 0
   m_EditModeTestListGUI:
-    m_Window: {fileID: 18}
+    m_Window: {fileID: 14}
     m_NewResultList:
     - id: 1000
       uniqueId: '[chess-game-project][suite]'
@@ -2118,7 +1572,7 @@ MonoBehaviour:
       selectedCategoryMask: 0
       availableCategories:
       - Uncategorized
---- !u!114 &19
+--- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2175,7 +1629,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 60.600006}
     m_SelectedIDs: 926e0000
     m_LastClickedID: 28306
-    m_ExpandedIDs: 00000000426100004461000046610000486100004a6100004c610000
+    m_ExpandedIDs: 000000004a6100004c6100004e610000506100005261000054610000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2203,7 +1657,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000426100004461000046610000486100004a6100004c610000
+    m_ExpandedIDs: 000000004a6100004c6100004e610000506100005261000054610000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2247,7 +1701,7 @@ MonoBehaviour:
       m_IsRenaming: 0
       m_OriginalEventType: 11
       m_IsRenamingFilename: 1
-      m_ClientGUIView: {fileID: 10}
+      m_ClientGUIView: {fileID: 7}
     m_CreateAssetUtility:
       m_EndAction: {fileID: 0}
       m_InstanceID: 0
@@ -2259,7 +1713,7 @@ MonoBehaviour:
     m_GridSize: 64
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 207
---- !u!114 &20
+--- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2279,10 +1733,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1460
-    y: 819
-    width: 449
-    height: 164
+    x: 1466
+    y: 823
+    width: 453
+    height: 168
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -2301,7 +1755,7 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_PreviewWindow: {fileID: 0}
---- !u!114 &21
+--- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2321,10 +1775,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 8
-    y: 83
-    width: 358
-    height: 524
+    x: 0
+    y: 73
+    width: 243
+    height: 818
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -2335,7 +1789,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 1afbffff
+      m_ExpandedIDs: 22e4feff5ae4feffaafefeff16fffeff4efffeffee03ffffd404ffff0c05ffff5407ffff2808ffff5e08ffffbe08ffff2e09ffff6609ffffac0bffff080cffff400cffff860effff6214ffff9a14ffffd22dffff642effff9c2effffd447ffffce50ffff0651ffff3e6affff087affff4a7bffff827bffffba94ffff5c98ffff449cffff809effffb89effff00a1ffffd6a1ffff0ea2ffff56a4ffff2ca5ffff64a5ffffaaa7ffff0ea8ffff46a8ffff8eaaffff64abffff9cabffffe4adffffe8aeffff20afffff42c7ffff0ec8ffff46c8ffff66e0ffff20e1ffff58e1ffff82f9ffff1afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -2351,7 +1805,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 9}
+        m_ClientGUIView: {fileID: 6}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -2359,7 +1813,7 @@ MonoBehaviour:
       m_IsLocked: 0
     m_CurrentSortingName: TransformSorting
   m_WindowGUID: 4c969a2b90040154d917609493e03593
---- !u!114 &22
+--- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2720,7 +2174,7 @@ MonoBehaviour:
   m_SceneVisActive: 1
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
---- !u!114 &23
+--- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2740,10 +2194,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 367
-    y: 83
-    width: 1091
-    height: 524
+    x: 244
+    y: 73
+    width: 1220
+    height: 818
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -2791,29 +2245,29 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-      width: 1091
-      height: 503
-    m_Scale: {x: 0.46574077, y: 0.46574074}
-    m_Translation: {x: 545.5, y: 251.5}
+      width: 1220
+      height: 797
+    m_Scale: {x: 0.6354167, y: 0.6354167}
+    m_Translation: {x: 610, y: 398.5}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-      x: -1171.2524
-      y: -540
-      width: 2342.505
-      height: 1080
+      x: -960
+      y: -627.1475
+      width: 1920
+      height: 1254.295
     m_MinimalGUI: 1
-  m_defaultScale: 0.46574074
-  m_LastWindowPixelSize: {x: 1091, y: 524}
+  m_defaultScale: 0.6354167
+  m_LastWindowPixelSize: {x: 1220, y: 818}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
   m_XRRenderMode: 0
   m_RenderTexture: {fileID: 0}
---- !u!114 &24
+--- !u!114 &20
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2833,10 +2287,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 8
-    y: 628
-    width: 1451
-    height: 355
+    x: 0
+    y: 912
+    width: 1465
+    height: 79
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
