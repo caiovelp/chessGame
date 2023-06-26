@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,7 +9,6 @@ public class Game : MonoBehaviour
     private GameObject[,] positions = new GameObject[8,8];
     private GameObject[] whitePlayer = new GameObject[16];
     private GameObject[] blackPlayer = new GameObject[16];
-    private GameObject[,] destroyedPieces;
 
     private string currentPlayer = "white";
 
@@ -41,7 +38,7 @@ public class Game : MonoBehaviour
             Create("blackQueen", 3, 7), Create("blackKing", 4, 7),
             Create("blackBishop", 5, 7), Create("blackKnight", 6, 7), Create("blackTower", 7, 7)
         };
-        this.destroyedPieces = new GameObject[4,8];
+
         // Coloca as peças no tabuleiro
         for (int i = 0; i < whitePlayer.Length; i++) 
         {
@@ -74,33 +71,7 @@ public class Game : MonoBehaviour
 
         positions[chessman.GetXBoard(), chessman.GetYBoard()] = obj;
     }
-    
-    public void SearchAndDestroy(GameObject cp)
-    {
-        if (cp.GetComponent<Chessman>().GetPlayer() == "white")
-        {
-            for (var i = 0; i < whitePlayer.Length; i++)
-            {
-                if (whitePlayer[i] == null || whitePlayer[i].Equals(cp))
-                {
-                    whitePlayer[i] = null;
-                    break;
-                }
-            }
-        }
-        else
-        {
-            for (var i = 0; i < blackPlayer.Length; i++)
-            {
-                if (blackPlayer[i] == cp)
-                {
-                    blackPlayer[i] = null;
-                    break;
-                }
-            }
-        }
-    }
-    
+
     public GameObject[,] GetPositions()
     {
         return positions;
@@ -116,7 +87,6 @@ public class Game : MonoBehaviour
         return blackPlayer;
     }
 
-
     public GameObject GetPosition(int x, int y)
     {
         return positions[x, y];
@@ -131,6 +101,54 @@ public class Game : MonoBehaviour
     public void SerPositionSpriteEmpty(int x, int y)
     {
         positions[x, y].GetComponent<SpriteRenderer>().sprite = null;   
+    }
+
+    public void SearchAndDestroy(GameObject cp)
+    {
+        var i = 0;
+        if (cp.GetComponent<Chessman>().GetPlayer() == "white")
+        {
+            for (i = 0; i < whitePlayer.Length; i++)
+            {
+                if (whitePlayer[i] == null) break;
+                if (whitePlayer[i].Equals(cp))
+                {
+                    whitePlayer[i] = null;
+                    break;
+                }
+            }
+
+            while (i < whitePlayer.Length)
+            {
+                if (whitePlayer[i] != null)
+                {
+                    whitePlayer[i - 1] = whitePlayer[i];
+                }
+
+                i++;
+            }
+        }
+        else
+        {
+            for (i = 0; i < blackPlayer.Length; i++)
+            {
+                if (whitePlayer == null) break;
+                if (blackPlayer[i].Equals(cp))
+                {
+                    blackPlayer[i] = null;
+                    break;
+                }
+            }
+            while (i < blackPlayer.Length)
+            {
+                if (blackPlayer[i] != null)
+                {
+                    blackPlayer[i - 1] = blackPlayer[i];
+                }
+
+                i++;
+            }
+        }
     }
 
     // Função verifica se dado um valor (x, y), esse par está dentro do tabuleiro 8x8.
@@ -175,52 +193,6 @@ public class Game : MonoBehaviour
             SceneManager.LoadScene("Game");
         }
     }
-    
-    public void AppendDestroyedPieces(GameObject cp)
-    {
-        if (cp.GetComponent<Chessman>().GetPlayer() == "white")
-        {
-            for (int i = 1; i >= 0 ; i--)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (destroyedPieces[i, j] == null)
-                    {
-                        destroyedPieces[i, j] = cp;
-                        return;
-                    }
-                }
-            }
-        }
-        else
-        {
-            for (int i = 2; i < 4; i++)
-            {
-                for (int j = 0; j < 8; j++)
-                {
-                    if (destroyedPieces[i, j] == null)
-                    {
-                        destroyedPieces[i, j] = cp;
-                        return;
-                    }
-                }
-            }    
-        }
-    }
-    
-    public (int i, int j) SearchDestroyedPieces(GameObject cp)
-    {
-        for (int i = 0; i < 4; i++)
-        {
-            for (int j = 0; j < 8; j++)
-            {
-                if (destroyedPieces[i, j] == cp)
-                    return (i, j);
-            }
-        }
-
-        return (-1, -1);
-    }
 
     public void Winner(string playerWinner)
     {
@@ -250,5 +222,15 @@ public class Game : MonoBehaviour
         }
         
         return new Vector2Int(-1, -1);
+    }
+
+    public void SetWhitePlayer(GameObject[] playerArray)
+    {
+        this.whitePlayer = playerArray;
+    }
+    
+    public void SetBlackPlayer(GameObject[] playerArray)
+    {
+        this.blackPlayer = playerArray;
     }
 }

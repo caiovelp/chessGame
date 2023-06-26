@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Chessman : MonoBehaviour
 {
@@ -23,10 +21,10 @@ public class Chessman : MonoBehaviour
     public Sprite[] whiteQueen, whiteKing, whiteBishop, whiteTower, whiteKnight, whitePawn;
     public Sprite[] blackQueen, blackKing, blackBishop, blackTower, blackKnight, blackPawn;
     private int setID;
-
+    private bool move = false;
+    
     private List<GameObject> movePlates = new List<GameObject>();
     private List<Vector2Int> avaliableMoves = new List<Vector2Int>();
-
 
     //Função que seleciona a skin das peças.
     public void SelectPeca(bool isForward)
@@ -142,6 +140,16 @@ public class Chessman : MonoBehaviour
         return this.player;
     }
 
+    public bool GetMove()
+    {
+        return move;
+    }
+    
+    public void SetMove(bool m = false)
+    {
+        this.move = m;
+    }
+
     public void SetName(string name)
     {
         pieceName = name;
@@ -158,13 +166,29 @@ public class Chessman : MonoBehaviour
     */
     private void OnMouseUp()
     {
-        if(player == "black" && controller.GetComponent<Game>().IsBlackIa())
+        if(controller.GetComponent<Game>().GetCurrentPlayer() == "white" &&  controller.GetComponent<Game>().IsWhiteIa())
         {
-            if(!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player)
-                // Quando for a vez do preto e ele ser a IA do jogo.
-                AIMove();
+            AIMove();
+            return;
         }
-        else
+
+        if(controller.GetComponent<Game>().GetCurrentPlayer() == "black" &&  controller.GetComponent<Game>().IsBlackIa())
+        {
+            AIMove();
+            return;
+        }
+
+        // Só habilita a jogada se o for a vez do jogador da peça selecionada e se o player não for IA
+        
+        if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player && !controller.GetComponent<Game>().IsBlackIa())
+        {
+            // Apaga os moveplates que estão no tabuleiro.
+            DestroyMovePlates();
+
+            // Inicia os novos moveplates depedendo da interação.
+            InitiateMovePlates();
+        }
+        if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player && !controller.GetComponent<Game>().IsWhiteIa())
         {
             // Só habilita a jogada se o for a vez do jogador da peça selecionada
             if (!controller.GetComponent<Game>().IsGameOver() && controller.GetComponent<Game>().GetCurrentPlayer() == player)
@@ -300,6 +324,56 @@ public class Chessman : MonoBehaviour
         foreach (Vector2Int move in avaliableMoves)
             moves.Add(PointMovePlate(move.x, move.y));
         return moves;
+        RoqueMovePlate();
+    }
+
+    //Essa função verifica se é possível fazer roque e spawna o moveplate
+    private void RoqueMovePlate()
+    {
+        string currentPlayer = controller.GetComponent<Game>().GetCurrentPlayer();
+        if (!move)
+        {
+            if(currentPlayer == "white")
+            {
+                if (controller.GetComponent<Game>().GetPosition(0, 0) != null && !controller.GetComponent<Game>().GetPosition(0, 0).GetComponent<Chessman>().GetMove() && VerificaRoque(0))
+                {
+                    MovePlateSpawn(0, 0, roque: true);
+                }
+
+                if (controller.GetComponent<Game>().GetPosition(7, 0) != null &&!controller.GetComponent<Game>().GetPosition(7, 0).GetComponent<Chessman>().GetMove() && VerificaRoque(7))
+                {
+                    MovePlateSpawn(7, 0, roque: true);
+                }
+            }
+            else
+            {
+                if (controller.GetComponent<Game>().GetPosition(0, 7) != null && !controller.GetComponent<Game>().GetPosition(0, 7).GetComponent<Chessman>().GetMove() && VerificaRoque(0) )
+                {
+                    MovePlateSpawn(0, 7, roque: true);
+                }
+
+                if (controller.GetComponent<Game>().GetPosition(7, 7) != null &&!controller.GetComponent<Game>().GetPosition(7, 7).GetComponent<Chessman>().GetMove() && VerificaRoque(7))
+                {
+                    MovePlateSpawn(7, 7, roque: true);
+                }
+            }
+        }
+    }
+
+    public bool VerificaRoque(int x)
+    {
+        if (xBoard > x)
+        {
+            for (int i = xBoard-1; i > x; i--)
+                if (controller.GetComponent<Game>().GetPosition(i, yBoard) != null)
+                    return false;
+            return true;
+        }
+
+        for (int i = xBoard+1; i < x; i++)
+            if (controller.GetComponent<Game>().GetPosition(i, yBoard) != null)
+                return false;
+        return true;
     }
 
     // Função resposável por ditar os movimento em "L"
@@ -328,7 +402,7 @@ public class Chessman : MonoBehaviour
     }
 
     // Desenha os moveplates de acordo com uma matrix 8x8
-    public GameObject MovePlateSpawn(int matrixX, int matrixY)
+    public GameObject MovePlateSpawn(int matrixX, int matrixY, bool roque = false, bool attack = false)
     {
         // Recupera o valor do tabuleiro para converter em xy coordenadas
         float x = matrixX;
@@ -346,6 +420,8 @@ public class Chessman : MonoBehaviour
 
         // Cria uma instância do moveplate e interage com essa instância.
         MovePlate mpScript = mp.GetComponent<MovePlate>();
+        mpScript.attack = attack;
+        mpScript.roque = roque;
         mpScript.SetReference(gameObject);
         mpScript.SetCoordinates(matrixX, matrixY);
         return mp;
@@ -428,7 +504,7 @@ public class Chessman : MonoBehaviour
                     pieceType = 4;
                     break;
                 case "whiteKing":
-                    pieceType = 5;
+                    pieceType = 999;
                     break;
             }
                 
@@ -468,7 +544,7 @@ public class Chessman : MonoBehaviour
                     pieceType = 4;
                     break;
                 case "blackKing":
-                    pieceType = 5;
+                    pieceType = 999;
                     break;
             }
                 
@@ -480,7 +556,7 @@ public class Chessman : MonoBehaviour
         return bps;
     }
 
-    private Piece[,] SetPiecesPosition(GameObject[] whitePieces, GameObject[] blackPieces)
+    public Piece[,] SetPiecesPosition(GameObject[] whitePieces, GameObject[] blackPieces)
     {
         Piece[,] pieces = new Piece[8,8];
         foreach (var whitePiece in whitePieces)
@@ -507,7 +583,7 @@ public class Chessman : MonoBehaviour
                     pieceType = 4;
                     break;
                 case "whiteKing":
-                    pieceType = 5;
+                    pieceType = 999;
                     break;
             }
 
@@ -537,7 +613,7 @@ public class Chessman : MonoBehaviour
                     pieceType = 4;
                     break;
                 case "blackKing":
-                    pieceType = 5;
+                    pieceType = 999;
                     break;
             }
 
@@ -552,9 +628,8 @@ public class Chessman : MonoBehaviour
         Board board = new Board();
 
         board.positions = pieces;
-        board.wPieces = whitePieces;
-        board.bPieces = blackPieces;
-
+        board.wPieces = new List<Piece>(whitePieces);
+        board.bPieces = new List<Piece>(blackPieces);
         return board;
     }
 
@@ -573,8 +648,12 @@ public class Chessman : MonoBehaviour
             currentPlayer = 0;
         else
             currentPlayer = 1;
-        
-        Move move = AI.RandomChoice(board, currentPlayer);
+        var move = Move.Fake();
+
+        if (controller.name == "Random")
+            move = AI.RandomChoice(board, currentPlayer);
+        else
+            move = AI.BestChoice(board, currentPlayer, 1);
 
         int xAtual = move.x;
         int yAtual = move.y;
@@ -583,6 +662,12 @@ public class Chessman : MonoBehaviour
         bool attack = move.attack;
 
         GameObject gc = controller.GetComponent<Game>().GetPosition(xAtual, yAtual);
+
+        if (controller.tag == "Untagged") // É teste
+        {
+            return;
+        }
+        
         MovePlateIaSpawn(xDest, yDest, gc, attack);
     }
 
