@@ -24,6 +24,9 @@ public class Chessman : MonoBehaviour
     public Sprite[] blackQueen, blackKing, blackBishop, blackTower, blackKnight, blackPawn;
     private int setID;
 
+    private List<GameObject> movePlates = new List<GameObject>();
+    private List<Vector2Int> avaliableMoves = new List<Vector2Int>();
+
 
     //Função que seleciona a skin das peças.
     public void SelectPeca(bool isForward)
@@ -52,15 +55,12 @@ public class Chessman : MonoBehaviour
         }
         PlayerPrefs.SetInt("set", setID);
 
-        switch (this.name)
+        switch (this.pieceName)
         {
-            case "SptPecaBranca": this.GetComponent<SpriteRenderer>().sprite = whiteKing[setID]; Debug.Log(this.name); break;
-            case "SptPecaPreta": this.GetComponent<SpriteRenderer>().sprite = blackKing[setID]; Debug.Log(this.name); break;
+            case "SptPecaBranca": this.GetComponent<SpriteRenderer>().sprite = whiteKing[setID]; Debug.Log(this.pieceName); break;
+            case "SptPecaPreta": this.GetComponent<SpriteRenderer>().sprite = blackKing[setID]; Debug.Log(this.pieceName); break;
         }
     }
-
-    private List<GameObject> movePlates = new List<GameObject>();
-    private List<Vector2Int> avaliableMoves = new List<Vector2Int>();
 
     /* 
         Função responsável por "ativar" as peças, ou seja, ela define as posições das peças,

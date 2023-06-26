@@ -10,7 +10,9 @@ public class ChessmanTests
     [SetUp]
     public void Setup()
     {
-        game = new Game();
+        GameObject gameObject = new GameObject();
+        gameObject.AddComponent<Game>();
+        game = gameObject.GetComponent<Game>();
     }
 
     [Test, Order(1)]

@@ -5,10 +5,17 @@ public class GameTests
 {
     private Game game;
 
+    public Chessman GetChessman(GameObject gameObject)
+    {
+        return gameObject.GetComponent<Chessman>();
+    }
+
     [SetUp]
     public void Setup()
     {
-        game = new Game();
+        GameObject gameObject = new GameObject();
+        gameObject.AddComponent<Game>();
+        game = gameObject.GetComponent<Game>();
     }
 
     [Test]
@@ -28,7 +35,7 @@ public class GameTests
     }
 
     [Test]
-    public void Create_PieceInstantiatedWithCorrectProperties()
+    public void Create_PieceInstantiatedWithCorrectProperties() // REVIEW
     {
         // Arrange
         string pieceName = "whitePawn";
@@ -49,13 +56,13 @@ public class GameTests
         // Act
         game.chesspiece = gameObject; // Assign the chess piece prefab to the game object
         GameObject piece = game.Create(pieceName, x, y);
-        Chessman chessman = piece.GetComponent<Chessman>();
+        Chessman chessman = GetChessman(piece);
 
         game.SetPosition(piece);
 
         // Assert
         Assert.AreEqual(piece, game.GetPosition(x, y));
-        Assert.AreEqual(pieceName, chessman.name);
+        Assert.AreEqual(pieceName, chessman.GetName()); // REVIEW
         Assert.AreEqual(x, chessman.GetXBoard());
         Assert.AreEqual(y, chessman.GetYBoard());
 
@@ -74,7 +81,7 @@ public class GameTests
     }
 
     [Test]
-    public void ShouldInitializeAllPìeces_Test() {
+    public void ShouldInitializeAllPìeces_Test() { // REVIEW
         // Create a chess piece prefab as a placeholder for testing
         var gameObject = new GameObject();
         gameObject.AddComponent<Chessman>();
@@ -134,35 +141,35 @@ public class GameTests
         game.chesspiece = gameObject; 
         game.Start();
 
-        Assert.AreEqual("whitePawn", game.GetPosition(0,1).name);
-        Assert.AreEqual("whitePawn", game.GetPosition(1,1).name);
-        Assert.AreEqual("whitePawn", game.GetPosition(2,1).name);
-        Assert.AreEqual("whitePawn", game.GetPosition(3,1).name);
-        Assert.AreEqual("whitePawn", game.GetPosition(4,1).name);
-        Assert.AreEqual("whitePawn", game.GetPosition(5,1).name);
-        Assert.AreEqual("whitePawn", game.GetPosition(6,1).name);
-        Assert.AreEqual("whitePawn", game.GetPosition(7,1).name);
-        Assert.AreEqual("whiteTower", game.GetPosition(0,0).name);
-        Assert.AreEqual("whiteTower", game.GetPosition(7,0).name);
-        Assert.AreEqual("whiteBishop", game.GetPosition(2,0).name);
-        Assert.AreEqual("whiteBishop", game.GetPosition(5,0).name);
-        Assert.AreEqual("whiteQueen", game.GetPosition(3,0).name);
-        Assert.AreEqual("whiteKing", game.GetPosition(4,0).name);
+        Assert.AreEqual("whitePawn", GetChessman(game.GetPosition(0,1)).GetName());
+        Assert.AreEqual("whitePawn", GetChessman(game.GetPosition(1,1)).GetName());
+        Assert.AreEqual("whitePawn", GetChessman(game.GetPosition(2,1)).GetName());
+        Assert.AreEqual("whitePawn", GetChessman(game.GetPosition(3,1)).GetName());
+        Assert.AreEqual("whitePawn", GetChessman(game.GetPosition(4,1)).GetName());
+        Assert.AreEqual("whitePawn", GetChessman(game.GetPosition(5,1)).GetName());
+        Assert.AreEqual("whitePawn", GetChessman(game.GetPosition(6,1)).GetName());
+        Assert.AreEqual("whitePawn", GetChessman(game.GetPosition(7,1)).GetName());
+        Assert.AreEqual("whiteTower", GetChessman(game.GetPosition(0,0)).GetName());
+        Assert.AreEqual("whiteTower", GetChessman(game.GetPosition(7,0)).GetName());
+        Assert.AreEqual("whiteBishop", GetChessman(game.GetPosition(2,0)).GetName());
+        Assert.AreEqual("whiteBishop", GetChessman(game.GetPosition(5,0)).GetName());
+        Assert.AreEqual("whiteQueen", GetChessman(game.GetPosition(3,0)).GetName());
+        Assert.AreEqual("whiteKing", GetChessman(game.GetPosition(4,0)).GetName());
 
-        Assert.AreEqual("blackPawn", game.GetPosition(0,6).name);
-        Assert.AreEqual("blackPawn", game.GetPosition(1,6).name);
-        Assert.AreEqual("blackPawn", game.GetPosition(2,6).name);
-        Assert.AreEqual("blackPawn", game.GetPosition(3,6).name);
-        Assert.AreEqual("blackPawn", game.GetPosition(4,6).name);
-        Assert.AreEqual("blackPawn", game.GetPosition(5,6).name);
-        Assert.AreEqual("blackPawn", game.GetPosition(6,6).name);
-        Assert.AreEqual("blackPawn", game.GetPosition(7,6).name);
-        Assert.AreEqual("blackTower", game.GetPosition(0,7).name);
-        Assert.AreEqual("blackTower", game.GetPosition(7,7).name);
-        Assert.AreEqual("blackBishop", game.GetPosition(2,7).name);
-        Assert.AreEqual("blackBishop", game.GetPosition(5,7).name);
-        Assert.AreEqual("blackQueen", game.GetPosition(3,7).name);
-        Assert.AreEqual("blackKing", game.GetPosition(4,7).name);
+        Assert.AreEqual("blackPawn", GetChessman(game.GetPosition(0,6)).GetName());
+        Assert.AreEqual("blackPawn", GetChessman(game.GetPosition(1,6)).GetName());
+        Assert.AreEqual("blackPawn", GetChessman(game.GetPosition(2,6)).GetName());
+        Assert.AreEqual("blackPawn", GetChessman(game.GetPosition(3,6)).GetName());
+        Assert.AreEqual("blackPawn", GetChessman(game.GetPosition(4,6)).GetName());
+        Assert.AreEqual("blackPawn", GetChessman(game.GetPosition(5,6)).GetName());
+        Assert.AreEqual("blackPawn", GetChessman(game.GetPosition(6,6)).GetName());
+        Assert.AreEqual("blackPawn", GetChessman(game.GetPosition(7,6)).GetName());
+        Assert.AreEqual("blackTower", GetChessman(game.GetPosition(0,7)).GetName());
+        Assert.AreEqual("blackTower", GetChessman(game.GetPosition(7,7)).GetName());
+        Assert.AreEqual("blackBishop", GetChessman(game.GetPosition(2,7)).GetName());
+        Assert.AreEqual("blackBishop", GetChessman(game.GetPosition(5,7)).GetName());
+        Assert.AreEqual("blackQueen", GetChessman(game.GetPosition(3,7)).GetName());
+        Assert.AreEqual("blackKing", GetChessman(game.GetPosition(4,7)).GetName());
     }
 
     [Test]
