@@ -158,20 +158,20 @@ public class Game : MonoBehaviour
         return true;
     }
 
-     public string GetCurrentPlayer()
+    public string GetCurrentPlayer()
     {
         return currentPlayer;
     }
-     
-     public bool IsBlackIa()
-     {
-         return blackIa;
-     }
-     
-     public bool IsWhiteIa()
-     {
-         return whiteIa;
-     }
+
+    public bool IsBlackIa()
+    {
+        return blackIa;
+    }
+
+    public bool IsWhiteIa()
+    {
+        return whiteIa;
+    }
 
     public bool IsGameOver()
     {
