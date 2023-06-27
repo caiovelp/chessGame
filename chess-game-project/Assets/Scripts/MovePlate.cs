@@ -42,82 +42,99 @@ public class MovePlate : MonoBehaviour
             Movement();
     }
 
-    private void RoqueMovement()
-    {
-        controller = GameObject.FindGameObjectWithTag("GameController");
-        controller.GetComponent<Game>().SetPositionEmpty(reference.GetComponent<Chessman>().GetXBoard(), reference.GetComponent<Chessman>().GetYBoard());
-        reference.GetComponent<Chessman>().SetYBoard(matrixY);
-        if (matrixX == 0)
-        {
-                reference.GetComponent<Chessman>().SetXBoard(2);
-                reference.GetComponent<Chessman>().SetCoordinates();
-
-                controller.GetComponent<Game>().SetPosition(reference);  
-                SetReference(controller.GetComponent<Game>().GetPosition(0, matrixY));
-                
-                reference.GetComponent<Chessman>().SetXBoard(3);
-                reference.GetComponent<Chessman>().SetYBoard(matrixY);
-                reference.GetComponent<Chessman>().SetCoordinates();
-                
-                controller.GetComponent<Game>().SetPosition(reference);
-        }
-        else 
-        {
-            reference.GetComponent<Chessman>().SetXBoard(6);
-            reference.GetComponent<Chessman>().SetCoordinates();
-
-            controller.GetComponent<Game>().SetPosition(reference);
-            SetReference(controller.GetComponent<Game>().GetPosition(7, matrixY));
-            
-            reference.GetComponent<Chessman>().SetXBoard(5);
-            reference.GetComponent<Chessman>().SetYBoard(matrixY);
-            reference.GetComponent<Chessman>().SetCoordinates();
-                
-            controller.GetComponent<Game>().SetPosition(reference);
-        }
-        
-        controller.GetComponent<Game>().NextTurn();
-
-        reference.GetComponent<Chessman>().DestroyMovePlates();
-    }
-
     public void Movement()
     {
         controller = GameObject.FindGameObjectWithTag("GameController");
-
+        Chessman chessman = reference.GetComponent<Chessman>();
+        Game game = controller.GetComponent<Game>();
         if (attack)
         {
-            EatMovement();
+            GameObject cp = game.GetPosition(matrixX, matrixY);
+            Chessman enemyChessman = cp.GetComponent<Chessman>();
+            if (enemyChessman.GetName() == "whiteKing") game.Winner("preto");
+            if (enemyChessman.GetName() == "blackKing") game.Winner("branco");
+
+            game.SearchAndDestroy(cp);
+            
+            game.SerPositionSpriteEmpty(matrixX, matrixY);
+            game.SetPositionEmpty(matrixX, matrixY);
         }
 
-        controller.GetComponent<Game>().SetPositionEmpty(reference.GetComponent<Chessman>().GetXBoard(), reference.GetComponent<Chessman>().GetYBoard());
+        game.SetPositionEmpty(chessman.GetXBoard(), chessman.GetYBoard());
 
-        reference.GetComponent<Chessman>().SetXBoard(matrixX);
-        reference.GetComponent<Chessman>().SetYBoard(matrixY);
-        reference.GetComponent<Chessman>().SetCoordinates();
-        reference.GetComponent<Chessman>().SetMove(true);
-
-        controller.GetComponent<Game>().SetPosition(reference);
+        chessman.SetXBoard(matrixX);
+        chessman.SetYBoard(matrixY);
+        chessman.SetCoordinates();
+        chessman.SetMove(true);
+        game.SetPosition(reference);
 
         //Alterna o jogador atual
-        controller.GetComponent<Game>().NextTurn();
-
-        reference.GetComponent<Chessman>().DestroyMovePlates();
+        game.NextTurn();
+        chessman.DestroyMovePlates();
     }
-    
-    
 
-    public void EatMovement()
+    private void RoqueMovement()
     {
-        GameObject cp = controller.GetComponent<Game>().GetPosition(matrixX,matrixY);
+        controller = GameObject.FindGameObjectWithTag("GameController");
+        Game game = controller.GetComponent<Game>();
+        Chessman chessman = reference.GetComponent<Chessman>();
+
+        //Esvazia a posição atual do rei
+        game.SetPositionEmpty(chessman.GetXBoard(), chessman.GetYBoard());
+
+        chessman.SetYBoard(matrixY);
+        // Torre da Esquerda
+        if (matrixX == 0)
+        {
+            chessman.SetXBoard(2);
+            chessman.SetCoordinates();
+            game.SetPosition(reference);  
+
+            // SetReference(game.GetPosition(0, matrixY));
+            GameObject torreReference = game.GetPosition(0, matrixY);
+            Chessman torreChessman = torreReference.GetComponent<Chessman>();
+
+            //Esvazia a posição atual da torre
+            game.SetPositionEmpty(torreChessman.GetXBoard(), torreChessman.GetYBoard());
+
+            torreChessman.SetXBoard(3);
+            torreChessman.SetYBoard(matrixY);
+            torreChessman.SetCoordinates();
+            game.SetPosition(torreReference); 
+        }
+        // Torre da Direita
+        else 
+        {
+            chessman.SetXBoard(6);
+            chessman.SetCoordinates();
+            game.SetPosition(reference);
+
+            // SetReference(game.GetPosition(0, matrixY));
+            GameObject torreReference = game.GetPosition(7, matrixY);
+            Chessman torreChessman = torreReference.GetComponent<Chessman>();
+
+            //Esvazia a posição atual da torre
+            game.SetPositionEmpty(torreChessman.GetXBoard(), torreChessman.GetYBoard());
+            
+            torreChessman.SetXBoard(5); 
+            torreChessman.SetYBoard(matrixY);
+            torreChessman.SetCoordinates();
+            game.SetPosition(torreReference);        
+        }     
         
-        if (cp.name == "whiteKing") controller.GetComponent<Game>().Winner("preto");
-        if (cp.name == "blackKing") controller.GetComponent<Game>().Winner("branco");
-        
-        controller.GetComponent<Game>().SearchAndDestroy(cp);
-        controller.GetComponent<Game>().SerPositionSpriteEmpty(matrixX, matrixY);
-        controller.GetComponent<Game>().SetPositionEmpty(matrixX, matrixY);
+        game.NextTurn();
+        chessman.DestroyMovePlates();
     }
+
+    public int GetMatrixX()
+    {
+        return matrixX;
+    }
+
+    public int GetMatrixY()
+    {
+        return matrixY;
+    }  
 
     //Função para definir as coordenadas de acordo com uma matriz.
     public void SetCoordinates(int x, int y) 
