@@ -678,8 +678,20 @@ public class Chessman : MonoBehaviour
 
         if (controller.name == "Random")
             move = AI.RandomChoice(board, currentPlayer);
-        else
-            move = AI.BestChoice(board, currentPlayer, 1);
+        else{
+            int i = 2;
+            while(i > 0){
+                try {
+                    move = AI.BestChoice(board, currentPlayer, i);
+                    i = -1;
+                }catch{
+                    i -= 1;
+                }
+            }
+            if(i == 0){
+                move = AI.RandomChoice(board, currentPlayer);
+            }
+        }
 
         int xAtual = move.x;
         int yAtual = move.y;
