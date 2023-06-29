@@ -29,6 +29,7 @@ public class Chessman : MonoBehaviour
     //Função que seleciona a skin das peças.
     public void SelectPeca(bool isForward)
     {
+        Debug.Log(this.name);
         if (isForward)
         {
             if (setID == whitePawn.Length - 1)
@@ -53,10 +54,11 @@ public class Chessman : MonoBehaviour
         }
         PlayerPrefs.SetInt("set", setID);
 
-        switch (this.pieceName)
+        switch (this.name)
         {
-            case "SptPecaBranca": this.GetComponent<SpriteRenderer>().sprite = whiteKing[setID]; Debug.Log(this.pieceName); break;
-            case "SptPecaPreta": this.GetComponent<SpriteRenderer>().sprite = blackKing[setID]; Debug.Log(this.pieceName); break;
+            case "SptPecaBranca": this.GetComponent<SpriteRenderer>().sprite = whiteKing[setID]; Debug.Log(this.name); break;
+            case "SptPecaPreta": this.GetComponent<SpriteRenderer>().sprite = blackKing[setID]; Debug.Log(this.name); break;
+            default: Debug.Log("Default do Switch. Algo esta errado"); break;
         }
     }
 
